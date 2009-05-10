@@ -1,0 +1,11 @@
+﻿<html>
+	<head>
+		<title>
+			Spark + OpenRasta demo app
+		</title>
+	</head>
+	<body>
+    <div id="pageContent"><use content="view"/></div>
+		
+	</body>
+</html>

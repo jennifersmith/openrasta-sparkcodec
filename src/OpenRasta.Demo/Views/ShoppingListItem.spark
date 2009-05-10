@@ -1,0 +1,13 @@
+﻿<use master="Application"/>
+<use namespace="OpenRasta.Demo.Resources"/>
+<viewdata resource="ShoppingListItem"/>
+<h1>${resource.Quantity} ${resource.Description}</h1>
+<form for="resource" method="post">
+		<p>Edit</p>
+	Quantity <textbox for="resource.Quantity"/><br/>
+	Description	<textbox for="resource.Description"/> <br/>
+		<input type="submit" value="Update"/>
+</form>
+<p>
+	Click <a forType="ShoppingList">here</a> to view your shopping list.
+</p>
