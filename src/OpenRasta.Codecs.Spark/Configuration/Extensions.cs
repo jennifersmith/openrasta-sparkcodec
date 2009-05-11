@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using OpenRasta.Configuration.Fluent;
+using OpenRasta.DI;
 
-namespace OpenRasta.Codecs.Spark
+namespace OpenRasta.Codecs.Spark.Configuration
 {
 	public static class Extensions
 	{
@@ -15,9 +16,15 @@ namespace OpenRasta.Codecs.Spark
 		/// <returns></returns>
 		public static ResourcesOfTypeAreTranscodedBy<TResource, SparkCodec> AndRenderedBySpark
 			<TResource, TResourceHandler>(this ResourcesOfTypeAreHandledBy<TResource, TResourceHandler> target,
-										  string config)
+			                              string config)
 		{
 			return new ResourcesOfTypeAreTranscodedBy<TResource, SparkCodec>(new { index = config });
+		}
+
+		public static void SparkCodec(this IUses uses)
+		{
+			DependencyManager.GetService<IDependencyResolver>().AddDependency(typeof(ISparkConfiguration),
+			                                                                  typeof(SparkConfiguration), DependencyLifetime.Singleton);
 		}
 
 	}

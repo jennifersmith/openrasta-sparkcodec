@@ -1,8 +1,11 @@
 using System.Collections.Generic;
+using OpenRasta.Codecs.Spark;
+using OpenRasta.Codecs.Spark;
+using OpenRasta.Codecs.Spark;
 using Spark;
 using Spark.FileSystem;
 
-namespace OpenRasta.Codecs.Spark
+namespace OpenRasta.Codecs.Spark.Configuration
 {
 	public class SparkConfiguration : ISparkConfiguration
 	{

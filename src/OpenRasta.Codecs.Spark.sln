@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRasta.Codecs.Spark", "O
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRasta.Codecs.Spark.Tests", "OpenRasta.Codecs.Spark.Tests\OpenRasta.Codecs.Spark.Tests.csproj", "{F0C9CDE3-88A7-46E6-9FFE-718FEC8BA32C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRasta.Extensions", "..\..\..\Users\Jennifer Smith\Documents\Visual Studio 2008\Projects\StoryBook\OpenRasta.Extensions\OpenRasta.Extensions.csproj", "{DEE774C2-F62C-4F04-985A-6D8607867BEA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRasta.Demo", "OpenRasta.Demo\OpenRasta.Demo.csproj", "{5F35FBA7-9DB8-43B1-A80F-8C15433FEFC2}"
 EndProject
 Global
@@ -39,16 +37,6 @@ Global
 		{F0C9CDE3-88A7-46E6-9FFE-718FEC8BA32C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F0C9CDE3-88A7-46E6-9FFE-718FEC8BA32C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F0C9CDE3-88A7-46E6-9FFE-718FEC8BA32C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{DEE774C2-F62C-4F04-985A-6D8607867BEA}.Debug|.NET.ActiveCfg = Debug|Any CPU
-		{DEE774C2-F62C-4F04-985A-6D8607867BEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DEE774C2-F62C-4F04-985A-6D8607867BEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DEE774C2-F62C-4F04-985A-6D8607867BEA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{DEE774C2-F62C-4F04-985A-6D8607867BEA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{DEE774C2-F62C-4F04-985A-6D8607867BEA}.Release|.NET.ActiveCfg = Release|Any CPU
-		{DEE774C2-F62C-4F04-985A-6D8607867BEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DEE774C2-F62C-4F04-985A-6D8607867BEA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DEE774C2-F62C-4F04-985A-6D8607867BEA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{DEE774C2-F62C-4F04-985A-6D8607867BEA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5F35FBA7-9DB8-43B1-A80F-8C15433FEFC2}.Debug|.NET.ActiveCfg = Debug|Any CPU
 		{5F35FBA7-9DB8-43B1-A80F-8C15433FEFC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5F35FBA7-9DB8-43B1-A80F-8C15433FEFC2}.Debug|Any CPU.Build.0 = Debug|Any CPU

@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using OpenRasta.Codecs.Spark;
+using OpenRasta.Codecs.Spark;
+using OpenRasta.Codecs.Spark;
 using OpenRasta.Collections.Specialized;
 using OpenRasta.Diagnostics;
 using OpenRasta.IO;
@@ -17,14 +20,13 @@ namespace OpenRasta.Codecs.Spark
 		static readonly string[] DEFAULT_VIEW_NAMES = new[] { "index", "default", "view", "get" };
 		public ILogger Log { get; set; }
 		public IDictionary<string, string> Configuration { get; private set; }
-		IRequest request;
+		readonly IRequest request;
 		private readonly ISparkConfiguration sparkConfiguration;
 
-		public SparkCodec(IRequest request)
+		public SparkCodec(IRequest request, ISparkConfiguration sparkConfiguration)
 		{
 			this.request = request;
-			// TODO: Get DI to work...
-			this.sparkConfiguration = new SparkConfiguration();
+			this.sparkConfiguration = sparkConfiguration;
 		}
 
 		object ICodec.Configuration
@@ -39,8 +41,6 @@ namespace OpenRasta.Codecs.Spark
 
 		public void WriteTo(object entity, IHttpEntity response, string[] codecParameters)
 		{
-			// TODO: error handling or something
-			Stream template = null;
 			var codecParameterList = new List<string>(codecParameters);
 			if (!string.IsNullOrEmpty(request.UriName))
 				codecParameterList.Add(request.UriName);
@@ -64,7 +64,7 @@ namespace OpenRasta.Codecs.Spark
 			}
 		}
 
-		void RenderToResponse(IHttpEntity response, SparkResourceView templateBase)
+		static void RenderToResponse(IHttpEntity response, ISparkView templateBase)
 		{
 			var targetEncoding = Encoding.UTF8;
 			response.ContentType.CharSet = targetEncoding.HeaderName;

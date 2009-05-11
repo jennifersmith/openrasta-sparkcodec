@@ -36,6 +36,7 @@ namespace OpenRasta.Demo.Resources
 	public class ShoppingListItem
 	{
 		public string Description { get; set; }
+		public string Notes { get; set; }
 		public string Quantity { get; set; }
 	}
 }

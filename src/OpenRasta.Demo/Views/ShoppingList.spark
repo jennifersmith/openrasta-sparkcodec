@@ -4,12 +4,12 @@
 <h1>Shopping List</h1>
 <ul if="resource.Any()">
 	<li each="var item in resource">
-		${item.Quantity} ${item.Description}
+		${item.Quantity} ${item.Description}: <i>${item.Notes}</i>
 		<a for="item">edit</a>
 	</li>
 </ul>
 <form forType="ShoppingList" method="POST">
 	<p>Add new item</p>
-	<textbox forType="ShoppingListItem" forProperty="Description"/>
+	<input type="text" forType="ShoppingListItem" forProperty="Description"/>
 	<input type="submit" value="Add"/>
 </form>

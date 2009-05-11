@@ -4,8 +4,9 @@
 <h1>${resource.Quantity} ${resource.Description}</h1>
 <form for="resource" method="post">
 		<p>Edit</p>
-	Quantity <textbox for="resource.Quantity"/><br/>
-	Description	<textbox for="resource.Description"/> <br/>
+	Quantity <input type="text" for="resource.Quantity"/><br/>
+	Description	<input type="text" for="resource.Description"/> <br/>
+	Notes	<textarea for="resource.Notes"/> <br/>
 		<input type="submit" value="Update"/>
 </form>
 <p>

@@ -54,15 +54,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnchorTagExtension.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="FormExtension.cs" />
-    <Compile Include="NodeExtensions.cs" />
+    <Compile Include="Extensions\AnchorTagExtension.cs" />
+    <Compile Include="Configuration\Extensions.cs" />
+    <Compile Include="Extensions\FormExtension.cs" />
+    <Compile Include="Extensions\NodeExtensions.cs" />
+    <Compile Include="Extensions\InputExtensions.cs" />
     <Compile Include="OpenRastaSparkExtensionsFactory.cs" />
     <Compile Include="ISparkConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SparkCodec.cs" />
-    <Compile Include="SparkConfiguration.cs" />
+    <Compile Include="Configuration\SparkConfiguration.cs" />
     <Compile Include="SparkResourceView.cs" />
     <Compile Include="ViewData.cs" />
   </ItemGroup>

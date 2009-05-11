@@ -5,6 +5,7 @@ using System.Text;
 using NUnit.Framework;
 using OpenRasta.Codecs;
 using OpenRasta.Codecs.Spark;
+using OpenRasta.Codecs.Spark.Configuration;
 using OpenRasta.Configuration;
 using OpenRasta.DI;
 using OpenRasta.Web;
@@ -15,7 +16,7 @@ using Rhino.Mocks;
 namespace  configuration_specifications
 {
 	namespace with_scenario_of
-	{
+	{ 
 		public class configuring_open_rasta_to_use_spark : BaseContext
 		{
 			public override void CreateContext()
