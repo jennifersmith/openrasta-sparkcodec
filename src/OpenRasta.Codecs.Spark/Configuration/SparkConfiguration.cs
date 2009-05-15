@@ -33,6 +33,7 @@ namespace OpenRasta.Codecs.Spark.Configuration
 			result.AddNamespace("OpenRasta.Web");
 			result.AddNamespace("OpenRasta.Codecs.Spark");
 			result.AddNamespace("System.Linq");
+			result.AddNamespace("OpenRasta.Codecs.Spark.Extensions");
 			return result;
 		}
 

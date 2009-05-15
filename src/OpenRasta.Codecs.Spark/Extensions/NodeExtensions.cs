@@ -18,7 +18,11 @@ namespace OpenRasta.Codecs.Spark
 		{
 			return String.Equals(x, y, StringComparison.InvariantCultureIgnoreCase);
 		}
-		public static bool MatchesNames(this AttributeNode attribute, string[] name)
+		public static bool MatchesNames(this AttributeNode attribute, params string[] name)
+		{
+			return name.Where(x => IsMatch(x, attribute.Name)).Any();
+		}
+		public static bool MatchesNames(this ElementNode attribute, params string[] name)
 		{
 			return name.Where(x => IsMatch(x, attribute.Name)).Any();
 		}
@@ -32,7 +36,18 @@ namespace OpenRasta.Codecs.Spark
 		{
 			return node.Attributes.Where(x => IsMatch(name, x.Name));
 		}
-
+		public static AttributeNode GetAttribute(this ElementNode node, string name)
+		{
+			return node.WhereAttributeNameIs(name).FirstOrDefault();
+		}
+		public static void RemoveAttributesByName(this ElementNode node, string name)
+		{
+			var attribute = node.GetAttribute(name);
+			if(attribute!=null)
+			{
+				node.Attributes.Remove(attribute);
+			}
+		}
 		public static string GetAttributeValue(this ElementNode node, string name)
 		{
 			var attribute = node.WhereAttributeNameIs(name).FirstOrDefault();

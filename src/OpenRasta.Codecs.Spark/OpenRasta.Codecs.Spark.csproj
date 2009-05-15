@@ -57,8 +57,10 @@
     <Compile Include="Extensions\AnchorTagExtension.cs" />
     <Compile Include="Configuration\Extensions.cs" />
     <Compile Include="Extensions\FormExtension.cs" />
+    <Compile Include="Extensions\InputAttributeNodeVisitor.cs" />
     <Compile Include="Extensions\NodeExtensions.cs" />
     <Compile Include="Extensions\InputExtensions.cs" />
+    <Compile Include="Extensions\CodeGenerationExtensions.cs" />
     <Compile Include="OpenRastaSparkExtensionsFactory.cs" />
     <Compile Include="ISparkConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

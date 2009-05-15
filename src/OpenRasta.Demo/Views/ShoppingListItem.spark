@@ -6,6 +6,7 @@
 		<p>Edit</p>
 	Quantity <input type="text" for="resource.Quantity"/><br/>
 	Description	<input type="text" for="resource.Description"/> <br/>
+	Optional?	<input type="checkbox" name="ShoppingListItem.Optional" value="true" /> <br/>
 	Notes	<textarea for="resource.Notes"/> <br/>
 		<input type="submit" value="Update"/>
 </form>
