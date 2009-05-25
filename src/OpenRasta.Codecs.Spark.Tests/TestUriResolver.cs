@@ -8,6 +8,9 @@ namespace OpenRasta.Codecs.Spark.Tests
 {
 	internal class TestUriResolver : Dictionary<string,Type>, IUriResolver
 	{
+		public const string TestEntityFormatString = "/TestEntity/{0}";
+		public const string TestEntitiesUriString = "/TestEntities";
+
 		public void AddUriMapping(string uri, Type resourceType, CultureInfo uriCulture, string name)
 		{
 			throw new System.NotImplementedException();
@@ -42,7 +45,7 @@ namespace OpenRasta.Codecs.Spark.Tests
 		{
 			if(typeof(IEnumerable<TestEntity>).IsAssignableFrom(type))
 			{
-				return new Uri(baseAddress, "/TestEntities");
+				return new Uri(baseAddress, TestEntitiesUriString);
 			}
 			if(typeof(TestEntity).IsAssignableFrom(type))
 			{
@@ -51,7 +54,7 @@ namespace OpenRasta.Codecs.Spark.Tests
 				{
 					name = keyValues["name"];
 				}
-				return new Uri(baseAddress, "/TestEntity/" + name);
+				return new Uri(baseAddress, string.Format(TestEntityFormatString, name));
 			}
 			throw new InvalidOperationException("Dont recognise the type");
 		}

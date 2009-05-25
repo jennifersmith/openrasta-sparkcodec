@@ -36,6 +36,7 @@ namespace OpenRasta.Codecs.Spark.Tests
 			                                                  	});
 			settings.AddNamespace("OpenRasta.Codecs.Spark");
 			settings.AddNamespace("OpenRasta.Web.Markup");
+			settings.AddNamespace("OpenRasta.Web");
 			settings.AddNamespace("OpenRasta.Codecs.Spark.Tests");
 			settings.AddNamespace("System.Collections.Generic");
 			settings.AddNamespace("OpenRasta.Codecs.Spark.Extensions");

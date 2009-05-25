@@ -43,6 +43,11 @@ namespace  configuration_specifications
 				throw new System.NotImplementedException();
 			}
 
+			public void HandleIncomingRequestProcessed()
+			{
+				throw new System.NotImplementedException();
+			}
+
 			public bool HasDependency(Type serviceType)
 			{
 				throw new System.NotImplementedException();
@@ -59,6 +64,11 @@ namespace  configuration_specifications
 			}
 
 			public void AddDependency(Type serviceType, Type concreteType, DependencyLifetime dependencyLifetime)
+			{
+				throw new System.NotImplementedException();
+			}
+
+			public void AddDependencyInstance(Type registeredType, object value, DependencyLifetime dependencyLifetime)
 			{
 				throw new System.NotImplementedException();
 			}

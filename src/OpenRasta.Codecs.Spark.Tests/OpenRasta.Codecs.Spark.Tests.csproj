@@ -74,19 +74,30 @@
     <Compile Include="BaseContext.cs" />
     <Compile Include="BaseSparkExtensionsContext.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="FormExtensions.cs" />
     <Compile Include="InputExtensionTests.cs" />
+    <Compile Include="MarkupAssertions.cs" />
     <Compile Include="TestEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestCommunicationContext.cs" />
     <Compile Include="TestingViewFolder.cs" />
     <Compile Include="TestUriResolver.cs" />
     <Compile Include="TestViewFile.cs" />
+    <Compile Include="Uri_replacement_specifications.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenRasta.Codecs.Spark\OpenRasta.Codecs.Spark.csproj">
       <Project>{E975B88A-90AB-4392-882E-E2C17486C651}</Project>
       <Name>OpenRasta.Codecs.Spark</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TestGeneration\Xhtml1.0Transitional.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestGeneration\UriSpecifications.xslt" />
+    <Content Include="TestGeneration\UriTestScenarios.txt" />
+    <Content Include="TestGeneration\UriTestScenarios.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

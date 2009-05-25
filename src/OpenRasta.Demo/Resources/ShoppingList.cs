@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
@@ -11,6 +12,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
+using OpenRasta.IO;
 
 namespace OpenRasta.Demo.Resources
 {
@@ -39,5 +41,6 @@ namespace OpenRasta.Demo.Resources
 		public string Notes { get; set; }
 		public string Quantity { get; set; }
 		public bool Optional { get; set; }
+		public IFile Image { get; set; }
 	}
 }

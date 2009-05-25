@@ -31,6 +31,12 @@
             Codec rendering error messages collected during the processing of a request.
             </summary>
     </member>
+    <member name="M:OpenRasta.Codecs.SupportedTypeAttribute.#ctor(System.Type)">
+      <summary>
+            Defines a type a codec is supporting by default.
+            </summary>
+      <param name="supportedType">The type a codec can convert from / to.</param>
+    </member>
     <member name="T:OpenRasta.CodeDom.Compiler.MarkupElementModifier">
       <summary>
             Supports IElement elements, and render them as html elements dealing with their own encoding.
@@ -45,6 +51,11 @@
       <summary>
             Provides an implementation of IDictionary&lt;TKey,TValue&gt; that automatically replaces missing values
             with null.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.DI.IDependencyResolverAccessor">
+      <summary>
+            Provides an instance of the dependency resolver to be used with OpenRasta.
             </summary>
     </member>
     <member name="M:OpenRasta.Configuration.Fluent.ResourcesOfTypeWithoutUri`1.TranscodedBy``1">
@@ -105,7 +116,7 @@
             Adds a contributor to the pipeline.
             </summary>
       <typeparam name="TPipeline">The type of the pipeline contributor to register.</typeparam>
-      <param name="src">
+      <param name="anchor">
       </param>
     </member>
     <member name="M:OpenRasta.Configuration.HasExtensions.ResourcesOfType``1(OpenRasta.Configuration.Fluent.IHas)">
@@ -118,17 +129,12 @@
       <returns>
       </returns>
     </member>
-    <member name="T:OpenRasta.DI.IDependencyResolverFactory">
-      <summary>
-            Provides an instance of the dependency resolver to be used with OpenRasta.
-            </summary>
-    </member>
-    <member name="T:OpenRasta.DI.IDependencyRegistrar">
+    <member name="T:OpenRasta.Configuration.IDependencyRegistrar">
       <summary>
             Provides the initial set of dependencies required to initialize OpenRasta.
             </summary>
     </member>
-    <member name="M:OpenRasta.DI.IDependencyRegistrar.Register">
+    <member name="M:OpenRasta.Configuration.IDependencyRegistrar.Register(OpenRasta.DI.IDependencyResolver)">
       <summary>
             Registers the default dependencies.
             </summary>
@@ -140,7 +146,7 @@
     </member>
     <member name="M:OpenRasta.DI.DependencyManager.SetResolver(OpenRasta.DI.IDependencyResolver)">
       <summary>
-            Set-up a new dependency resolver and automatically creates the default dependencies.
+            Set a dependency resolver for the current thread
             </summary>
       <param name="resolver">An instance of a dependnecy resolver.</param>
       <remarks>If no dependency registrar is registered in the container, the DefaultDependencyRegistrar will be used instead.</remarks>
@@ -205,6 +211,26 @@
       </param>
       <returns>An instance of T.</returns>
       <exception cref="T:OpenRasta.DI.DependencyResolutionException">The resolver couldn't resolve the exception.</exception>
+    </member>
+    <member name="P:OpenRasta.Web.IRequest.Uri">
+      <summary>
+            The request Uri
+            </summary>
+    </member>
+    <member name="P:OpenRasta.Web.IRequest.UriName">
+      <summary>
+            The name associated with the requested URI
+            </summary>
+    </member>
+    <member name="P:OpenRasta.Web.IRequest.NegotiatedCulture">
+      <summary>
+            The culture in which the resource has been requested by the client.
+            </summary>
+    </member>
+    <member name="P:OpenRasta.Web.IRequest.HttpMethod">
+      <summary>
+            The HTTP method used.
+            </summary>
     </member>
     <member name="T:OpenRasta.IO.DeterministicStreamWriter">
       <summary>
@@ -351,26 +377,6 @@
             Selects which codec can be used to parse the request entity to fullfill
             the parameters to the available handler methods, and selects which method will
             be resolved.
-            </summary>
-    </member>
-    <member name="P:OpenRasta.Web.IRequest.Uri">
-      <summary>
-            The request Uri
-            </summary>
-    </member>
-    <member name="P:OpenRasta.Web.IRequest.UriName">
-      <summary>
-            The name associated with the requested URI
-            </summary>
-    </member>
-    <member name="P:OpenRasta.Web.IRequest.NegotiatedCulture">
-      <summary>
-            The culture in which the resource has been requested by the client.
-            </summary>
-    </member>
-    <member name="P:OpenRasta.Web.IRequest.HttpMethod">
-      <summary>
-            The HTTP method used.
             </summary>
     </member>
     <member name="F:OpenRasta.Web.Pipeline.PipelineContinuation.Abort">
@@ -571,6 +577,11 @@
             Gets or sets the resource to be returned in the response messsage.
             </summary>
     </member>
+    <member name="T:OpenRasta.Web.Pipeline.IPipeline">
+      <summary>
+            Represents an instance of an OpenRasta pipeline
+            </summary>
+    </member>
     <member name="T:OpenRasta.Web.Pipeline.PipelineData">
       <summary>
       </summary>
@@ -659,21 +670,6 @@
             Defines if the codec is to be preserved in configuration because it is part of the
             OpenRasta framework.
             </summary>
-    </member>
-    <member name="M:OpenRasta.Configuration.WebForms.Extensions.AndRenderedByAspx``2(OpenRasta.Configuration.Fluent.ResourcesOfTypeAreHandledBy{``0,``1},System.String)">
-      <summary>
-            Adds an html rendering of a resource using an aspx page.
-            </summary>
-      <typeparam name="TResource">
-      </typeparam>
-      <typeparam name="TResourceHandler">
-      </typeparam>
-      <param name="target">
-      </param>
-      <param name="config">
-      </param>
-      <returns>
-      </returns>
     </member>
     <member name="T:IQ.ExpressionComparer">
       <summary>

@@ -1,8 +1,11 @@
+using OpenRasta.Codecs;
 using OpenRasta.Codecs.Spark.Configuration;
 using OpenRasta.Configuration;
 using OpenRasta.Demo.Handlers;
 using OpenRasta.Demo.Resources;
 using OpenRasta.DI;
+using OpenRasta.IO;
+using OpenRasta.Web;
 using OpenRasta.Web.Pipeline;
 using OpenRasta.Web.UriDecorators;
 
@@ -35,7 +38,11 @@ namespace OpenRasta.Demo
 				ResourceSpace.Has.ResourcesOfType<ShoppingListItem>()
 					.AtUri("/shoppinglistitem/{description}")
 					.HandledBy<ShoppingListItemHandler>()
-					.AndRenderedBySpark("shoppinglistitem.spark");
+					.AndRenderedBySpark("shoppinglistitem.spark")
+					.AndBy<ApplicationOctetStreamCodec>()
+					.ForExtensions("jpg");
+
+				
 			}
 		}
 

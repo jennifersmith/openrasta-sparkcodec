@@ -12,6 +12,7 @@ using Spark.Parser.Markup;
 
 namespace OpenRasta.Codecs.Spark.Extensions
 {
+
 	internal class InputExtensions : ISparkExtension
 	{
 		private readonly ElementNode node;

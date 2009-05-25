@@ -60,6 +60,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\OpenRasta\net-35\OpenRasta.DI.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="OpenRasta.Hosting.AspNet, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\OpenRasta\net-35\OpenRasta.Hosting.AspNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core">
@@ -102,6 +106,7 @@
     <Compile Include="Handlers\HomeHandler.cs" />
     <Compile Include="Handlers\ShoppingListHandler.cs" />
     <Compile Include="Handlers\ShoppingListItemHandler.cs" />
+    <Compile Include="Handlers\ShoppingListItemImageHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Home.cs" />
     <Compile Include="Resources\ShoppingList.cs" />

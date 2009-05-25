@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
 using OpenRasta.Codecs.Spark.Extensions;
+using OpenRasta.Codecs.Spark.Extensions.Specifications;
 using Spark;
 using Spark.Compiler.NodeVisitors;
 using Spark.Parser.Markup;
@@ -11,19 +14,19 @@ namespace OpenRasta.Codecs.Spark
 
 		public ISparkExtension CreateExtension(VisitorContext context, ElementNode node)
 		{
-			if (IsResourceAnchorTag(node))
+			IEnumerable<IReplacement> replacements = GetApplicableReplacements(node);
+			if(replacements.Any())
 			{
-				return new AnchorTagExtension(node);
-			}
-			if (IsResourceFormTag(node))
-			{
-				return new FormExtension(node);
-			}
-			if (IsInputTag(node)||IsTextareaTag(node))
-			{
-				return new InputExtensions(node);
+				return new SparkExtension(node, replacements);	
 			}
 			return null;
+		}
+
+		private IEnumerable<IReplacement> GetApplicableReplacements(ElementNode node)
+		{
+			List<IReplacement> result = new List<IReplacement>();
+			result.AddRange(UriReplacementSpecifications.GetMatching(node));
+			return result;
 		}
 
 		#endregion

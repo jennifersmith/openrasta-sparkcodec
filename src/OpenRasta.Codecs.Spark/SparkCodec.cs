@@ -5,6 +5,7 @@ using OpenRasta.Codecs.Spark;
 using OpenRasta.Codecs.Spark;
 using OpenRasta.Codecs.Spark;
 using OpenRasta.Collections.Specialized;
+using OpenRasta.DI;
 using OpenRasta.Diagnostics;
 using OpenRasta.IO;
 using OpenRasta.Web;
@@ -22,10 +23,12 @@ namespace OpenRasta.Codecs.Spark
 		public IDictionary<string, string> Configuration { get; private set; }
 		readonly IRequest request;
 		private readonly ISparkConfiguration sparkConfiguration;
+		private IDependencyResolver resolver;
 
-		public SparkCodec(IRequest request, ISparkConfiguration sparkConfiguration)
+		public SparkCodec(IRequest request, ISparkConfiguration sparkConfiguration, IDependencyResolver resolver)
 		{
 			this.request = request;
+			this.resolver = resolver;
 			this.sparkConfiguration = sparkConfiguration;
 		}
 
@@ -53,9 +56,10 @@ namespace OpenRasta.Codecs.Spark
 			var descriptor = new SparkViewDescriptor().AddTemplate(templateAddress);
 			var engine = sparkConfiguration.Container.GetService<ISparkViewEngine>();
 			var view = (SparkResourceView)engine.CreateInstance(descriptor);
+			view.ViewData = new ViewData(entity);
+			view.Resolver = resolver;
 			try
 			{
-				view.ViewData = new ViewData(entity);
 				RenderToResponse(response, view);
 			}
 			finally

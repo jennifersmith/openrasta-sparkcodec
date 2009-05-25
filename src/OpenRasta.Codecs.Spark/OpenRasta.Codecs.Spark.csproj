@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OpenRasta, Version=2.0.100.235, Culture=neutral, PublicKeyToken=e04bf464d7caae73, processorArchitecture=MSIL">
+    <Reference Include="OpenRasta, Version=2.0.1.0, Culture=neutral, PublicKeyToken=e04bf464d7caae73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\OpenRasta\net-35\OpenRasta.dll</HintPath>
     </Reference>
@@ -54,13 +54,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\AnchorTagExtension.cs" />
+    <Compile Include="Extensions\SparkExtensionBase.cs" />
+    <Compile Include="Extensions\UriReplacementExtension.cs" />
     <Compile Include="Configuration\Extensions.cs" />
     <Compile Include="Extensions\FormExtension.cs" />
     <Compile Include="Extensions\InputAttributeNodeVisitor.cs" />
     <Compile Include="Extensions\NodeExtensions.cs" />
     <Compile Include="Extensions\InputExtensions.cs" />
     <Compile Include="Extensions\CodeGenerationExtensions.cs" />
+    <Compile Include="Extensions\Specifications\ReplacementSpecification.cs" />
+    <Compile Include="Extensions\Specifications\UriReplacementSpecifications.cs" />
     <Compile Include="OpenRastaSparkExtensionsFactory.cs" />
     <Compile Include="ISparkConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

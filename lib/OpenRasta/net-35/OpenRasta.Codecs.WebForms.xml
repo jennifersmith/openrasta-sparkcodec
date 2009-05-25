@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OpenRasta.Codecs.WebForms</name>
+    </assembly>
+    <members>
+        <member name="M:OpenRasta.Configuration.WebForms.Extensions.AndRenderedByAspx``2(OpenRasta.Configuration.Fluent.ResourcesOfTypeAreHandledBy{``0,``1},System.String)">
+            <summary>
+            Adds an html rendering of a resource using an aspx page.
+            </summary>
+            <typeparam name="TResource"></typeparam>
+            <typeparam name="TResourceHandler"></typeparam>
+            <param name="target"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

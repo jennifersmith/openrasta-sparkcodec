@@ -1,0 +1,51 @@
+﻿
+		// all attribute/elements needing uri replacement
+	
+		new ReplacementSpecification("head", "profile"),
+    
+		new ReplacementSpecification("base", "href"),
+    
+		new ReplacementSpecification("link", "href"),
+    
+		new ReplacementSpecification("script", "src"),
+    
+		new ReplacementSpecification("iframe", "longdesc"),
+    
+		new ReplacementSpecification("iframe", "src"),
+    
+		new ReplacementSpecification("body", "background"),
+    
+		new ReplacementSpecification("blockquote", "cite"),
+    
+		new ReplacementSpecification("ins", "cite"),
+    
+		new ReplacementSpecification("del", "cite"),
+    
+		new ReplacementSpecification("a", "href"),
+    
+		new ReplacementSpecification("q", "cite"),
+    
+		new ReplacementSpecification("object", "classid"),
+    
+		new ReplacementSpecification("object", "codebase"),
+    
+		new ReplacementSpecification("object", "data"),
+    
+		new ReplacementSpecification("object", "usemap"),
+    
+		new ReplacementSpecification("applet", "codebase"),
+    
+		new ReplacementSpecification("img", "src"),
+    
+		new ReplacementSpecification("img", "longdesc"),
+    
+		new ReplacementSpecification("img", "usemap"),
+    
+		new ReplacementSpecification("area", "href"),
+    
+		new ReplacementSpecification("form", "action"),
+    
+		new ReplacementSpecification("input", "src"),
+    
+		new ReplacementSpecification("input", "usemap"),
+    

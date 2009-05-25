@@ -21,7 +21,7 @@ namespace OpenRasta.Codecs.Spark
 			{
 				// todo: where has my user gone?
 				if (_xhtmlAnchor == null)
-					_xhtmlAnchor = new XhtmlAnchor(new XhtmlTextWriter(Output), () => HttpContext.Current.User);
+					_xhtmlAnchor = new XhtmlAnchor(Resolver, new XhtmlTextWriter(Output), () => HttpContext.Current.User);
 				return _xhtmlAnchor;
 			}
 		}

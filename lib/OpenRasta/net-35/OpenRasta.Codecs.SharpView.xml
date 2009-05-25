@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OpenRasta.Codecs.SharpView</name>
+    </assembly>
+    <members>
+        <member name="M:OpenRasta.Configuration.SharpViewConfiguration.SharpView(OpenRasta.Configuration.Fluent.IUses)">
+            <summary>
+            Registers SharpView in OpenRasta.
+            </summary>
+            <param name="src"></param>
+        </member>
+    </members>
+</doc>
