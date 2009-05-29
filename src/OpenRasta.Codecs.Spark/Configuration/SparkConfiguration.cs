@@ -1,7 +1,4 @@
 using System.Collections.Generic;
-using OpenRasta.Codecs.Spark;
-using OpenRasta.Codecs.Spark;
-using OpenRasta.Codecs.Spark;
 using Spark;
 using Spark.FileSystem;
 
@@ -21,25 +18,29 @@ namespace OpenRasta.Codecs.Spark.Configuration
 			                                                   	});
 		}
 
+		#region ISparkConfiguration Members
+
+		public ISparkServiceContainer Container
+		{
+			get { return container; }
+		}
+
+		#endregion
+
 		private SparkSettings CreateSparkSettings()
 		{
-			var result = new SparkSettings()
+			var result = new SparkSettings
 			             	{
-			             		PageBaseType = typeof(SparkResourceView).Name
+			             		PageBaseType = typeof (SparkResourceView).Name
 			             	};
 			result.AddViewFolder(ViewFolderType.VirtualPathProvider,
-			                     new Dictionary<string, string>{{"virtualBaseDir", "~/views/"}});
+			                     new Dictionary<string, string> {{"virtualBaseDir", "~/views/"}});
 			result.AddNamespace("OpenRasta.Web.Markup");
 			result.AddNamespace("OpenRasta.Web");
 			result.AddNamespace("OpenRasta.Codecs.Spark");
 			result.AddNamespace("System.Linq");
 			result.AddNamespace("OpenRasta.Codecs.Spark.Extensions");
 			return result;
-		}
-
-		public ISparkServiceContainer Container
-		{
-			get { return container; }
 		}
 	}
 }

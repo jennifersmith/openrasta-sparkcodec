@@ -10,8 +10,8 @@ namespace OpenRasta.Demo.Handlers
 		private static ShoppingList CreateDefault()
 		{
 			var result = new ShoppingList();
-			result.Add(new ShoppingListItem() {Description = "Large Eggs", Quantity = "6", Notes="Free range please!"});
-			result.Add(new ShoppingListItem() {Description = "Pints of Milk", Quantity = "4"});
+			result.Add(new ShoppingListItem() {Description = "Large Eggs", Quantity = "6", Notes="Free range please!", Image = "/images/eggs.jpg"});
+			result.Add(new ShoppingListItem() { Description = "Pints of Milk", Quantity = "4", Image = "/images/milk.jpg" });
 			result.Add(new ShoppingListItem() {Description = "Bag of Apples", Quantity = "1"});
 			result.Add(new ShoppingListItem() {Description = "Boxes of Wine", Quantity = "4"});
 			return result;

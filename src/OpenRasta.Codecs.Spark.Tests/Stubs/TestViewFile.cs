@@ -2,23 +2,25 @@ using System;
 using System.IO;
 using Spark.FileSystem;
 
-namespace OpenRasta.Codecs.Spark.Tests
+namespace OpenRasta.Codecs.Spark.Tests.Stubs
 {
 	internal class TestViewFile : IViewFile
 	{
-		private string templateSource;
+		private readonly string templateSource;
 		private DateTime modified;
 
 		public TestViewFile(string templateSource)
 		{
 			this.templateSource = templateSource;
-			this.modified = DateTime.Now;
+			modified = DateTime.Now;
 		}
+
+		#region IViewFile Members
 
 		public Stream OpenViewStream()
 		{
-			MemoryStream memoryStream = new MemoryStream();
-			StreamWriter writer = new StreamWriter(memoryStream);
+			var memoryStream = new MemoryStream();
+			var writer = new StreamWriter(memoryStream);
 			writer.Write(templateSource);
 			writer.Flush();
 			memoryStream.Seek(0, SeekOrigin.Begin);
@@ -27,10 +29,9 @@ namespace OpenRasta.Codecs.Spark.Tests
 
 		public long LastModified
 		{
-			get
-			{
-				return DateTime.Now.Ticks;
-			}
+			get { return DateTime.Now.Ticks; }
 		}
+
+		#endregion
 	}
 }

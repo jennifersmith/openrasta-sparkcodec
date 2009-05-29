@@ -89,6 +89,8 @@
   <ItemGroup>
     <Content Include="default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="images\eggs.jpg" />
+    <Content Include="images\milk.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -106,7 +108,6 @@
     <Compile Include="Handlers\HomeHandler.cs" />
     <Compile Include="Handlers\ShoppingListHandler.cs" />
     <Compile Include="Handlers\ShoppingListItemHandler.cs" />
-    <Compile Include="Handlers\ShoppingListItemImageHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Home.cs" />
     <Compile Include="Resources\ShoppingList.cs" />

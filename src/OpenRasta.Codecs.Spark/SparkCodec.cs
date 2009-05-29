@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using OpenRasta.Codecs.Spark;
-using OpenRasta.Codecs.Spark;
-using OpenRasta.Codecs.Spark;
 using OpenRasta.Collections.Specialized;
 using OpenRasta.DI;
 using OpenRasta.Diagnostics;
@@ -13,17 +10,14 @@ using Spark;
 
 namespace OpenRasta.Codecs.Spark
 {
-
 	[MediaType("application/xhtml+xml;q=0.9", "xhtml"), MediaType("text/html", "html"),
 	 MediaType("application/vnd.openrasta.htmlfragment+xml;q=0.5")]
 	public class SparkCodec : IMediaTypeWriter
 	{
-		static readonly string[] DEFAULT_VIEW_NAMES = new[] { "index", "default", "view", "get" };
-		public ILogger Log { get; set; }
-		public IDictionary<string, string> Configuration { get; private set; }
-		readonly IRequest request;
+		private static readonly string[] DEFAULT_VIEW_NAMES = new[] {"index", "default", "view", "get"};
+		private readonly IRequest request;
+		private readonly IDependencyResolver resolver;
 		private readonly ISparkConfiguration sparkConfiguration;
-		private IDependencyResolver resolver;
 
 		public SparkCodec(IRequest request, ISparkConfiguration sparkConfiguration, IDependencyResolver resolver)
 		{
@@ -31,6 +25,11 @@ namespace OpenRasta.Codecs.Spark
 			this.resolver = resolver;
 			this.sparkConfiguration = sparkConfiguration;
 		}
+
+		public ILogger Log { get; set; }
+		public IDictionary<string, string> Configuration { get; private set; }
+
+		#region IMediaTypeWriter Members
 
 		object ICodec.Configuration
 		{
@@ -51,11 +50,13 @@ namespace OpenRasta.Codecs.Spark
 			RenderTemplate(response, templateAddress, entity);
 		}
 
+		#endregion
+
 		private void RenderTemplate(IHttpEntity response, string templateAddress, object entity)
 		{
-			var descriptor = new SparkViewDescriptor().AddTemplate(templateAddress);
+			SparkViewDescriptor descriptor = new SparkViewDescriptor().AddTemplate(templateAddress);
 			var engine = sparkConfiguration.Container.GetService<ISparkViewEngine>();
-			var view = (SparkResourceView)engine.CreateInstance(descriptor);
+			var view = (SparkResourceView) engine.CreateInstance(descriptor);
 			view.ViewData = new ViewData(entity);
 			view.Resolver = resolver;
 			try
@@ -68,9 +69,9 @@ namespace OpenRasta.Codecs.Spark
 			}
 		}
 
-		static void RenderToResponse(IHttpEntity response, ISparkView templateBase)
+		private static void RenderToResponse(IHttpEntity response, ISparkView templateBase)
 		{
-			var targetEncoding = Encoding.UTF8;
+			Encoding targetEncoding = Encoding.UTF8;
 			response.ContentType.CharSet = targetEncoding.HeaderName;
 			TextWriter writer = null;
 			bool ownsWriter = false;
@@ -78,7 +79,7 @@ namespace OpenRasta.Codecs.Spark
 			{
 				if (response is ISupportsTextWriter)
 				{
-					writer = ((ISupportsTextWriter)response).TextWriter;
+					writer = ((ISupportsTextWriter) response).TextWriter;
 				}
 				else
 				{

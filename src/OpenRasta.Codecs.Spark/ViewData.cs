@@ -4,7 +4,7 @@ namespace OpenRasta.Codecs.Spark
 {
 	public class ViewData
 	{
-		private readonly  object resource;
+		private readonly object resource;
 
 		public ViewData(object resource)
 		{
@@ -14,14 +14,14 @@ namespace OpenRasta.Codecs.Spark
 
 		public object Eval(string expression)
 		{
-			if(Matches(expression, "Resource"))
+			if (Matches(expression, "Resource"))
 			{
-				return resource;	
+				return resource;
 			}
-			throw new Exception("Unrecognised expression " + expression);
+			return null;
 		}
 
-		private bool Matches(string expression, string name)
+		private static bool Matches(string expression, string name)
 		{
 			return string.Equals(expression, name, StringComparison.CurrentCultureIgnoreCase);
 		}
@@ -31,6 +31,5 @@ namespace OpenRasta.Codecs.Spark
 			// not sure if this will be used;
 			return string.Format(format, Eval(expression));
 		}
-
 	}
 }

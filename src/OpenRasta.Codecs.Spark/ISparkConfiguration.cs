@@ -2,7 +2,7 @@ using Spark;
 
 namespace OpenRasta.Codecs.Spark
 {
-	public interface ISparkConfiguration	
+	public interface ISparkConfiguration
 	{
 		ISparkServiceContainer Container { get; }
 	}

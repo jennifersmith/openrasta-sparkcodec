@@ -2,16 +2,15 @@
 <use namespace="OpenRasta.Demo.Resources"/>
 <viewdata resource="ShoppingListItem"/>
 <h1>${resource.Quantity} ${resource.Description}</h1>
-<img src="${resource.Image.CreateUri()}" if="resource.Image!=null" /> 
+<img src="${resource.Image}" if="resource.Image!=null" />
 <form for="resource" method="post" enctype="multipart/form-data">
 		<p>Edit</p>
 	Quantity <input type="text" for="resource.Quantity"/><br/>
 	Description	<input type="text" for="resource.Description"/> <br/>
-	Optional?	<input type="checkbox" for="resource.Optional" /> <br/>
-	Notes	<textarea for="resource.Notes"/> <br/>
-	Image	<input type="file" for="resource.Image" type="file"/> <br/>
+	Optional?	 <br/>
+	Notes	<textarea for="resource.Notes"></textarea> <br/>
 		<input type="submit" value="Update"/>
 </form>
 <p>
-	Click <a forType="ShoppingList">here</a> to view your shopping list.
+	Click <a totype="ShoppingList">here</a> to view your shopping list.
 </p>

@@ -9,6 +9,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
+using OpenRasta.Data;
 using OpenRasta.Demo.Resources;
 using OpenRasta.Reflection;
 using OpenRasta.Web;

@@ -4,5 +4,5 @@
 <h1>${resource.Title}</h1>
 <h2>${resource.Strapline}</h2>
 <p>
-	Click <a forType="ShoppingList">here</a> to view your shopping list.
+	Click <a totype="ShoppingList">here</a> to view your shopping list.
 </p>

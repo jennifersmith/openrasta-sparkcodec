@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Linq;
-using OpenRasta.Codecs.Spark;
-
-namespace OpenRasta.Codecs.Spark.Tests
+﻿namespace OpenRasta.Codecs.Spark.Tests.TestObjects
 {
 	public class TestEntity
 	{
@@ -10,5 +6,4 @@ namespace OpenRasta.Codecs.Spark.Tests
 		public string Description { get; set; }
 		public bool Enabled { get; set; }
 	}
-
 }

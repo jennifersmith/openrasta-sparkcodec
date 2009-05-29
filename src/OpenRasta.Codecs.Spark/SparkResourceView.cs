@@ -11,10 +11,14 @@ namespace OpenRasta.Codecs.Spark
 {
 	public abstract class SparkResourceView : AbstractSparkView, IXhtmlAnchorSite
 	{
+		private XhtmlAnchor _xhtmlAnchor;
 		public ViewData ViewData { get; set; }
-
-		XhtmlAnchor _xhtmlAnchor;
 		public IDependencyResolver Resolver { get; set; }
+
+		public IList<Error> Errors { get; set; }
+
+		#region IXhtmlAnchorSite Members
+
 		public IXhtmlAnchor Xhtml
 		{
 			get
@@ -25,7 +29,9 @@ namespace OpenRasta.Codecs.Spark
 				return _xhtmlAnchor;
 			}
 		}
-		public IList<Error> Errors { get; set; }
+
+		#endregion
+
 		public IDisposable scope(IContentModel element)
 		{
 			return IXhtmlAnchorSiteExtensions.scope(this, element);

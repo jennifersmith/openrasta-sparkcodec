@@ -265,14 +265,39 @@
             The stream is not closed.
             </summary>
     </member>
-    <member name="T:OpenRasta.Reflection.TypeAccessor">
+    <member name="P:OpenRasta.Reflection.IProperty.PropertyParameters">
       <summary>
-            Build objects
+            Defines the parameters for indexer properties
+            </summary>
+    </member>
+    <member name="P:OpenRasta.Reflection.IProperty.OwnerType">
+      <summary>
+            Defines the type owning this property
+            </summary>
+    </member>
+    <member name="P:OpenRasta.Reflection.ReflectionProperty.PropertyParameters">
+      <summary>
+            Defines the parameters for indexer properties
+            </summary>
+    </member>
+    <member name="P:OpenRasta.Reflection.ReflectionProperty.Property">
+      <summary>
+            Defines the PropertyInfo of the property as defined on the owner type
+            </summary>
+    </member>
+    <member name="P:OpenRasta.Reflection.ReflectionProperty.OwnerType">
+      <summary>
+            Defines the type owning this property
             </summary>
     </member>
     <member name="T:OpenRasta.Reflection.Surrogates.ListIndexerSurrogate`1">
       <summary>
             Provides a surrogate for types implementing IList of T.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Reflection.ReflectionType">
+      <summary>
+            Represents a 
             </summary>
     </member>
     <member name="T:OpenRasta.Text.Rfc2047Encoding">
@@ -291,24 +316,370 @@
             If no method matching the UriName is found, the system falls back to selecting all methods work.
             </remarks>
     </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IBdoElement">
+      <summary>
+            Represents the &lt;bdo&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IBaseElement">
+      <summary>
+            Represents the &lt;base&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.ICaptionElement">
+      <summary>
+            Represents the &lt;caption&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IContentSetFlow">
+      <summary>
+        <para>Represens the set of Flow elements</para>
+        <para>
+            Block elements: &lt;address&gt;, &lt;blockquote&gt;, &lt;div&gt;, &lt;p&gt;, &lt;pre&gt;, &lt;script&gt;, &lt;noscript&gt;</para>
+        <para>
+            Form elements: &lt;form&gt; and &lt;fieldset&gt;
+            </para>
+        <para>
+            Table elements: &lt;table&gt;
+            </para>
+        <para>
+            List elements: &lt;dl&gt;, &lt;ol&gt; and &lt;ul&gt;
+            </para>
+        <para>
+            Header elements: &lt;h1&gt;, &lt;h2&gt;, &lt;h3&gt;, &lt;h4&gt;, &lt;h5&gt;, &lt;h6&gt;
+            </para>
+        <para>
+            Inline Elements: &lt;a&gt;, &lt;del&gt;, &lt;ins&gt;, &lt;iframe&gt;, &lt;script&gt;, &lt;noscript&gt; and &lt;object&gt;
+            </para>
+        <para>
+            Empty elements: &lt;hr&gt;, &lt;br&gt; and &lt;img&gt;</para>
+        <para>
+            Text elements: &lt;abbr&gt;, &lt;acronym&gt;, &lt;b&gt;, &lt;big&gt;, &lt;cite&gt;, &lt;code&gt;, &lt;dfn&gt;, &lt;em&gt;, &lt;i&gt;, &lt;kbd&gt;, &lt;samp&gt;, &lt;small&gt;, &lt;span&gt;, &lt;strong&gt;, &lt;sub&gt;, &lt;sup&gt;, &lt;tt&gt; and &lt;var&gt;
+            </para>
+      </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IContentSetBlock">
+      <summary>
+        <para>Represents the set of Block elements.</para>
+        <para>
+            Block elements: &lt;address&gt;, &lt;blockquote&gt;, &lt;div&gt;, &lt;p&gt;, &lt;pre&gt;, &lt;script&gt;, &lt;noscript&gt;
+            </para>
+        <para>
+            Form elements: &lt;form&gt; and &lt;fieldset&gt;
+            </para>
+        <para>
+            Table elements: &lt;table&gt;
+            </para>
+      </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.ITableElement">
+      <summary>
+            Represents the &lt;table&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.ITHeadElement">
+      <summary>
+            Represents the &lt;thead&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.ITBodyElement">
+      <summary>
+            Represents the &lt;tbody&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.ITFootElement">
+      <summary>
+            Represents the &lt;tfoot&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.ITrElement">
+      <summary>
+            Represents the &lt;tr&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IColElement">
+      <summary>
+            Defines the &lt;col&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IColGroupElement">
+      <summary>
+            Defines the &lt;colgroup&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.ITdElement">
+      <summary>
+            Represents the &lt;td&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IThElement">
+      <summary>
+            Represents the &lt;th&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Attributes.DigitBooleanAttribute">
+      <summary>
+            Annotation for attributes using 1 and 0 as boolean values.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Attributes.Annotations.BooleanAttribute">
+      <summary>
+            Represents a boolean sgmml attribute, of the form attrib="attrib"
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.IBodyElement">
+      <summary>
+            Represents the &lt;body&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.IHeadElement">
+      <summary>
+            Represents the &lt;head&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.IHtmlElement">
+      <summary>
+            Represents the &lt;html&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.ITitleElement">
+      <summary>
+            Represents the &lt;title&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IContentSetHeading">
+      <summary>
+        <para>Represents the set of Heading elements.</para>
+        <para>
+            Header elements: &lt;h1&gt;, &lt;h2&gt;, &lt;h3&gt;, &lt;h4&gt;, &lt;h5&gt;, &lt;h6&gt;
+            </para>
+      </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.IHElement">
+      <summary>
+            Represents the &lt;h1&gt;, &lt;h2&gt;, &lt;h3&gt;, &lt;h4&gt;, &lt;h5&gt; and &lt;h6&gt; elements.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.IAddressElement">
+      <summary>
+            Represents the &lt;address&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.IBlockQuoteElement">
+      <summary>
+            Represents the &lt;blockquote&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.IDivElement">
+      <summary>
+            Represents the &lt;div&gt; element.
+            </summary>
+    </member>
     <member name="T:OpenRasta.Web.Markup.Elements.IPElement">
       <summary>
-            Represents the P element.
+            Represents the &lt;p&gt; element.
             </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.IPreElement">
+      <summary>
+            Represents the &lt;pre&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IContentSetInline">
+      <summary>
+        <para>Represents the set of Inline elements.</para>
+        <para>
+            Inline Elements: &lt;a&gt;, &lt;del&gt;, &lt;ins&gt;, &lt;iframe&gt;, &lt;script&gt;, &lt;noscript&gt; and &lt;object&gt;
+            </para>
+        <para>
+            Empty elements: &lt;hr&gt;, &lt;br&gt; and &lt;img&gt;</para>
+        <para>
+            Text elements: &lt;abbr&gt;, &lt;acronym&gt;, &lt;b&gt;, &lt;big&gt;, &lt;cite&gt;, &lt;code&gt;, &lt;dfn&gt;, &lt;em&gt;, &lt;i&gt;, &lt;kbd&gt;, &lt;samp&gt;, &lt;small&gt;, &lt;span&gt;, &lt;strong&gt;, &lt;sub&gt;, &lt;sup&gt;, &lt;tt&gt; and &lt;var&gt;
+            </para>
+      </summary>
     </member>
     <member name="T:OpenRasta.Web.Markup.Elements.IInlineElement">
       <summary>
-            Represents the abbr, acronym, cite, code, dfn, em, kbd, samp, span, strong and var elements.
+            Represents the &lt;abbr&gt;, &lt;acronym&gt;, &lt;b&gt;, &lt;big&gt;, &lt;cite&gt;, &lt;code&gt;, &lt;dfn&gt;, &lt;em&gt;, &lt;i&gt;, &lt;kbd&gt;, &lt;samp&gt;, &lt;small&gt;, &lt;span&gt;, &lt;strong&gt;, &lt;sub&gt;, &lt;sup&gt;, &lt;tt&gt; and &lt;var&gt; elements.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.IQElement">
+      <summary>
+            Represents the &lt;q&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IAElement">
+      <summary>
+            Represents the &lt;a&gt; element
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IContentSetList">
+      <summary>
+        <para>Represents the set of list elements</para>
+        <para>
+            List elements: &lt;dl&gt;, &lt;ol&gt; and &lt;ul&gt;
+            </para>
+      </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.IDlElement">
+      <summary>
+            Represents the &lt;dl&gt; element
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.IDtElement">
+      <summary>
+            Represents the &lt;dt&gt; element
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.IDdElement">
+      <summary>
+            Represents the &lt;dd&gt; element
             </summary>
     </member>
     <member name="T:OpenRasta.Web.Markup.Elements.IListElement">
       <summary>
-            Represents the ul and ol tags
+            Represents the &lt;ul&gt; and &lt;ol&gt; elements
             </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.ILiElement">
+      <summary>
+            Represents the &lt;li&gt; element
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IEditElement">
+      <summary>
+            Represents the &lt;del&gt; and &lt;ins&gt; elements.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.IEmptyElement">
+      <summary>
+            Represents the &lt;img&gt;, &lt;hr&gt; and &lt;br&gt; elements
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.IImgElement">
+      <summary>
+            Represents the &lt;img&gt; element
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IContentSetForm">
+      <summary>
+        <para>Represents the set of form elements.</para>
+        <para>
+            Form elements: &lt;form&gt; and &lt;fieldset&gt;
+            </para>
+      </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IFormElement">
+      <summary>
+            Represents the &lt;form&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IContentSetFormctrl">
+      <summary>
+        <para>Represents the set of form control elements.</para>
+        <para>
+            Form control elements: &lt;input&gt;, &lt;select&gt;, &lt;textarea&gt;, &lt;label&gt; and &lt;button&gt;
+            </para>
+      </summary>
     </member>
     <member name="T:OpenRasta.Web.Markup.Modules.IInputCheckedElement">
       <summary>
             Represents the input tags checkbox and radio
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IInputTextElement">
+      <summary>
+            Represents the &lt;input type="text" /&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IInputImageElement">
+      <summary>
+            Represents the &lt;input type="image" /&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IOptionElement">
+      <summary>
+            Represents the &lt;option&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IOptgroupElement">
+      <summary>
+            Represents the &lt;optgroup&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.IObjectElement">
+      <summary>
+            Represents the &lt;object&gt; element
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.IParamElement">
+      <summary>
+            Represents the &lt;param&gt; element
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IIFrameElement">
+      <summary>
+            Represents the &lt;iframe&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.IMetaElement">
+      <summary>
+            Represents the &lt;meta&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IStyleElement">
+      <summary>
+            Represents the &lt;style&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.ILinkElement">
+      <summary>
+            Represents the &lt;link&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.IScriptElement">
+      <summary>
+            Represents the &lt;script&lt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Elements.INoScriptElement">
+      <summary>
+            Represents the &lt;noscript&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.ITextAreaElement">
+      <summary>
+            Represents the &lt;textarea&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.ISelectElement">
+      <summary>
+            Represents the &lt;select&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.ILabelElement">
+      <summary>
+            Represents the &lt;label&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IFieldsetElement">
+      <summary>
+            Represents the &lt;fieldset&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.ILegendElement">
+      <summary>
+            Represents the &lt;legend&gt; element.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Markup.Modules.IButtonElement">
+      <summary>
+            Represents the &lt;button&gt; element.
+            </summary>
+    </member>
+    <member name="P:OpenRasta.Web.Markup.IXhtmlAnchor.User">
+      <summary>
+            Gets the principal object representing the current user's credentials.
             </summary>
     </member>
     <member name="T:OpenRasta.Web.Markup.XhtmlAnchor">
@@ -422,6 +793,16 @@
       </param>
       <param name="interfaceType">
       </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:OpenRasta.Reflection.ReflectionExtensions.FindInterface(System.Type,System.Type)">
+      <summary>
+            Returns the interface implemented by a type, or null if no matching interface was found.
+            </summary>
+      <param name="type">
+      </param>
+      <param name="interfaceType">The interface to look for, including open generic types, for exemple <c>typeof(IList&lt;&gt;)</c></param>
       <returns>
       </returns>
     </member>

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace PanelSystem.WorkingDays.Tests
 {
-	public abstract class BaseContext 
+	public abstract class BaseContext
 	{
 		[SetUp]
 		public void SetUp()
@@ -16,10 +12,9 @@ namespace PanelSystem.WorkingDays.Tests
 			When();
 		}
 
-		public virtual  void AssignTarget()
+		public virtual void AssignTarget()
 		{
 		}
-
 
 
 		public virtual void When()
@@ -33,21 +28,16 @@ namespace PanelSystem.WorkingDays.Tests
 	}
 
 	public abstract class BaseContext<TTarget> : BaseContext
-    {
-        public TTarget Target
-        {
-            get;
-            private set;
-        }
+	{
+		public TTarget Target { get; private set; }
 
-		public object ScenarioResult
-		{
-			get; private set;
-		}
+		public object ScenarioResult { get; private set; }
+
 		public override void AssignTarget()
 		{
 			Target = CreateTarget();
 		}
+
 		protected abstract TTarget CreateTarget();
 
 		public virtual object ExecuteScenario()
@@ -57,11 +47,11 @@ namespace PanelSystem.WorkingDays.Tests
 
 		public override void CreateContext()
 		{
-
 		}
+
 		public override void When()
 		{
 			ScenarioResult = ExecuteScenario();
 		}
-    }
+	}
 }

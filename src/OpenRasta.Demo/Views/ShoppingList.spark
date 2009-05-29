@@ -5,12 +5,12 @@
 <ul if="resource.Any()">
 	<li each="var item in resource">
 		${item.Quantity} ${item.Description}: <i>${item.Notes}</i> <span if="item.Optional">(Optional)</span>
-		<a for="item">edit</a>
+		<a to="item">edit</a>
 	</li>
 </ul>
-<form forType="ShoppingList" method="POST">
+<viewdata newItem="ShoppingListItem"/>
+<form toType="ShoppingList" method="POST">
 	<p>Add new item</p>
-	<input type="text" forType="ShoppingListItem" forProperty="Description"/>
+	<input type="text" name="newItem.Description"/>
 	<input type="submit" value="Add"/>
-	<input type="text" value="${resource}?{resource!=null}"/>
 </form>

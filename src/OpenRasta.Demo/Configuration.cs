@@ -38,11 +38,7 @@ namespace OpenRasta.Demo
 				ResourceSpace.Has.ResourcesOfType<ShoppingListItem>()
 					.AtUri("/shoppinglistitem/{description}")
 					.HandledBy<ShoppingListItemHandler>()
-					.AndRenderedBySpark("shoppinglistitem.spark")
-					.AndBy<ApplicationOctetStreamCodec>()
-					.ForExtensions("jpg");
-
-				
+					.AndRenderedBySpark("shoppinglistitem.spark");
 			}
 		}
 
