@@ -1,1 +1,2 @@
-%windir%\Microsoft.NET\Framework\v3.5\msbuild.exe src\OpenRasta.Codecs.Spark.sln
+lib\nant\nant -f:"build\OpenRasta.Codecs.Spark.build"
+pause

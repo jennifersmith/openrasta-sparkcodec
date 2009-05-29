@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<project name="OpenRasta.Codecs.Spark" default="build">
+	<loadtasks assembly="../lib/nantcontrib/NAnt.Contrib.Tasks.dll" />
+
+    <property name="configuration" value="debug"/>
+    <property name="solution-file-path" value="../src/OpenRasta.Codecs.Spark.sln"/>
+    <property name="build-dir" value="../bin"/>
+    <property name="binaries-root-dir" value="../src/OpenRasta.Codecs.Spark/"/>
+    <property name="binaries-out-dir" value="${binaries-root-dir}bin/${configuration}/"/>
+    <property name="unit-test-output-dir" value="../src/OpenRasta.Codecs.Spark.Tests/bin/${configuration}"/>
+    <property name="unit-test-assembly" value="OpenRasta.Codecs.Spark.Tests.dll"/>
+    <target name="build">
+        <call target="run-unit-tests"/>
+    </target>
+    
+    <target name="build-solution">
+        <msbuild project="${solution-file-path}">
+		  <property name="Configuration" value="${configuration}"/>
+		</msbuild>
+    </target>
+    
+    <target name="dist" depends="build">
+
+	<delete dir="${build-dir}" />	
+	<mkdir dir="${build-dir}" />
+	<copy todir="${build-dir}">
+    <fileset basedir="${binaries-out-dir}">
+        <include name="*.dll" />
+        <include name="*.pdb" />
+    </fileset>
+	</copy>
+	
+    </target>
+    
+    
+    <target name="run-unit-tests" depends="build-solution">
+		<nunit2 verbose="true">
+			    <formatter type="Plain" />
+		  <test assemblyname="${unit-test-output-dir}\${unit-test-assembly}" />
+		</nunit2>
+	</target>
+
+</project>
