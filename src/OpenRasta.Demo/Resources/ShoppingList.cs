@@ -13,6 +13,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using OpenRasta.IO;
+using OpenRasta.Web;
 
 namespace OpenRasta.Demo.Resources
 {

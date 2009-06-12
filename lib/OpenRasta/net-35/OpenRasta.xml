@@ -4,6 +4,15 @@
     <name>OpenRasta</name>
   </assembly>
   <members>
+    <member name="M:OpenRasta.Binding.ChangeSetBinder.#ctor(System.String,System.Type)">
+      <summary>
+            Constructs a new binder for types of type ChangeSet.
+            </summary>
+      <param name="objectName">
+      </param>
+      <param name="objectType">
+      </param>
+    </member>
     <member name="T:OpenRasta.Binding.IKeyedValuesMediaTypeReader`1">
       <summary>
             Represents a codec that can transform an entity into a set of named values.
@@ -12,7 +21,7 @@
     </member>
     <member name="T:OpenRasta.Binding.KeyedValues`1">
       <summary>
-            Represent a string key associated with a series of values and a converter, used to match key / values with the keyvalue binder.
+            Represent a string key associated with a series of values and a converter, used to match key and values pairs with the keyvalue binder.
             </summary>
       <typeparam name="T">The type of the values.</typeparam>
     </member>
@@ -58,60 +67,7 @@
             Provides an instance of the dependency resolver to be used with OpenRasta.
             </summary>
     </member>
-    <member name="M:OpenRasta.Configuration.Fluent.ResourcesOfTypeWithoutUri`1.TranscodedBy``1">
-      <summary>
-            Associates the resource type with a codec.
-            </summary>
-      <typeparam name="TCodec">The type of codec, implementing ICodec.</typeparam>
-      <returns>
-      </returns>
-    </member>
-    <member name="M:OpenRasta.Configuration.Fluent.ResourcesOfTypeAtUri`1.InLanguage(System.String)">
-      <summary>
-            Defines the language associated with the URI.
-            </summary>
-      <param name="languageTag">
-      </param>
-      <returns>
-      </returns>
-      <remarks> The value of the languageTag parameter value will override content-language negotiation for resources accessed through that URI.</remarks>
-    </member>
-    <member name="M:OpenRasta.Configuration.Fluent.ResourcesOfTypeAtUri`1.Named(System.String)">
-      <summary>
-            Gives a name to a specific URI.
-            </summary>
-      <param name="uriName">
-      </param>
-      <returns>
-      </returns>
-    </member>
-    <member name="M:OpenRasta.Configuration.Fluent.ResourcesOfTypeAtUri`1.AndAt(System.String)">
-      <summary>
-            Adds an additional URI for the resource.
-            </summary>
-      <param name="uri">
-      </param>
-      <returns>
-      </returns>
-    </member>
-    <member name="M:OpenRasta.Configuration.Fluent.ResourcesOfTypeAtUri`1.HandledBy``1">
-      <summary>
-            Defines the handler associated with the resource.
-            </summary>
-      <typeparam name="THandler">
-      </typeparam>
-      <returns>
-      </returns>
-    </member>
-    <member name="M:OpenRasta.Configuration.UsesExtensions.UriDecorator``1(OpenRasta.Configuration.Fluent.IUses)">
-      <summary>
-            Adds a URI decorator to process incoming URIs.
-            </summary>
-      <typeparam name="TDecorator">The type of the URI decorator.</typeparam>
-      <param name="anchor">
-      </param>
-    </member>
-    <member name="M:OpenRasta.Configuration.UsesExtensions.PipelineContributor``1(OpenRasta.Configuration.Fluent.IUses)">
+    <member name="M:OpenRasta.Configuration.Fluent.UsesExtensions.PipelineContributor``1(OpenRasta.Configuration.Fluent.IUses)">
       <summary>
             Adds a contributor to the pipeline.
             </summary>
@@ -119,15 +75,29 @@
       <param name="anchor">
       </param>
     </member>
-    <member name="M:OpenRasta.Configuration.HasExtensions.ResourcesOfType``1(OpenRasta.Configuration.Fluent.IHas)">
+    <member name="M:OpenRasta.Configuration.Fluent.UsesExtensions.UriDecorator``1(OpenRasta.Configuration.Fluent.IUses)">
       <summary>
-            Configures a resource type.
+            Adds a URI decorator to process incoming URIs.
             </summary>
-      <typeparam name="TResource">The type of the resource.</typeparam>
+      <typeparam name="TDecorator">The type of the URI decorator.</typeparam>
       <param name="anchor">
       </param>
-      <returns>
-      </returns>
+    </member>
+    <member name="M:OpenRasta.Configuration.Fluent.HasExtensions.ResourcesWithKey(OpenRasta.Configuration.Fluent.IHas,System.Object)">
+      <exception cref="T:System.ArgumentNullException">
+        <c>has</c> is null.</exception>
+    </member>
+    <member name="M:OpenRasta.Configuration.Fluent.Implementation.ResourceDefinition.AtUri(System.String)">
+      <exception cref="T:System.ArgumentNullException">
+        <c>uri</c> is null.</exception>
+    </member>
+    <member name="P:OpenRasta.Configuration.Fluent.Implementation.ResourceDefinition.WithoutUri">
+      <exception cref="T:System.InvalidOperationException">Cannot make a resource URI-less if a URI is already registered.</exception>
+    </member>
+    <member name="P:OpenRasta.Configuration.Fluent.ResourceSpace.Has">
+      <summary>
+            Registers resources
+            </summary>
     </member>
     <member name="T:OpenRasta.Configuration.IDependencyRegistrar">
       <summary>
@@ -144,13 +114,6 @@
             Provides easy access to common services and dependency-specific properties.
             </summary>
     </member>
-    <member name="M:OpenRasta.DI.DependencyManager.SetResolver(OpenRasta.DI.IDependencyResolver)">
-      <summary>
-            Set a dependency resolver for the current thread
-            </summary>
-      <param name="resolver">An instance of a dependnecy resolver.</param>
-      <remarks>If no dependency registrar is registered in the container, the DefaultDependencyRegistrar will be used instead.</remarks>
-    </member>
     <member name="M:OpenRasta.DI.DependencyManager.GetService(System.Type)">
       <summary>
             Resolve a component, optionally registering it in the container if AutoRegisterDependencies is set to true.
@@ -159,6 +122,13 @@
       </param>
       <returns>
       </returns>
+    </member>
+    <member name="M:OpenRasta.DI.DependencyManager.SetResolver(OpenRasta.DI.IDependencyResolver)">
+      <summary>
+            Set a dependency resolver for the current thread
+            </summary>
+      <param name="resolver">An instance of a dependnecy resolver.</param>
+      <remarks>If no dependency registrar is registered in the container, the DefaultDependencyRegistrar will be used instead.</remarks>
     </member>
     <member name="P:OpenRasta.DI.DependencyManager.AutoRegisterDependencies">
       <summary>
@@ -265,6 +235,13 @@
             The stream is not closed.
             </summary>
     </member>
+    <member name="M:OpenRasta.Reflection.IProperty.GetCallStack">
+      <summary>
+            Gets the members call stack, from property to property all the way to the root object.
+            </summary>
+      <returns>
+      </returns>
+    </member>
     <member name="P:OpenRasta.Reflection.IProperty.PropertyParameters">
       <summary>
             Defines the parameters for indexer properties
@@ -272,32 +249,80 @@
     </member>
     <member name="P:OpenRasta.Reflection.IProperty.OwnerType">
       <summary>
-            Defines the type owning this property
+            Defines the member owning this property
             </summary>
     </member>
-    <member name="P:OpenRasta.Reflection.ReflectionProperty.PropertyParameters">
+    <member name="T:OpenRasta.TypeSystem.ITypeSystem">
       <summary>
-            Defines the parameters for indexer properties
+            Represents the type system used by OpenRasta for executing objects.
             </summary>
     </member>
-    <member name="P:OpenRasta.Reflection.ReflectionProperty.Property">
+    <member name="P:OpenRasta.TypeSystem.ITypeSystem.SurrogateFactory">
+      <summary>
+            Gets or sets the surrogate factory used to build surrogate types.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.TypeSystem.IPathManager">
+      <summary>
+            Represents the componenet responsible for generating and parsing object paths.
+            </summary>
+    </member>
+    <member name="M:OpenRasta.TypeSystem.IPathManager.ReadComponents(System.String)">
+      <summary>
+            Gets the list of components in an object path.
+            </summary>
+      <param name="objectPath">The object path to parse.</param>
+      <returns>The individual components in the path.</returns>
+    </member>
+    <member name="M:OpenRasta.TypeSystem.TypeInstance.Create">
+      <exception cref="T:System.ArgumentNullException">
+        <c>instance</c> is null.</exception>
+    </member>
+    <member name="M:OpenRasta.TypeSystem.TypeInstance.Apply(System.Object)">
+      <exception cref="T:System.ArgumentNullException">
+        <c>instance</c> is null.</exception>
+    </member>
+    <member name="P:OpenRasta.TypeSystem.ReflectionBased.ReflectionBasedProperty.Property">
       <summary>
             Defines the PropertyInfo of the property as defined on the owner type
             </summary>
     </member>
-    <member name="P:OpenRasta.Reflection.ReflectionProperty.OwnerType">
+    <member name="P:OpenRasta.TypeSystem.ReflectionBased.ReflectionBasedProperty.PropertyParameters">
+      <summary>
+            Defines the parameters for indexer properties
+            </summary>
+    </member>
+    <member name="P:OpenRasta.TypeSystem.ReflectionBased.ReflectionBasedProperty.OwnerType">
       <summary>
             Defines the type owning this property
             </summary>
+    </member>
+    <member name="M:OpenRasta.TypeSystem.PropertyInstance.TrySetValue``1(System.Collections.Generic.IEnumerable{``0},OpenRasta.Binding.ValueConverter{``0})">
+      <summary>
+            Tries to assign a property value and return true if it was successfully assigned or if the parent wasn't available.
+            </summary>
+      <typeparam name="T">
+      </typeparam>
+      <param name="values">
+      </param>
+      <param name="converter">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:OpenRasta.TypeSystem.PropertyInstance.SetParent(OpenRasta.Reflection.IMemberInstance)">
+      <exception cref="T:System.ArgumentNullException">
+        <c>parentInstance</c> is null.</exception>
+      <exception cref="T:System.InvalidOperationException">The property instance has already been attached to a parent.</exception>
     </member>
     <member name="T:OpenRasta.Reflection.Surrogates.ListIndexerSurrogate`1">
       <summary>
             Provides a surrogate for types implementing IList of T.
             </summary>
     </member>
-    <member name="T:OpenRasta.Reflection.ReflectionType">
+    <member name="T:OpenRasta.TypeSystem.ReflectionBased.ReflectionBasedType">
       <summary>
-            Represents a 
+            Represents a CLR-based type.
             </summary>
     </member>
     <member name="T:OpenRasta.Text.Rfc2047Encoding">
@@ -692,6 +717,14 @@
             Provides access to a list of errors associated with the entity
             </summary>
     </member>
+    <member name="P:OpenRasta.IO.BoundaryStreamReader.BoundarySubStream.Length">
+      <exception cref="T:System.NotSupportedException">
+        <c>NotSupportedException</c>.</exception>
+    </member>
+    <member name="P:OpenRasta.IO.BoundaryStreamReader.BoundarySubStream.Position">
+      <exception cref="T:System.NotSupportedException">
+        <c>NotSupportedException</c>.</exception>
+    </member>
     <member name="M:OpenRasta.IO.BoundaryStreamReader.ReadLine">
       <summary>
             Used only to parse boundaries and headers. ASCII always.
@@ -704,6 +737,15 @@
             Provides a stream over non-seekable streams that buffers all read calls
             and provide a seekable recent history of the stream.
             </summary>
+    </member>
+    <member name="M:OpenRasta.UriTemplateTable.MakeReadOnly(System.Boolean)">
+      <exception cref="T:System.InvalidOperationException">You need to set a BaseAddress before calling MakeReadOnly</exception>
+    </member>
+    <member name="M:OpenRasta.UriTemplateTable.MatchSingle(System.Uri)">
+      <exception cref="T:OpenRasta.UriTemplateMatchException">Several matching templates were found.</exception>
+    </member>
+    <member name="M:OpenRasta.UriTemplateTable.EnsureAllTemplatesAreDifferent">
+      <exception cref="T:System.InvalidOperationException">Two equivalent templates were found.</exception>
     </member>
     <member name="T:OpenRasta.Web.HttpHeaderDictionary">
       <summary>
@@ -750,6 +792,11 @@
             be resolved.
             </summary>
     </member>
+    <member name="T:OpenRasta.Web.Pipeline.KnownStages">
+      <summary>
+            Contains all the known stages 
+            </summary>
+    </member>
     <member name="F:OpenRasta.Web.Pipeline.PipelineContinuation.Abort">
       <summary>
             An error occured and the pipeline should abort.
@@ -767,17 +814,28 @@
             Continue processing the pipeline.
             </summary>
     </member>
-    <member name="T:OpenRasta.Reflection.ParameterInstance">
+    <member name="T:OpenRasta.TypeSystem.ParameterInstance">
       <summary>
             Represents an instance of a method parameter.
             </summary>
     </member>
-    <member name="P:OpenRasta.Reflection.ParameterInstance.HasAssignedValue">
+    <member name="P:OpenRasta.TypeSystem.ParameterInstance.HasAssignedValue">
       <summary>
             The parameter has been assigned a value through its Value property.
             </summary>
     </member>
-    <member name="M:OpenRasta.Reflection.ReflectionExtensions.CreateInstanceFrom(System.Type,System.String)">
+    <member name="M:OpenRasta.TypeSystem.ReflectionBased.ReflectionExtensions.GetInheritanceDistance(System.Type,System.Type)">
+      <summary>
+            Calculates the distance in an inheritance hierarchy between two types.
+            </summary>
+      <param name="type">
+      </param>
+      <param name="parentType">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:OpenRasta.TypeSystem.ReflectionBased.ReflectionExtensions.CreateInstanceFrom(System.Type,System.String)">
       <summary>
             Creates a type using the provided string to initialize its values.
             </summary>
@@ -785,7 +843,17 @@
       <param name="propertyValue">The value to assign to the created object.</param>
       <returns>The created object.</returns>
     </member>
-    <member name="M:OpenRasta.Reflection.ReflectionExtensions.Implements(System.Type,System.Type)">
+    <member name="M:OpenRasta.TypeSystem.ReflectionBased.ReflectionExtensions.CreateInstanceFrom(System.Type,System.Object)">
+      <exception cref="T:System.NotSupportedException">You can only pass an array of strings or a single string</exception>
+    </member>
+    <member name="M:OpenRasta.TypeSystem.ReflectionBased.ReflectionExtensions.CreateInstanceFrom``1(System.Type,System.Collections.Generic.IEnumerable{``0},OpenRasta.Binding.ValueConverter{``0})">
+      <exception cref="T:System.NotSupportedException">
+        <c>NotSupportedException</c>.</exception>
+    </member>
+    <member name="M:OpenRasta.TypeSystem.ReflectionBased.ReflectionExtensions.TryConvert``1(``0[],System.Type,OpenRasta.Binding.ValueConverter{``0},System.Action{System.Object})">
+      <exception cref="T:System.NotSupportedException">Could not convert element {0} to {1}.</exception>
+    </member>
+    <member name="M:OpenRasta.TypeSystem.ReflectionBased.ReflectionExtensions.Implements(System.Type,System.Type)">
       <summary>
             Returns true if the type implements the interface.
             </summary>
@@ -795,8 +863,9 @@
       </param>
       <returns>
       </returns>
+      <exception cref="T:System.ArgumentException">interfaceType is not an interface. Use InheritsFrom instead.</exception>
     </member>
-    <member name="M:OpenRasta.Reflection.ReflectionExtensions.FindInterface(System.Type,System.Type)">
+    <member name="M:OpenRasta.TypeSystem.ReflectionBased.ReflectionExtensions.FindInterface(System.Type,System.Type)">
       <summary>
             Returns the interface implemented by a type, or null if no matching interface was found.
             </summary>
@@ -805,61 +874,26 @@
       <param name="interfaceType">The interface to look for, including open generic types, for exemple <c>typeof(IList&lt;&gt;)</c></param>
       <returns>
       </returns>
+      <exception cref="T:System.ArgumentNullException">
+        <c>type</c> is null.</exception>
+      <exception cref="T:System.ArgumentException">The type is not an interface</exception>
     </member>
-    <member name="M:OpenRasta.Configuration.Fluent.ResourcesOfTypeAreHandledBy`2.AndTranscodedBy``1">
+    <member name="M:OpenRasta.TypeSystem.ReflectionBased.ReflectionExtensions.FindIndexers(System.Type,System.Int32)">
       <summary>
-            Associates the resource type with a codec.
+            Gets a list of default properties (indexers) with the provided number of parameters.
             </summary>
-      <typeparam name="TCodec">The type of codec, implementing ICodec.</typeparam>
-      <returns>
-      </returns>
-    </member>
-    <member name="M:OpenRasta.Configuration.Fluent.ResourcesOfTypeAreTranscodedBy`2.ForMediaType(OpenRasta.Web.MediaType)">
-      <summary>
-            Overrides the default media-types for the codec with the provided media type.
-            </summary>
-    </member>
-    <member name="M:OpenRasta.Configuration.Fluent.ResourcesOfTypeAreTranscodedBy`2.ForMediaType(System.String)">
-      <summary>
-            Overrides the default media-types for the codec with the provided media type.
-            </summary>
-    </member>
-    <member name="M:OpenRasta.Configuration.Fluent.ResourcesOfTypeAreTranscodedBy`2.AndForMediaType(OpenRasta.Web.MediaType)">
-      <summary>
-            Creates a new media-type association for the resource.
-            </summary>
-      <param name="mediaType">
+      <param name="target">
+      </param>
+      <param name="parameterCount">
       </param>
       <returns>
       </returns>
+      <exception cref="T:System.ArgumentNullException">
+        <c>target</c> is null.</exception>
     </member>
-    <member name="M:OpenRasta.Configuration.Fluent.ResourcesOfTypeAreTranscodedBy`2.AndForMediaType(System.String)">
-      <summary>
-            Creates a new media-type association for the resource.
-            </summary>
-      <param name="mediaType">
-      </param>
-      <returns>
-      </returns>
-    </member>
-    <member name="M:OpenRasta.Configuration.Fluent.ResourcesOfTypeAreTranscodedBy`2.ForExtensions(System.String[])">
-      <summary>
-            Overrides the default file extensions for the codec.
-            </summary>
-    </member>
-    <member name="M:OpenRasta.Configuration.Fluent.ResourcesOfTypeAreTranscodedBy`2.AndBy``1">
-      <summary>
-            Associates the resource type with a codec.
-            </summary>
-      <typeparam name="TNewCodec">The type of codec, implementing ICodec.</typeparam>
-      <returns>
-      </returns>
-    </member>
-    <member name="M:OpenRasta.Configuration.Fluent.ResourcesOfType`1.AtUri(System.String)">
-      <summary>
-            Defines the URI identifying the resource.
-            </summary>
-      <param name="uri">A uri template at which the resource will be exposed.</param>
+    <member name="M:OpenRasta.TypeSystem.ReflectionBased.ReflectionExtensions.FindIndexer(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Reflection.PropertyInfo,System.Reflection.ParameterInfo[]}},System.String[])">
+      <exception cref="T:System.InvalidOperationException">
+        <c>InvalidOperationException</c>.</exception>
     </member>
     <member name="M:OpenRasta.DI.IDependencyResolver.Resolve(System.Type)">
       <summary>
@@ -897,7 +931,7 @@
       </param>
       <returns>The instance of the HttpOperation attribute, or null if none were defined.</returns>
     </member>
-    <member name="M:OpenRasta.Codecs.ICodecRepository.FindMediaTypeReader(OpenRasta.Web.MediaType,System.Collections.Generic.IList{System.Type},System.Collections.Generic.IList{System.Type})">
+    <member name="M:OpenRasta.Codecs.ICodecRepository.FindMediaTypeReader(OpenRasta.Web.MediaType,System.Collections.Generic.IEnumerable{OpenRasta.TypeSystem.IMember},System.Collections.Generic.IEnumerable{OpenRasta.TypeSystem.IMember})">
       <summary>
             Selects the best codec for a given media type and a set of parameters to be resolved.
             </summary>
@@ -968,9 +1002,24 @@
       </summary>
       <remarks>Need to inherit from a yet to be created SafeDictionary</remarks>
     </member>
-    <member name="P:OpenRasta.Web.Pipeline.PipelineData.SelectedResource">
+    <member name="P:OpenRasta.Web.Pipeline.PipelineData.HandlerType">
       <summary>
-            Provides access to the matched resource registration for a request URI.
+            Gets the type of the handler selected when matching a request against the registerd resource.
+            </summary>
+    </member>
+    <member name="P:OpenRasta.Web.Pipeline.PipelineData.RequestCodec">
+      <summary>
+            Gets the Codec associated with the request entity.
+            </summary>
+    </member>
+    <member name="P:OpenRasta.Web.Pipeline.PipelineData.ResourceKey">
+      <summary>
+            Gets the type of the resource associated with the requestURI. 
+            </summary>
+    </member>
+    <member name="P:OpenRasta.Web.Pipeline.PipelineData.ResponseCodec">
+      <summary>
+            Gets the Codec associated with the response entity.
             </summary>
     </member>
     <member name="P:OpenRasta.Web.Pipeline.PipelineData.SelectedHandler">
@@ -983,34 +1032,19 @@
             Gets the list of instance methods on a handler that could be used for resolving the request, after the handler method filters have been executed.
             </summary>
     </member>
-    <member name="P:OpenRasta.Web.Pipeline.PipelineData.SelectedMethodInvocations">
-      <summary>
-            Gets the list of handler methods being considered for processing. 
-            </summary>
-    </member>
     <member name="P:OpenRasta.Web.Pipeline.PipelineData.SelectedMethod">
       <summary>
             Gets the handler method that has been selected. 
             </summary>
     </member>
-    <member name="P:OpenRasta.Web.Pipeline.PipelineData.HandlerType">
+    <member name="P:OpenRasta.Web.Pipeline.PipelineData.SelectedMethodInvocations">
       <summary>
-            Gets the type of the handler selected when matching a request against the registerd resource.
+            Gets the list of handler methods being considered for processing. 
             </summary>
     </member>
-    <member name="P:OpenRasta.Web.Pipeline.PipelineData.ResourceType">
+    <member name="P:OpenRasta.Web.Pipeline.PipelineData.SelectedResource">
       <summary>
-            Gets the type of the resource associated with the requestURI. 
-            </summary>
-    </member>
-    <member name="P:OpenRasta.Web.Pipeline.PipelineData.RequestCodec">
-      <summary>
-            Gets the Codec associated with the request entity.
-            </summary>
-    </member>
-    <member name="P:OpenRasta.Web.Pipeline.PipelineData.ResponseCodec">
-      <summary>
-            Gets the Codec associated with the response entity.
+            Provides access to the matched resource registration for a request URI.
             </summary>
     </member>
     <member name="T:OpenRasta.Web.UriDecorators.IUriDecorator">
@@ -1033,12 +1067,12 @@
     </member>
     <member name="T:OpenRasta.Web.UriDecorators.ContentTypeExtensionUriDecorator">
       <summary>
-            Decorates a uri with an extension, similar to a file system extension, to override content-type negociation.
+            Decorates a uri with an extension, similar to a file system extension, to override content-type negotiation.
             </summary>
       <remarks>
             The extension is always processed at the end of the uri, and separated by a dot.
-            The matching is done per-resource, based on the extension declared for the renderer
-            associated with that resource.
+            The matching is done per-resource, based on the extension declared for the codec
+            associated with a resource.
             </remarks>
     </member>
     <member name="P:OpenRasta.Configuration.OpenRastaConfiguration.Manual">
@@ -1046,11 +1080,35 @@
             Creates a manual configuration of the resources supported by the application.
             </summary>
     </member>
+    <member name="M:OpenRasta.Codecs.CodecRepository.FindMediaTypeReader(OpenRasta.Web.MediaType,System.Collections.Generic.IEnumerable{OpenRasta.TypeSystem.IMember},System.Collections.Generic.IEnumerable{OpenRasta.TypeSystem.IMember})">
+      <exception cref="T:System.ArgumentNullException">
+        <c>requestedMediaType</c> is null.</exception>
+    </member>
+    <member name="M:OpenRasta.Codecs.CodecRegistration.CheckArgumentsAreValid(System.Type,System.Object,OpenRasta.Web.MediaType,System.Boolean)">
+      <exception cref="T:System.ArgumentException">Cannot do a strict registration on resources with keys that are not types.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <c>mediaType</c> is null.</exception>
+    </member>
     <member name="P:OpenRasta.Codecs.CodecRegistration.IsSystem">
       <summary>
             Defines if the codec is to be preserved in configuration because it is part of the
             OpenRasta framework.
             </summary>
+    </member>
+    <member name="M:OpenRasta.Web.Handlers.HandlerRepository.AddResourceHandler(System.Object,OpenRasta.TypeSystem.IType)">
+      <exception cref="T:System.ArgumentException">The provided handler is already registered.</exception>
+    </member>
+    <member name="M:OpenRasta.Web.TemplatedUriResolver.CreateUriFor(System.Uri,System.Object,System.String[])">
+      <exception cref="T:System.InvalidOperationException">There is no Uri mapping to the resource you requested.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <c>resourceKey</c> is null.</exception>
+    </member>
+    <member name="M:OpenRasta.Web.TemplatedUriResolver.AddUriMapping(System.String,System.Object,System.Globalization.CultureInfo,System.String)">
+      <exception cref="T:System.InvalidOperationException">Cannot add a Uri mapping once the configuration has been done.</exception>
+    </member>
+    <member name="M:OpenRasta.Web.TemplatedUriResolver.CreateUriFor(System.Uri,System.Object,System.String,System.Collections.Specialized.NameValueCollection)">
+      <exception cref="T:System.InvalidOperationException">
+        <c>InvalidOperationException</c>.</exception>
     </member>
     <member name="T:IQ.ExpressionComparer">
       <summary>

@@ -247,7 +247,6 @@ namespace Input_replacement_specifications
 			[Test]
 			public void Selected_item_is_updated()
 			{
-				TestEntity resource = null;
 				TemplateResult
 					.HasElement("select")
 					.HasElement(x => x.HasAttributeValue("value", Entity.Name))

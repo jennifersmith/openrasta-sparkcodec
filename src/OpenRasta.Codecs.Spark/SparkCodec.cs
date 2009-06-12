@@ -46,7 +46,7 @@ namespace OpenRasta.Codecs.Spark
 			var codecParameterList = new List<string>(codecParameters);
 			if (!string.IsNullOrEmpty(request.UriName))
 				codecParameterList.Add(request.UriName);
-			string templateAddress = GetViewVPath(Configuration, codecParameterList.ToArray());
+			string templateAddress = GetViewVPath(Configuration);
 			RenderTemplate(response, templateAddress, entity);
 		}
 
@@ -95,26 +95,17 @@ namespace OpenRasta.Codecs.Spark
 			}
 		}
 
-		public static string GetViewVPath(IDictionary<string, string> codecConfiguration, string[] codecUriParameters)
+		public static string GetViewVPath(IDictionary<string, string> codecConfiguration)
 		{
 			// if no pages were defined, return 501 not implemented
 			if (codecConfiguration == null || codecConfiguration.Count == 0)
 			{
 				return null;
 			}
-
-			// if no request parameters, take the default or return null
-			if (codecUriParameters == null || codecUriParameters.Length == 0)
+			string result = null;
+			if (codecConfiguration.TryGetValue("TemplateName", out result))
 			{
-				foreach (string defaultViewName in DEFAULT_VIEW_NAMES)
-					if (codecConfiguration.Keys.Contains(defaultViewName))
-						return codecConfiguration[defaultViewName];
-			}
-			else
-			{
-				string requestParameter = codecUriParameters[codecUriParameters.Length - 1];
-				if (codecConfiguration.Keys.Contains(requestParameter))
-					return codecConfiguration[requestParameter];
+				return result;
 			}
 			return null;
 		}

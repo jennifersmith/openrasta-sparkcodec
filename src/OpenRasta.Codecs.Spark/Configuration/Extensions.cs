@@ -1,23 +1,15 @@
 ﻿using OpenRasta.Configuration.Fluent;
+using OpenRasta.Configuration.Fluent.Implementation;
 using OpenRasta.DI;
 
 namespace OpenRasta.Codecs.Spark.Configuration
 {
 	public static class Extensions
 	{
-		/// <summary>
-		/// Adds an html rendering of a resource using an aspx page.
-		/// </summary>
-		/// <typeparam name="TResource"></typeparam>
-		/// <typeparam name="TResourceHandler"></typeparam>
-		/// <param name="target"></param>
-		/// <param name="config"></param>
-		/// <returns></returns>
-		public static ResourcesOfTypeAreTranscodedBy<TResource, SparkCodec> AndRenderedBySpark
-			<TResource, TResourceHandler>(this ResourcesOfTypeAreHandledBy<TResource, TResourceHandler> target,
+		public static ICodecDefinition AndRenderedBySpark(this ICodecParentDefinition codecParentDefinition,
 			                              string config)
 		{
-			return new ResourcesOfTypeAreTranscodedBy<TResource, SparkCodec>(new {index = config});
+            return codecParentDefinition.TranscodedBy<SparkCodec>(new{TemplateName=config});
 		}
 
 		public static void SparkCodec(this IUses uses)

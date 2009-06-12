@@ -1,6 +1,7 @@
 using OpenRasta.Codecs;
 using OpenRasta.Codecs.Spark.Configuration;
 using OpenRasta.Configuration;
+using OpenRasta.Configuration.Fluent;
 using OpenRasta.Demo.Handlers;
 using OpenRasta.Demo.Resources;
 using OpenRasta.DI;
@@ -26,7 +27,7 @@ namespace OpenRasta.Demo
 
 				ResourceSpace.Has.ResourcesOfType<Home>()
 					.AtUri("/home")
-					.AndAt("/")
+					.And.AtUri("/")
 					.HandledBy<HomeHandler>()
 					.AndRenderedBySpark("home.spark");
 

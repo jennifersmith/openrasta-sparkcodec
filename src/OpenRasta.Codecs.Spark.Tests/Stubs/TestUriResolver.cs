@@ -14,7 +14,7 @@ namespace OpenRasta.Codecs.Spark.Tests.Stubs
 
 		#region IUriResolver Members
 
-		public void AddUriMapping(string uri, Type resourceType, CultureInfo uriCulture, string name)
+		public void AddUriMapping(string uri, object resourceKey, CultureInfo uriCulture, string uriName)
 		{
 			throw new NotImplementedException();
 		}
@@ -24,28 +24,9 @@ namespace OpenRasta.Codecs.Spark.Tests.Stubs
 			throw new NotImplementedException();
 		}
 
-		public void MakeReadOnly(Uri baseAddress)
+		public Uri CreateUriFor(Uri baseAddress, object obj, string uriName, NameValueCollection keyValues)
 		{
-			throw new NotImplementedException();
-		}
-
-		public void Clear()
-		{
-			throw new NotImplementedException();
-		}
-
-		public string[] GetQueryParameterNamesFor(string uriTemplate)
-		{
-			throw new NotImplementedException();
-		}
-
-		public string[] GetTemplateParameterNamesFor(string uriTemplate)
-		{
-			throw new NotImplementedException();
-		}
-
-		public Uri CreateUriFor(Uri baseAddress, Type type, string uriName, NameValueCollection keyValues)
-		{
+			var type = (Type) obj;
 			if (typeof (IEnumerable<TestEntity>).IsAssignableFrom(type))
 			{
 				return new Uri(baseAddress, TestEntitiesUriString);
@@ -62,16 +43,11 @@ namespace OpenRasta.Codecs.Spark.Tests.Stubs
 			throw new InvalidOperationException("Dont recognise the type");
 		}
 
-		public Type this[string uriTemplate]
-		{
-			get { throw new NotImplementedException(); }
-		}
-
-		public bool IsReadOnly
-		{
-			get { throw new NotImplementedException(); }
-		}
-
 		#endregion
+
+		public new IEnumerator<KeyValuePair<string, object>> GetEnumerator()
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

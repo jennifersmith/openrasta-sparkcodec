@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using OpenRasta.Demo.Resources;
+using OpenRasta.Web;
 
 namespace OpenRasta.Demo.Handlers
 {
@@ -17,6 +18,7 @@ namespace OpenRasta.Demo.Handlers
 	{
 		public Home Get()
 		{
+			typeof(ShoppingList).CreateUri();
 			return new Home() {Title = "Shopping List tool", Strapline = "Because a pen and paper would be too simple..."};
 		}
 	}

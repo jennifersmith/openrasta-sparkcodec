@@ -10,8 +10,12 @@
             </summary>
             <param name="src"></param>
         </member>
+        <member name="M:OpenRasta.Codecs.SharpView.SharpViewSnippetModifier.ProcessString(System.String)">
+            <exception cref="T:System.InvalidOperationException">Something went really really wrong captain.</exception>
+        </member>
         <member name="T:OpenRasta.Codecs.SharpView.Visitors.IfRewriterVisitor">
             <summary>
+            Rewrites the If extension method.
             </summary>
         </member>
     </members>
