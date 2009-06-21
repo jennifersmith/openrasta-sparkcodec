@@ -18,7 +18,6 @@ namespace OpenRasta.Demo.Handlers
 	{
 		public Home Get()
 		{
-			typeof(ShoppingList).CreateUri();
 			return new Home() {Title = "Shopping List tool", Strapline = "Because a pen and paper would be too simple..."};
 		}
 	}

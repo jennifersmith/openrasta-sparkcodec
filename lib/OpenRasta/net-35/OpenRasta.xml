@@ -752,6 +752,36 @@
             Provides a list of http headers. In dire need of refactoring to use specific header types similar to http digest.
             </summary>
     </member>
+    <member name="T:OpenRasta.Web.Pipeline.KnownStages">
+      <summary>
+            Contains all the known stages 
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Pipeline.KnownStages.IBegin">
+      <summary>
+            Represents the first stage in the pipeline.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Pipeline.KnownStages.IUriProcessing">
+      <summary>
+            Represents the stage at which the URI is processed.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Pipeline.KnownStages.IHandlerSelection">
+      <summary>
+            Represents the stage at which handlers are selected
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Pipeline.KnownStages.IOperationCreation">
+      <summary>
+            Represents the stage at which the operations get created.
+            </summary>
+    </member>
+    <member name="T:OpenRasta.Web.Pipeline.KnownStages.IOperationHydration">
+      <summary>
+            Represents the stage at which the operations get populated with data from the codecs and binders.
+            </summary>
+    </member>
     <member name="T:OpenRasta.Web.Pipeline.Contributors.HandlerMethodInvoker">
       <summary>
             Parses the content of the request and assign it to the method invocation.
@@ -790,11 +820,6 @@
             Selects which codec can be used to parse the request entity to fullfill
             the parameters to the available handler methods, and selects which method will
             be resolved.
-            </summary>
-    </member>
-    <member name="T:OpenRasta.Web.Pipeline.KnownStages">
-      <summary>
-            Contains all the known stages 
             </summary>
     </member>
     <member name="F:OpenRasta.Web.Pipeline.PipelineContinuation.Abort">
@@ -1105,10 +1130,16 @@
     </member>
     <member name="M:OpenRasta.Web.TemplatedUriResolver.AddUriMapping(System.String,System.Object,System.Globalization.CultureInfo,System.String)">
       <exception cref="T:System.InvalidOperationException">Cannot add a Uri mapping once the configuration has been done.</exception>
+      <exception cref="T:System.ArgumentException">Cannot use a Type as the resourceKey. Use an IType instead or assign the TypeSystem property.</exception>
     </member>
     <member name="M:OpenRasta.Web.TemplatedUriResolver.CreateUriFor(System.Uri,System.Object,System.String,System.Collections.Specialized.NameValueCollection)">
       <exception cref="T:System.InvalidOperationException">
         <c>InvalidOperationException</c>.</exception>
+    </member>
+    <member name="P:OpenRasta.Web.TemplatedUriResolver.TypeSystem">
+      <summary>
+            The TypeSystem to use for any resource key that is a type
+            </summary>
     </member>
     <member name="T:IQ.ExpressionComparer">
       <summary>

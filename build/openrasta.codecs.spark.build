@@ -4,12 +4,17 @@
 
     <property name="configuration" value="debug"/>
     <property name="solution-file-path" value="../src/OpenRasta.Codecs.Spark.sln"/>
+    <property name="open-rasta-bin-dir" value="../../openrasta/bin/Release/net-35"/>
+    <property name="open-rasta-local-bin-dir" value="../lib/OpenRasta/net-35"/>
     <property name="build-dir" value="../bin"/>
     <property name="binaries-root-dir" value="../src/OpenRasta.Codecs.Spark/"/>
     <property name="binaries-out-dir" value="${binaries-root-dir}bin/${configuration}/"/>
     <property name="unit-test-output-dir" value="../src/OpenRasta.Codecs.Spark.Tests/bin/${configuration}"/>
     <property name="unit-test-assembly" value="OpenRasta.Codecs.Spark.Tests.dll"/>
     <target name="build">
+        <call target="run-unit-tests"/>
+    </target>
+	<target name="update-and-build" depends="update-open-rasta">
         <call target="run-unit-tests"/>
     </target>
     
@@ -25,6 +30,18 @@
 	<mkdir dir="${build-dir}" />
 	<copy todir="${build-dir}">
     <fileset basedir="${binaries-out-dir}">
+        <include name="*.dll" />
+        <include name="*.pdb" />
+    </fileset>
+	</copy>
+	
+    </target>    
+    <target name="update-open-rasta">
+
+	<delete dir="${open-rasta-local-bin-dir}" />	
+	<mkdir dir="${open-rasta-local-bin-dir}" />
+	<copy todir="${open-rasta-local-bin-dir}">
+    <fileset basedir="${open-rasta-bin-dir}">
         <include name="*.dll" />
         <include name="*.pdb" />
     </fileset>
