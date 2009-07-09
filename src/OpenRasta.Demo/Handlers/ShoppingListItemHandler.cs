@@ -1,38 +1,30 @@
 ﻿using System;
-using System.Data;
-using System.Configuration;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Xml.Linq;
 using OpenRasta.Data;
 using OpenRasta.Demo.Resources;
-using OpenRasta.Reflection;
 using OpenRasta.Web;
 
 namespace OpenRasta.Demo.Handlers
 {
 	public class ShoppingListItemHandler
 	{
-		public ShoppingListItem Get(string description)
+		private readonly IShoppingListService _shoppingListService;
+
+		public ShoppingListItemHandler(IShoppingListService shoppingListService)
 		{
-			return GetItem(description);
+			_shoppingListService = shoppingListService;
 		}
 
-		private ShoppingListItem GetItem(string description)
+		public ShoppingListItem Get(string description)
 		{
-			return ShoppingListHandler.ShoppingList.Where(x => x.Description.ToUpper() == description.ToUpper()).FirstOrDefault();
+			return new ShoppingListItem();
 		}
 
 		public OperationResult Post(string description, ChangeSet<ShoppingListItem> changes)
 		{
-			var item = GetItem(description);
-			changes.Apply(item);
-			return new OperationResult.SeeOther {RedirectLocation = item.CreateUri()};
+			return null;
+			//ShoppingListItem item = ShoppingListHandler.ShoppingList.GetItem(description);
+			//changes.Apply(item);
+			//return new OperationResult.SeeOther {RedirectLocation = item.CreateUri()};
 		}
 	}
 }

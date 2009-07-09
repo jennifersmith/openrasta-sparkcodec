@@ -1,31 +1,30 @@
-﻿using OpenRasta.Demo.Resources;
+﻿using System;
+using OpenRasta.Demo.Resources;
 using OpenRasta.Web;
 
 namespace OpenRasta.Demo.Handlers
 {
 	public class ShoppingListHandler
 	{
-		public static readonly ShoppingList ShoppingList = CreateDefault();
+		private readonly IShoppingListService _shoppingListService;
 
-		private static ShoppingList CreateDefault()
+
+		public ShoppingListHandler(IShoppingListService shoppingListService)
 		{
-			var result = new ShoppingList();
-			result.Add(new ShoppingListItem() {Description = "Large Eggs", Quantity = "6", Notes="Free range please!", Image = "/images/eggs.jpg"});
-			result.Add(new ShoppingListItem() { Description = "Pints of Milk", Quantity = "4", Image = "/images/milk.jpg" });
-			result.Add(new ShoppingListItem() {Description = "Bag of Apples", Quantity = "1"});
-			result.Add(new ShoppingListItem() {Description = "Boxes of Wine", Quantity = "4"});
-			return result;
+			_shoppingListService = shoppingListService;
 		}
 
-		public ShoppingList Get()
+
+		public IShoppingList Get()
 		{
-			return ShoppingList;
+			return _shoppingListService.GetShoppingList();
 		}
 
 		public OperationResult Post(ShoppingListItem item)
 		{
-			ShoppingList.Add(item);
-			return new OperationResult.SeeOther() { RedirectLocation = typeof(ShoppingList).CreateUri() };
+			IShoppingList shoppingList = _shoppingListService.GetShoppingList();
+			shoppingList.Add(item);
+			return new OperationResult.SeeOther() { RedirectLocation = shoppingList.CreateUri()};
 		}
 	}
 }

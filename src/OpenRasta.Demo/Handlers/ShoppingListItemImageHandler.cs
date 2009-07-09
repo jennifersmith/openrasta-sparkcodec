@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Data;
-using System.Configuration;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Xml.Linq;
+using OpenRasta.Demo.Resources;
+using OpenRasta.Web;
 
 namespace OpenRasta.Demo.Handlers
 {
 	public class ShoppingListItemImageHandler
 	{
+		public object Get(string description)
+		{
+			return "todo";
+		}
 	}
 }

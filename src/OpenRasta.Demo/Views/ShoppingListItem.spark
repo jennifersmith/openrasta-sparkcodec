@@ -2,7 +2,7 @@
 <use namespace="OpenRasta.Demo.Resources"/>
 <viewdata resource="ShoppingListItem"/>
 <h1>${resource.Quantity} ${resource.Description}</h1>
-<img src="${resource.Image}" if="resource.Image!=null" />
+<img to="resource.Image" if="resource.Image!=null" />
 <form for="resource" method="post" enctype="multipart/form-data">
 		<p>Edit</p>
 	Quantity <input type="text" for="resource.Quantity"/><br/>

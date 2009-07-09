@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E975B88A-90AB-4392-882E-E2C17486C651}</ProjectGuid>
+    <ProjectGuid>{0FD70814-2892-40EF-A94B-543E836F096F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpenRasta.Codecs.Spark</RootNamespace>
-    <AssemblyName>OpenRasta.Codecs.Spark</AssemblyName>
+    <RootNamespace>ShoppingListViewer.Demo.Tests</RootNamespace>
+    <AssemblyName>ShoppingListViewer.Demo.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,19 +31,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OpenRasta, Version=2.0.1.0, Culture=neutral, PublicKeyToken=e04bf464d7caae73, processorArchitecture=MSIL">
+    <Reference Include="nunit.framework, Version=2.5.0.9015, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\nunit\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenRasta, Version=2.0.2036.303, Culture=neutral, PublicKeyToken=e04bf464d7caae73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\OpenRasta\net-35\OpenRasta.dll</HintPath>
     </Reference>
-    <Reference Include="Spark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
+    <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Spark\Spark.dll</HintPath>
+      <HintPath>..\..\lib\rhinomocks\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -54,29 +57,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\Extensions.cs" />
-    <Compile Include="OpenRastaSparkExtensionsFactory.cs" />
-    <Compile Include="ISparkConfiguration.cs" />
+    <Compile Include="AutoObjectBuilder.cs" />
+    <Compile Include="BaseContext.cs" />
+    <Compile Include="ReflectionHelper.cs" />
+    <Compile Include="ShoppingListHandler_Specifications.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SparkCodec.cs" />
-    <Compile Include="Configuration\SparkConfiguration.cs" />
-    <Compile Include="SparkResourceView.cs" />
-    <Compile Include="Configuration\Syntax\CodeGenerationExtensions.cs" />
-    <Compile Include="Configuration\Syntax\InputNameReplacement.cs" />
-    <Compile Include="Configuration\Syntax\InputValueReplacement.cs" />
-    <Compile Include="Configuration\Syntax\IReplacement.cs" />
-    <Compile Include="Configuration\Syntax\NodeExtensions.cs" />
-    <Compile Include="Configuration\Syntax\SelectSelectedValueReplacement.cs" />
-    <Compile Include="Configuration\Syntax\SparkExtension.cs" />
-    <Compile Include="Configuration\Syntax\Specifications\FormReplacementSpecifications.cs" />
-    <Compile Include="Configuration\Syntax\Specifications\ReplacementSpecification.cs" />
-    <Compile Include="Configuration\Syntax\Specifications\UriReplacementSpecifications.cs" />
-    <Compile Include="Configuration\Syntax\SpecifiedReplacement.cs" />
-    <Compile Include="Configuration\Syntax\TextAreaValueReplacement.cs" />
-    <Compile Include="Configuration\Syntax\TidyUpReplacement.cs" />
-    <Compile Include="Configuration\Syntax\UriReplacement.cs" />
-    <Compile Include="Support\IHttpResults.cs" />
-    <Compile Include="ViewData.cs" />
+    <Compile Include="ShoppingListItemHandler_Specifications.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpenRasta.Codecs.Spark\OpenRasta.Codecs.Spark.csproj">
+      <Project>{E975B88A-90AB-4392-882E-E2C17486C651}</Project>
+      <Name>OpenRasta.Codecs.Spark</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenRasta.Demo\OpenRasta.Demo.csproj">
+      <Project>{5F35FBA7-9DB8-43B1-A80F-8C15433FEFC2}</Project>
+      <Name>OpenRasta.Demo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenRasta.TestingUtilities\OpenRasta.TestingUtilities.csproj">
+      <Project>{28F65997-74DD-46C6-ADCF-89F390FF89C8}</Project>
+      <Name>OpenRasta.TestingUtilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
