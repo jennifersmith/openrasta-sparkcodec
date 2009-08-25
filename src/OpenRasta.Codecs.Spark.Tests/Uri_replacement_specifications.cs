@@ -412,7 +412,7 @@ namespace Uri_replacement_specifications
 				get
 				{
 					return
-						@"<viewdata resource=""TestEntity""/> <form to=""resource"" anotherattribute=""leave this alone"">Inner text</form>";
+						@"<viewdata resource=""TestEntity""/> <form for=""resource"" anotherattribute=""leave this alone"">Inner text</form>";
 				}
 			}
 

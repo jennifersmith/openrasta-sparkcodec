@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F0C9CDE3-88A7-46E6-9FFE-718FEC8BA32C}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contexts\TestSparkConfiguration.cs" />
     <Compile Include="Extensions\AssertionExtensions.cs" />
     <Compile Include="Contexts\BaseContext.cs" />
     <Compile Include="Contexts\BaseSparkExtensionsContext.cs" />

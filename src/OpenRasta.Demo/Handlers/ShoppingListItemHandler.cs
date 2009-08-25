@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Web;
 using OpenRasta.Data;
 using OpenRasta.Demo.Resources;
 using OpenRasta.Web;
@@ -9,22 +11,34 @@ namespace OpenRasta.Demo.Handlers
 	{
 		private readonly IShoppingListService _shoppingListService;
 
-		public ShoppingListItemHandler(IShoppingListService shoppingListService)
+		public ShoppingListItemHandler()
 		{
-			_shoppingListService = shoppingListService;
+			_shoppingListService = new ShoppingListService();// temp!
 		}
 
-		public ShoppingListItem Get(string description)
+		public ShoppingListItem Get(int id)
 		{
-			return new ShoppingListItem();
+			return _shoppingListService.GetItem(id);
 		}
-
-		public OperationResult Post(string description, ChangeSet<ShoppingListItem> changes)
+		public OperationResult Post(int id)
 		{
-			return null;
-			//ShoppingListItem item = ShoppingListHandler.ShoppingList.GetItem(description);
-			//changes.Apply(item);
-			//return new OperationResult.SeeOther {RedirectLocation = item.CreateUri()};
+
+			ShoppingListItem item = _shoppingListService.GetItem(id);
+			//diff.Apply(item);
+			if(item.NewImage.Length>0)
+			{
+				using(Stream newImageStream =item.NewImage.OpenStream())
+				{
+					// I am basically crap at this...
+					string path = HttpContext.Current.Server.MapPath("~/images/") + item.NewImage.OriginalName;
+					var buffer = new byte[newImageStream.Length];
+					newImageStream.Read(buffer, 0, buffer.Length);
+					File.WriteAllBytes(path, buffer);
+					
+				}
+				item.Image = new ShoppingListItemImage(item.NewImage.OriginalName, item);
+			}
+			return new OperationResult.SeeOther {RedirectLocation = item.CreateUri()};
 		}
 	}
 }

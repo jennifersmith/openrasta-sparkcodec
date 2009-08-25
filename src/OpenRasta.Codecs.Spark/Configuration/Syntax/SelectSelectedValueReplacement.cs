@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using OpenRasta.Codecs.Spark.Configuration.Syntax;
 using OpenRasta.Codecs.Spark.Extensions.Specifications;
 using Spark.Parser.Markup;
 
@@ -28,7 +29,7 @@ namespace OpenRasta.Codecs.Spark.Extensions
 
 		private IEnumerable<ElementNode> GetOptions(IList<Node> body)
 		{
-			return body.Where(x => x is ElementNode).Cast<ElementNode>().Where(x => NodeExtensions.IsTag(x, "option"));
+			return body.Where(x => x is ElementNode).Cast<ElementNode>().Where(x => x.IsTag("option"));
 		}
 	}
 }

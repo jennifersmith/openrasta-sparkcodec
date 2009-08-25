@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using OpenRasta.Codecs.Spark.Configuration.Syntax;
 using OpenRasta.Codecs.Spark.Extensions.Specifications;
 using Spark.Parser.Markup;
 

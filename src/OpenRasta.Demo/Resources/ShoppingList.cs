@@ -1,29 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Configuration;
-using System.IO;
 using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Xml.Linq;
-using OpenRasta.Demo.Handlers;
-using OpenRasta.IO;
-using OpenRasta.Web;
+using OpenRasta.Codecs;
 
 namespace OpenRasta.Demo.Resources
 {
-	public interface IShoppingList : IEnumerable<ShoppingListItem>
-	{
-		void Add(ShoppingListItem item);
-	}
-
-	public class ShoppingList : IShoppingList
+	public class ShoppingList : IEnumerable<ShoppingListItem>
 	{
 		private readonly List<ShoppingListItem> _list = new List<ShoppingListItem>();
 		public IEnumerator<ShoppingListItem> GetEnumerator()
@@ -49,11 +31,55 @@ namespace OpenRasta.Demo.Resources
 	}
 	public class ShoppingListItem
 	{
+		private readonly int _id;
+
+		public ShoppingListItem(int id)
+		{
+			_id = id;
+		}
+
 		public string Description { get; set; }
 		public string Notes { get; set; }
 		public string Quantity { get; set; }
 		public bool Optional { get; set; }
 		public ShoppingListItemImage Image { get; set; }
+		public SupermarketSection Section { get; set; }
+		public HttpEntityFile NewImage
+		{
+			get;set;
+		}
+		public bool HasImage 
+		{ 
+			get
+			{
+				return Image != null;
+			}
+		}
+		public int Id
+		{
+			get
+			{
+				return _id;
+			}
+		}
+	}
+
+	public struct SupermarketSection
+	{
+		private readonly string _name;
+
+		public SupermarketSection(string name)
+		{
+			_name = name;
+		}
+
+		public string Name
+		{
+			get
+			{
+				return _name;
+			}
+		}
 	}
 
 	public static class ShoppingListItemExtensions

@@ -41,13 +41,13 @@ namespace OpenRasta.Demo
 					.AndRenderedBySpark("shoppingList.spark");
 
 				ResourceSpace.Has.ResourcesOfType<ShoppingListItem>()
-					.AtUri("/shoppinglistitem/{description}")
+					.AtUri("/shoppinglistitem/{id}")
 					.HandledBy<ShoppingListItemHandler>()
 					.AndRenderedBySpark("shoppinglistitem.spark");
 
 				ResourceSpace.Has.ResourcesOfType<ShoppingListItemImage>()
-					.AtUri("/shoppinglistitem/images/{Parent.Description}")
-					.HandledBy<ShoppingListItemImageHandler>();
+					.AtUri("/images/{filename}");
+
 			}
 		}
 
@@ -55,7 +55,10 @@ namespace OpenRasta.Demo
 
 		public IDependencyResolver Resolver
 		{
-			get { return new WindsorDependencyResolver(new WindsorContainer()); }
+			get
+			{
+				return new WindsorDependencyResolver(new WindsorContainer());
+			}
 		}
 	}
 }

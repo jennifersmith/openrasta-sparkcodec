@@ -4,11 +4,11 @@ using System.Text.RegularExpressions;
 using OpenRasta.Reflection;
 using Spark.Parser.Markup;
 
-namespace OpenRasta.Codecs.Spark.Extensions
+namespace OpenRasta.Codecs.Spark.Configuration.Syntax
 {
 	public static class CodeGenerationExtensions
 	{
-		private static readonly Regex objectNameRegex = new Regex("^(?<object>[a-zA-Z_][a-zA-Z0-9_]*)");
+		private static readonly Regex ObjectNameRegex = new Regex("^(?<object>[a-zA-Z_][a-zA-Z0-9_]*)");
 
 		public static Node GetCreateUriSnippet(this string entity, bool isType)
 		{
@@ -56,9 +56,20 @@ namespace OpenRasta.Codecs.Spark.Extensions
 			return node;
 		}
 
+		public static Node GetCheckedSnippet(this string propertyAccessor)
+		{
+			string propertyNullTest = propertyAccessor.GetObjectName().GetIsNotNullExpression();
+			// if ((propertyNullTest)&&(propertyAccessor))
+			string conidtion = string.Format("({0}&&{1})",
+											 propertyNullTest, propertyAccessor);
+			var node = new ConditionNode(conidtion);
+			node.Nodes.Add(new TextNode("true"));
+			return node;
+		}
+
 		public static string GetObjectName(this string propertyPath)
 		{
-			Match match = objectNameRegex.Match(propertyPath);
+			Match match = ObjectNameRegex.Match(propertyPath);
 			if (match.Success)
 			{
 				return match.Groups["object"].Value;

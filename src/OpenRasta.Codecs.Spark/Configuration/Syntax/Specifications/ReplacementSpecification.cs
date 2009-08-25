@@ -1,4 +1,5 @@
-﻿using Spark.Parser.Markup;
+﻿using OpenRasta.Codecs.Spark.Configuration.Syntax;
+using Spark.Parser.Markup;
 
 namespace OpenRasta.Codecs.Spark.Extensions.Specifications
 {

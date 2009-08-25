@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using OpenRasta.Codecs.Spark.Extensions;
+using OpenRasta.Codecs.Spark.Extensions.Specifications;
 using Spark.Parser.Markup;
 
-namespace OpenRasta.Codecs.Spark.Extensions.Specifications
+namespace OpenRasta.Codecs.Spark.Configuration.Syntax.Specifications
 {
 	internal class FormReplacementSpecifications
 	{
@@ -10,6 +13,8 @@ namespace OpenRasta.Codecs.Spark.Extensions.Specifications
 			GetInputTagReplacementSpecifications();
 
 		public static readonly IEnumerable<ReplacementSpecification> SelectSpecs = GetSelectSpects();
+
+
 		public static readonly IEnumerable<ReplacementSpecification> TextAreaSpecs = GetTextAreaSpecs();
 
 		private static IEnumerable<ReplacementSpecification> GetInputTagReplacementSpecifications()
@@ -48,9 +53,11 @@ namespace OpenRasta.Codecs.Spark.Extensions.Specifications
 			result.AddRange(GetValueReplacements(node));
 			result.AddRange(GetMiscReplacements(node));
 			result.AddRange(GetTidyReplacements(node));
+			// todo: refactor this shit
 			return result;
 		}
 
+	
 		private static IEnumerable<IReplacement> GetTidyReplacements(ElementNode node)
 		{
 			return MatchingSpecs(node).Select(x => new TidyUpReplacement(x)).Cast<IReplacement>();
@@ -63,6 +70,7 @@ namespace OpenRasta.Codecs.Spark.Extensions.Specifications
 			result =
 				result.Union(
 					SelectSpecs.Where(x => x.IsMatch(node)).Select(x => new SelectSelectedValueReplacement(x)).Cast<IReplacement>());
+			
 			return result;
 		}
 

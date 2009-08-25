@@ -14,23 +14,16 @@ namespace ShoppingListHandler_Specifications
 {
 	public class BaseShoppingListContext : BaseContext<ShoppingListHandler>
 	{
-		private IShoppingList _shoppingList;
-
 		public IShoppingListService ShoppingListService
 		{
 			get; private set;
 		}
 
-		public IShoppingList ShoppingList
-		{
-			get { return _shoppingList; }
-			set { _shoppingList = value; }
-		}
+		public IShoppingList ShoppingList { get; set; }
 
 		public override void CreateContext()
 		{
 			base.CreateContext();
-			//TestUtilities.SetupForTesting();
 			ShoppingListService = MockRepository.GenerateStub<IShoppingListService>();
 
 		}

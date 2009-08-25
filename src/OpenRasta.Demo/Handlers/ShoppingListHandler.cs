@@ -9,20 +9,21 @@ namespace OpenRasta.Demo.Handlers
 		private readonly IShoppingListService _shoppingListService;
 
 
-		public ShoppingListHandler(IShoppingListService shoppingListService)
+		public ShoppingListHandler()
 		{
-			_shoppingListService = shoppingListService;
+			_shoppingListService = new ShoppingListService();
+			// temp!
 		}
 
 
-		public IShoppingList Get()
+		public ShoppingList Get()
 		{
 			return _shoppingListService.GetShoppingList();
 		}
 
 		public OperationResult Post(ShoppingListItem item)
 		{
-			IShoppingList shoppingList = _shoppingListService.GetShoppingList();
+			ShoppingList shoppingList = _shoppingListService.GetShoppingList();
 			shoppingList.Add(item);
 			return new OperationResult.SeeOther() { RedirectLocation = shoppingList.CreateUri()};
 		}

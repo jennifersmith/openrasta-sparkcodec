@@ -2,20 +2,20 @@ using System.Collections.Generic;
 using OpenRasta.Codecs.Spark.Extensions.Specifications;
 using Spark.Parser.Markup;
 
-namespace OpenRasta.Codecs.Spark.Extensions
+namespace OpenRasta.Codecs.Spark.Configuration.Syntax
 {
 	internal abstract class SpecifiedReplacement : IReplacement
 	{
-		private readonly ReplacementSpecification replacementSpecification;
+		private readonly ReplacementSpecification _replacementSpecification;
 
 		protected SpecifiedReplacement(ReplacementSpecification replacementSpecification)
 		{
-			this.replacementSpecification = replacementSpecification;
+			_replacementSpecification = replacementSpecification;
 		}
 
 		protected ReplacementSpecification ReplacementSpecification
 		{
-			get { return replacementSpecification; }
+			get { return _replacementSpecification; }
 		}
 
 		#region IReplacement Members

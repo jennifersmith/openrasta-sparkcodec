@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using OpenRasta.Codecs.Spark.Configuration;
 using OpenRasta.Collections.Specialized;
 using OpenRasta.DI;
 using OpenRasta.Diagnostics;
@@ -14,16 +15,16 @@ namespace OpenRasta.Codecs.Spark
 	 MediaType("application/vnd.openrasta.htmlfragment+xml;q=0.5")]
 	public class SparkCodec : IMediaTypeWriter
 	{
-		private static readonly string[] DEFAULT_VIEW_NAMES = new[] {"index", "default", "view", "get"};
-		private readonly IRequest request;
-		private readonly IDependencyResolver resolver;
-		private readonly ISparkConfiguration sparkConfiguration;
+		private readonly IRequest _request;
+		private readonly IDependencyResolver _resolver;
+		private ISparkServiceContainer _sparkServiceContainer;
 
-		public SparkCodec(IRequest request, ISparkConfiguration sparkConfiguration, IDependencyResolver resolver)
+		public SparkCodec(IRequest request, ISparkServiceContainerFactory sparkServiceContainerFactory, IDependencyResolver resolver)
 		{
-			this.request = request;
-			this.resolver = resolver;
-			this.sparkConfiguration = sparkConfiguration;
+			_request = request;
+			_sparkServiceContainer = sparkServiceContainerFactory.CreateServiceContainer();
+			_resolver = resolver;
+
 		}
 
 		public ILogger Log { get; set; }
@@ -44,8 +45,8 @@ namespace OpenRasta.Codecs.Spark
 		public void WriteTo(object entity, IHttpEntity response, string[] codecParameters)
 		{
 			var codecParameterList = new List<string>(codecParameters);
-			if (!string.IsNullOrEmpty(request.UriName))
-				codecParameterList.Add(request.UriName);
+			if (!string.IsNullOrEmpty(_request.UriName))
+				codecParameterList.Add(_request.UriName);
 			string templateAddress = GetViewVPath(Configuration);
 			RenderTemplate(response, templateAddress, entity);
 		}
@@ -55,10 +56,10 @@ namespace OpenRasta.Codecs.Spark
 		private void RenderTemplate(IHttpEntity response, string templateAddress, object entity)
 		{
 			SparkViewDescriptor descriptor = new SparkViewDescriptor().AddTemplate(templateAddress);
-			var engine = sparkConfiguration.Container.GetService<ISparkViewEngine>();
+			var engine = _sparkServiceContainer.GetService<ISparkViewEngine>();
 			var view = (SparkResourceView) engine.CreateInstance(descriptor);
 			view.ViewData = new ViewData(entity);
-			view.Resolver = resolver;
+			view.Resolver = _resolver;
 			try
 			{
 				RenderToResponse(response, view);
@@ -97,12 +98,11 @@ namespace OpenRasta.Codecs.Spark
 
 		public static string GetViewVPath(IDictionary<string, string> codecConfiguration)
 		{
-			// if no pages were defined, return 501 not implemented
 			if (codecConfiguration == null || codecConfiguration.Count == 0)
 			{
 				return null;
 			}
-			string result = null;
+			string result;
 			if (codecConfiguration.TryGetValue("TemplateName", out result))
 			{
 				return result;

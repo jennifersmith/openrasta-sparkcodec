@@ -47,6 +47,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\OpenRasta\net-35\OpenRasta.dll</HintPath>
     </Reference>
+    <Reference Include="OpenRasta.Hosting.AspNet, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\OpenRasta\net-35\OpenRasta.Hosting.AspNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>

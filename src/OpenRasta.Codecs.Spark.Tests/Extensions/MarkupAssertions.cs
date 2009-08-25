@@ -34,6 +34,11 @@ namespace OpenRasta.Codecs.Spark.Tests.Assertions
 				x => x.Value == attributeValue).Any();
 		}
 
+		public static bool HasNoAttributeValue(this XElement element, string attributeName, string attributeValue)
+		{
+			return element.HasAttributeValue(attributeName, attributeValue) == false;
+		}
+
 		public static XElement HasElement(this XContainer xElement, Func<XElement, bool> predicate)
 		{
 			XElement result = xElement.Elements().Where(predicate).FirstOrDefault();

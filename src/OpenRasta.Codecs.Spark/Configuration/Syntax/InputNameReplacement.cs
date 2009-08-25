@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using OpenRasta.Codecs.Spark.Extensions.Specifications;
 using Spark.Parser.Markup;
 
-namespace OpenRasta.Codecs.Spark.Extensions
+namespace OpenRasta.Codecs.Spark.Configuration.Syntax
 {
 	internal class InputNameReplacement : SpecifiedReplacement, IReplacement
 	{

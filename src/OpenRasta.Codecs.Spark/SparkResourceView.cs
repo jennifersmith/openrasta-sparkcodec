@@ -36,5 +36,10 @@ namespace OpenRasta.Codecs.Spark
 		{
 			return IXhtmlAnchorSiteExtensions.scope(this, element);
 		}
+
+		public string SiteResource(string url)
+		{
+			throw new Exception("Haven't figured out how to do this yet");
+		}
 	}
 }

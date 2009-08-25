@@ -6,15 +6,15 @@ using Spark.Compiler.ChunkVisitors;
 using Spark.Compiler.NodeVisitors;
 using Spark.Parser.Markup;
 
-namespace OpenRasta.Codecs.Spark.Extensions
+namespace OpenRasta.Codecs.Spark.Configuration.Syntax
 {
 	internal class SparkExtension : ISparkExtension
 	{
-		private readonly IEnumerable<IReplacement> replacements;
+		private readonly IEnumerable<IReplacement> _replacements;
 
 		public SparkExtension(ElementNode node, IEnumerable<IReplacement> replacements)
 		{
-			this.replacements = replacements;
+			_replacements = replacements;
 			Node = node;
 		}
 
@@ -43,7 +43,7 @@ namespace OpenRasta.Codecs.Spark.Extensions
 
 		protected void Transform(ElementNode elementNode, IList<Node> body)
 		{
-			foreach (IReplacement replacement in replacements)
+			foreach (IReplacement replacement in _replacements)
 			{
 				replacement.DoReplace(elementNode, body);
 			}

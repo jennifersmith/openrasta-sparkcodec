@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Spark.Parser.Markup;
 
-namespace OpenRasta.Codecs.Spark
+namespace OpenRasta.Codecs.Spark.Configuration.Syntax
 {
 	public static class NodeExtensions
 	{
@@ -78,7 +78,6 @@ namespace OpenRasta.Codecs.Spark
 			return builder.ToString();
 		}
 	}
-
 
 	public static class StringExtensions
 	{

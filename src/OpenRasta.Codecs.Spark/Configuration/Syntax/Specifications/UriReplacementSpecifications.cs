@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using OpenRasta.Codecs.Spark.Extensions.Specifications;
 using Spark.Parser.Markup;
 
-namespace OpenRasta.Codecs.Spark.Extensions.Specifications
+namespace OpenRasta.Codecs.Spark.Configuration.Syntax.Specifications
 {
 	internal static class UriReplacementSpecifications
 	{
@@ -17,11 +18,11 @@ namespace OpenRasta.Codecs.Spark.Extensions.Specifications
 			       		new ReplacementSpecification("iframe", "to", "src"),
 			       		new ReplacementSpecification("a", "to", "href"),
 			       		new ReplacementSpecification("img", "to", "src"),
-			       		new ReplacementSpecification("form", "to", "action"),
+			       		new ReplacementSpecification("form", "for", "action"),
 			       		new ReplacementSpecification("iframe", "totype", "src"),
 			       		new ReplacementSpecification("a", "totype", "href"),
 			       		new ReplacementSpecification("img", "totype", "src"),
-			       		new ReplacementSpecification("form", "totype", "action")
+			       		new ReplacementSpecification("form", "fortype", "action")
 			       	};
 		}
 

@@ -1,4 +1,5 @@
-﻿using Input_replacement_specifications.With_scenario_of;
+﻿using System;
+using Input_replacement_specifications.With_scenario_of;
 using NUnit.Framework;
 using OpenRasta.Codecs.Spark.Tests;
 using OpenRasta.Codecs.Spark.Tests.Assertions;
@@ -19,11 +20,16 @@ namespace Input_replacement_specifications
 
 			public void WithTestEntity()
 			{
+				WithTestEntity(true);
+			}
+
+			public void WithTestEntity(bool enabled)
+			{
 				Entity = new TestEntity
 				         	{
 				         		Description = "This is it",
 				         		Name = "THENAME",
-				         		Enabled = true
+				         		Enabled = enabled
 				         	};
 			}
 
@@ -192,7 +198,7 @@ namespace Input_replacement_specifications
 			}
 
 			[Test]
-			public void innter_text_is_set_to_TestEntity_name()
+			public void inner_text_is_set_to_TestEntity_name()
 			{
 				TemplateResult.HasElement("textarea").Value.ShouldEqual(Entity.Name);
 			}
@@ -210,6 +216,56 @@ namespace Input_replacement_specifications
 			}
 		}
 
+		[TestFixture]
+		public class When_rendering_a_check_box_with_a_for_attribute_with_boolean_true : Using_spark_codec_to_render_an_input_element
+		{
+			public override void CreateContext()
+			{
+				base.CreateContext();
+				WithTestEntity(true);
+			}
+			public override string TemplateSource
+			{
+				get
+				{
+					return
+						@"<viewdata resource=""TestEntity""/> 
+							<input for=""resource.Enabled"" type=""checkbox"" />";
+				}
+		
+			}
+			[Test]
+			public void Checked_should_be_set()
+			{
+				TemplateResult.HasElement("input").WithAttribute("checked");
+			}
+		}
+
+		[TestFixture]
+		public class When_rendering_a_check_box_with_a_for_attribute_with_boolean_false : Using_spark_codec_to_render_an_input_element
+		{
+			public override void CreateContext()
+			{
+				base.CreateContext();
+				WithTestEntity(false);
+			}
+
+			public override string TemplateSource
+			{
+				get
+				{
+					return
+						@"<viewdata resource=""TestEntity""/> 
+							<input for=""resource.Enabled"" type=""checkbox"" />";
+				}
+
+			}
+			[Test]
+			public void Checked_attribute_should_not_be_set()
+			{
+				TemplateResult.HasElement("input").WithoutAttribute("checked");
+			}
+		}
 		[TestFixture]
 		public class When_rendering_a_select_with_a_for_attribute : Using_spark_codec_to_render_an_input_element
 		{
