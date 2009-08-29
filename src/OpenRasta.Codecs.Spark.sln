@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRasta.Codecs.Spark2", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRasta.Codecs.Spark.UnitTests", "OpenRasta.Codecs.Spark.UnitTests\OpenRasta.Codecs.Spark.UnitTests.csproj", "{D3698DCB-AC6C-4170-BE4A-1F6F2987B564}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRasta.Codecs.Spark.IntegrationTests", "OpenRasta.Codecs.Spark.IntegrationTests\OpenRasta.Codecs.Spark.IntegrationTests.csproj", "{AFBCC15B-1818-48EE-9254-257087E2BFA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRasta.Codecs.Spark.Testing", "OpenRasta.Codecs.Spark.Testing\OpenRasta.Codecs.Spark.Testing.csproj", "{A190F8BC-97BA-40B6-A469-1937C4B01ACF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -71,6 +75,26 @@ Global
 		{D3698DCB-AC6C-4170-BE4A-1F6F2987B564}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D3698DCB-AC6C-4170-BE4A-1F6F2987B564}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D3698DCB-AC6C-4170-BE4A-1F6F2987B564}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{AFBCC15B-1818-48EE-9254-257087E2BFA2}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{AFBCC15B-1818-48EE-9254-257087E2BFA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFBCC15B-1818-48EE-9254-257087E2BFA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFBCC15B-1818-48EE-9254-257087E2BFA2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AFBCC15B-1818-48EE-9254-257087E2BFA2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AFBCC15B-1818-48EE-9254-257087E2BFA2}.Release|.NET.ActiveCfg = Release|Any CPU
+		{AFBCC15B-1818-48EE-9254-257087E2BFA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFBCC15B-1818-48EE-9254-257087E2BFA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFBCC15B-1818-48EE-9254-257087E2BFA2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AFBCC15B-1818-48EE-9254-257087E2BFA2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A190F8BC-97BA-40B6-A469-1937C4B01ACF}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{A190F8BC-97BA-40B6-A469-1937C4B01ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A190F8BC-97BA-40B6-A469-1937C4B01ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A190F8BC-97BA-40B6-A469-1937C4B01ACF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A190F8BC-97BA-40B6-A469-1937C4B01ACF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A190F8BC-97BA-40B6-A469-1937C4B01ACF}.Release|.NET.ActiveCfg = Release|Any CPU
+		{A190F8BC-97BA-40B6-A469-1937C4B01ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A190F8BC-97BA-40B6-A469-1937C4B01ACF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A190F8BC-97BA-40B6-A469-1937C4B01ACF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A190F8BC-97BA-40B6-A469-1937C4B01ACF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

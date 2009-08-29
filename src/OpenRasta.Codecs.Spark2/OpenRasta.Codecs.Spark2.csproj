@@ -49,12 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Model\IElement.cs" />
+    <Compile Include="Model\INode.cs" />
+    <Compile Include="SparkInterface\ISparkElementTransformer.cs" />
+    <Compile Include="SparkInterface\CodecSparkExtensionFactory.cs" />
     <Compile Include="MissingEnumerableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
+    <Compile Include="SparkInterface\ISparkElementTransformerService.cs" />
+    <Compile Include="SparkInterface\NullSparkElementTransformer.cs" />
+    <Compile Include="SparkInterface\SparkElementTransformer.cs" />
+    <Compile Include="SparkInterface\SparkOverrideExtension.cs" />
+    <Compile Include="SparkInterface\SparkWrapperFactory.cs" />
+    <Compile Include="Transformers\ElementTransformerService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

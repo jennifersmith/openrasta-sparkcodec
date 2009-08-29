@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using OpenRasta.Codecs.Spark2.Model;
 using OpenRasta.Codecs.Spark2.SparkInterface;
+using OpenRasta.Codecs.Spark2.Transformers;
 using Rhino.Mocks;
 using Spark.Compiler.NodeVisitors;
 using Spark.Parser.Markup;
@@ -15,7 +17,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		[Test]
 		public void NodeShouldBeTakenFromTransformer()
 		{
-			var elementTransformer = MockRepository.GenerateStub<IElementTransformer>();
+			var elementTransformer = MockRepository.GenerateStub<ISparkElementTransformer>();
 			Node transformedNode = new ElementNode("transformed", new List<AttributeNode>(), false);
 			IList<Node> body = new List<Node>();
 			var extension = new SparkOverrideExtension(elementTransformer);
@@ -27,7 +29,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		[Test]
 		public void ShouldVisitTransformedNodeOnlyIfItIsEmpty()
 		{
-			var elementTransformer = MockRepository.GenerateStub<IElementTransformer>();
+			var elementTransformer = MockRepository.GenerateStub<ISparkElementTransformer>();
 			Node transformedNode = new ElementNode("transformed", new List<AttributeNode>(), true);
 			elementTransformer.Stub(x => x.Transform(null)).IgnoreArguments().Return(transformedNode);
 			var extension = new SparkOverrideExtension(elementTransformer);
@@ -41,7 +43,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		[Test]
 		public void ShouldVisitTransformedNodeBodyIfNotEmpty()
 		{
-			var elementTransformer = MockRepository.GenerateStub<IElementTransformer>();
+			var elementTransformer = MockRepository.GenerateStub<ISparkElementTransformer>();
 			Node transformedNode = new ElementNode("transformed", new List<AttributeNode>(), false);
 			elementTransformer.Stub(x => x.Transform(null)).IgnoreArguments().Return(transformedNode);
 			var extension = new SparkOverrideExtension(elementTransformer);
@@ -57,7 +59,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		[Test]
 		public void ShouldAppendEndElementIfNodeIsNotEmpty()
 		{
-			var elementTransformer = MockRepository.GenerateStub<IElementTransformer>();
+			var elementTransformer = MockRepository.GenerateStub<ISparkElementTransformer>();
 			Node transformedNode = new ElementNode("transformed", new List<AttributeNode>(), false);
 			elementTransformer.Stub(x => x.Transform(null)).IgnoreArguments().Return(transformedNode);
 			var extension = new SparkOverrideExtension(elementTransformer);
@@ -70,7 +72,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		[Test]
 		public void ShouldNotRet()
 		{
-			var elementTransformer = MockRepository.GenerateStub<IElementTransformer>();
+			var elementTransformer = MockRepository.GenerateStub<ISparkElementTransformer>();
 			var nodeVisitor = MockRepository.GenerateStub<INodeVisitor>();
 			IList<Node> body = new List<Node>();
 			Node transformedNode = new ElementNode("transformed", new List<AttributeNode>(), false);
@@ -82,16 +84,6 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 			nodeVisitor.AssertWasCalled(x => x.Accept(transformedNode));
 			nodeVisitor.AssertWasCalled(x => x.Accept(body));
 		}
-		
-		//Transform(Node, body);
-
-		//visitor.Accept(Node);
-		//visitor.Accept(body);
-		//if (!Node.IsEmptyElement)
-		//{
-		//    visitor.Accept(new EndElementNode(Node.Name));
-		//}
-		
 	}
 
 	public class StubNodeVisitor : INodeVisitor
@@ -122,4 +114,5 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		}
 
 	}
+
 }

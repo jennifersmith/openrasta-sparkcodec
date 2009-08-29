@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using OpenRasta.Codecs.Spark2;
+using OpenRasta.Codecs.Spark2.SparkInterface;
 using Spark;
 using Spark.Compiler;
 using Spark.Compiler.ChunkVisitors;

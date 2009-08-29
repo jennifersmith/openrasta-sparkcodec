@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D3698DCB-AC6C-4170-BE4A-1F6F2987B564}</ProjectGuid>
+    <ProjectGuid>{AFBCC15B-1818-48EE-9254-257087E2BFA2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpenRasta.Codecs.Spark.UnitTests</RootNamespace>
-    <AssemblyName>OpenRasta.Codecs.Spark.UnitTests</AssemblyName>
+    <RootNamespace>OpenRasta.Codecs.Spark.IntegrationTests</RootNamespace>
+    <AssemblyName>OpenRasta.Codecs.Spark.IntegrationTests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -35,9 +35,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\nunit\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+    <Reference Include="OpenRasta, Version=2.0.2064.335, Culture=neutral, PublicKeyToken=e04bf464d7caae73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\rhinomocks\Rhino.Mocks.dll</HintPath>
+      <HintPath>..\..\lib\OpenRasta\net-35\OpenRasta.dll</HintPath>
     </Reference>
     <Reference Include="Spark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -57,19 +57,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssertionExtensions.cs" />
-    <Compile Include="CodecSparkExtensionFactoryTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="SparkNodeExtensionTests.cs" />
+    <Compile Include="BaseContext.cs" />
+    <Compile Include="BaseSparkExtensionsContext.cs" />
+    <Compile Include="Input_replacement_specifications.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SparkTestNodes.cs" />
-    <Compile Include="SparkElementTransformerServiceTests.cs" />
-    <Compile Include="SparkElementTransformerTests.cs" />
-    <Compile Include="SparkOverrideExtensionTests.cs" />
-    <Compile Include="SparkWrapperFactoryTests.cs" />
+    <Compile Include="Uri_replacement_specifications.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OpenRasta.Codecs.Spark.Testing\OpenRasta.Codecs.Spark.Testing.csproj">
+      <Project>{A190F8BC-97BA-40B6-A469-1937C4B01ACF}</Project>
+      <Name>OpenRasta.Codecs.Spark.Testing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenRasta.Codecs.Spark2\OpenRasta.Codecs.Spark2.csproj">
       <Project>{AC553C43-7F19-4F2B-870C-BB3264090A6E}</Project>
       <Name>OpenRasta.Codecs.Spark2</Name>

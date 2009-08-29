@@ -11,71 +11,85 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 	[TestFixture]
 	public class CodecSparkExtensionFactoryTests
 	{
+		[SetUp]
+		public void SetUp()
+		{
+			_stubElementTransformerService = new StubSparkElementTransformerService();
+			_target = new CodecSparkExtensionFactory(_stubElementTransformerService);
+			ElementToUse = null;
+			ResultSparkExtension = null;
+			Transformer = new StubSparkElementTransformer();
+		}
+
+		private StubSparkElementTransformerService _stubElementTransformerService;
+		private CodecSparkExtensionFactory _target;
+
+		protected ElementNode ElementToUse { get; set; }
+		protected StubSparkElementTransformer Transformer { get; set; }
 		[Test]
 		public void ShouldReturnNullIfNodeIsNotOverridable()
 		{
-			var node = new ElementNode("nonOverridableElement", new List<AttributeNode>(), false);
-			IElementTransformerService elementTransformerService = CreateAlwaysFalseElementTransformerService(node);
-			var sparkExtensionFactory = new CodecSparkExtensionFactory(elementTransformerService);
-
-			ISparkExtension result = sparkExtensionFactory.CreateExtension(null, node);
-
-			result.ShouldBeNull();
+			GivenANonOverridableElement();
+			WhenWeAskForTheSparkExtension();
+			ThenTheResultShouldBeNull();
 		}
 		[Test]
-		public void ShouldReturnElementTransformerIfNodeIsNotOverridable()
+		public void ShouldReturnAValidExtensionIfIsOverridable()
 		{
-			var node = new ElementNode("overridableElement", new List<AttributeNode>(), false);
-			IElementTransformerService elementTransformerService = CreateAlwaysTrueElementTransformerService(node);
-			var sparkExtensionFactory = new CodecSparkExtensionFactory(elementTransformerService);
-
-			ISparkExtension result = sparkExtensionFactory.CreateExtension(null, node);
-
-			result.As<SparkOverrideExtension>().ElementTransformer.As<StubElementTransformer>().ElementNode.ShouldEqual(node);
+			GivenAnOverridableElement();
+			WhenWeAskForTheSparkExtension();
+			ThenTheResultShouldWrapTheGivenTransform();
 		}
 
-		private static IElementTransformerService CreateAlwaysFalseElementTransformerService(ElementNode node)
+		private void ThenTheResultShouldWrapTheGivenTransform()
 		{
-			IElementTransformerService elementTransformerService = CreateElementTransformerStub();
-			elementTransformerService.Stub(x=>x.ElementIsOverridable(node)).Return(false);
-			return elementTransformerService;
-		}
-		private static IElementTransformerService CreateAlwaysTrueElementTransformerService(ElementNode node)
-		{
-			IElementTransformerService elementTransformerService = CreateElementTransformerStub();
-			elementTransformerService.Stub(x => x.ElementIsOverridable(node)).Return(true);
-			return elementTransformerService;
+			ResultSparkExtension.As<SparkOverrideExtension>().SparkElementTransformer.ShouldEqual(Transformer);
 		}
 
-		private static IElementTransformerService CreateElementTransformerStub()
+		private void ThenTheResultShouldBeNull()
 		{
-			var elementTransformerStub = MockRepository.GenerateStub<IElementTransformerService>();
-			elementTransformerStub.Stub(x => x.CreateElementTransformer(null)).IgnoreArguments().Do(new CreateElementTransformerDelegate(
-			                                                                                        	node =>
-			                                                                                        	new StubElementTransformer(
-			                                                                                        		node)));
-			return elementTransformerStub;
+			ResultSparkExtension.ShouldBeNull();
 		}
 
-		delegate IElementTransformer CreateElementTransformerDelegate(ElementNode node);
-
-		private class StubElementTransformer : IElementTransformer
+		private void WhenWeAskForTheSparkExtension()
 		{
-			private readonly ElementNode _elementNode;
+			ResultSparkExtension = _target.CreateExtension(null, ElementToUse);
+		}
 
-			public StubElementTransformer(ElementNode elementNode)
-			{
-				_elementNode = elementNode;
-			}
+		protected ISparkExtension ResultSparkExtension { get; set; }
 
-			public ElementNode ElementNode
-			{
-				get { return _elementNode; }
-			}
+		private void GivenANonOverridableElement()
+		{
+			ElementToUse = new ElementNode("nonOverridable", new List<AttributeNode>(), true);
+		}
 
+		private void GivenAnOverridableElement()
+		{
+			ElementToUse = new ElementNode("overridableElement", new List<AttributeNode>(), true);
+			_stubElementTransformerService.WithTransformer(ElementToUse, Transformer);
+		}
+
+		
+		protected  class StubSparkElementTransformer : ISparkElementTransformer
+		{
 			public Node Transform(IList<Node> innerNodes)
 			{
 				throw new NotImplementedException();
+			}
+		}
+		protected class StubSparkElementTransformerService : ISparkElementTransformerService
+		{
+			private readonly Dictionary<ElementNode, ISparkElementTransformer> transfomersByElementNode = new Dictionary<ElementNode, ISparkElementTransformer>();
+
+			public void WithTransformer(ElementNode node, ISparkElementTransformer sparkElementTransformer)
+			{
+				transfomersByElementNode[node] = sparkElementTransformer;
+			}
+
+			public ISparkElementTransformer CreateElementTransformer(ElementNode elementNode)
+			{
+				ISparkElementTransformer result;
+				return transfomersByElementNode.TryGetValue(elementNode, out result) ? result : new NullSparkElementTransformer();
 			}
 		}
 	}

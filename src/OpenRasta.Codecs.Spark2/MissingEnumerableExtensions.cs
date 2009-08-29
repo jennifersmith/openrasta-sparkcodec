@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace OpenRasta.Codecs.Spark.Configuration
+namespace OpenRasta.Codecs.Spark2
 {
 	public static class MissingEnumerableExtensions
 	{

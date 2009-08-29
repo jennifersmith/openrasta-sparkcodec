@@ -1,34 +1,34 @@
 ﻿using NUnit.Framework;
+using OpenRasta.Codecs.Spark.IntegrationTests;
 using OpenRasta.Codecs.Spark.Testing.Extensions;
-using OpenRasta.Codecs.Spark.Tests;
 using OpenRasta.Codecs.Spark.Tests.TestObjects;
 
 namespace Uri_replacement_specifications
 {
-	public abstract class Using_spark_codec_to_render_an_element_with_a_uri_attributes : BaseSparkExtensionsContext
-	{
-		public abstract string TemplateSource { get; }
-
-		public string TemplateResult { get; private set; }
-
-		public TestEntity Entity { get; private set; }
-
-		public void WithTestEntity()
+		public abstract class Using_spark_codec_to_render_an_element_with_a_uri_attributes : BaseSparkExtensionsContext
 		{
-			Entity = new TestEntity
-			         	{
-			         		Description = "This is it",
-			         		Name = "THENAME",
-			         		Enabled = true
-			         	};
-		}
+			public abstract string TemplateSource { get; }
 
-		public override void When()
-		{
-			base.When();
-			TemplateResult = RenderTemplate(TemplateSource, Entity);
+			public string TemplateResult { get; private set; }
+
+			public TestEntity Entity { get; private set; }
+
+			public void WithTestEntity()
+			{
+				Entity = new TestEntity
+				         	{
+				         		Description = "This is it",
+				         		Name = "THENAME",
+				         		Enabled = true
+				         	};
+			}
+
+			public override void When()
+			{
+				base.When();
+				TemplateResult = RenderTemplate(TemplateSource, Entity);
+			}
 		}
-	}
 
 	namespace Given_that_testentity_is_null
 	{

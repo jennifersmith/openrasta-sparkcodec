@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
+using OpenRasta.Codecs.Spark.IntegrationTests;
 using OpenRasta.Codecs.Spark.Testing.Extensions;
-using OpenRasta.Codecs.Spark.Tests;
 using OpenRasta.Codecs.Spark.Tests.TestObjects;
 
 namespace Input_replacement_specifications
@@ -34,6 +34,7 @@ namespace Input_replacement_specifications
 			TemplateResult = RenderTemplate(TemplateSource, Entity);
 		}
 	}
+
 
 	namespace Given_that_testentity_is_null
 	{

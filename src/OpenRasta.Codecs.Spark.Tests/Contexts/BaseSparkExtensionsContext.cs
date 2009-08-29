@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 using OpenRasta.Codecs.Spark.Configuration;
+using OpenRasta.Codecs.Spark.Tests.Contexts;
 using OpenRasta.Codecs.Spark.Tests.Stubs;
 using OpenRasta.DI;
 using OpenRasta.Web;

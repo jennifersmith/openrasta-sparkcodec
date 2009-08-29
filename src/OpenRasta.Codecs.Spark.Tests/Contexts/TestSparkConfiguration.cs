@@ -3,7 +3,7 @@ using OpenRasta.Codecs.Spark.Configuration;
 using OpenRasta.Codecs.Spark.Tests.Stubs;
 using Spark;
 
-namespace OpenRasta.Codecs.Spark.Tests
+namespace OpenRasta.Codecs.Spark.Tests.Contexts
 {
 	public class TestSparkConfiguration: ISparkConfiguration
 	{
