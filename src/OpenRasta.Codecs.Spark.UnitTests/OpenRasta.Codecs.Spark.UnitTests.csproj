@@ -70,7 +70,9 @@
     <Compile Include="SparkElementTransformerTests.cs" />
     <Compile Include="SparkOverrideExtensionTests.cs" />
     <Compile Include="SparkWrapperFactoryTests.cs" />
+    <Compile Include="Specifications\ElementTransformerSpecificationTests.cs" />
     <Compile Include="Transformers\ElementTransformerServiceTests.cs" />
+    <Compile Include="Transformers\ElementTransformerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenRasta.Codecs.Spark2\OpenRasta.Codecs.Spark2.csproj">

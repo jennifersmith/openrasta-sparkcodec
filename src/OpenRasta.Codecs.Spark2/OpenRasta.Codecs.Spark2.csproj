@@ -50,7 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Matchers\NodeMatcher.cs" />
-    <Compile Include="Matchers\Scratch.cs" />
+    <Compile Include="Specification\ElementTransformerActionsByMatch.cs" />
+    <Compile Include="Specification\ElementTransformerSpecification.cs" />
+    <Compile Include="Specification\IElementTransformerAction.cs" />
+    <Compile Include="Specification\IElementTransformerSpecification.cs" />
+    <Compile Include="Specification\ISpecificationProvider.cs" />
+    <Compile Include="Specification\Scratch.cs" />
     <Compile Include="Model\IElement.cs" />
     <Compile Include="Model\INode.cs" />
     <Compile Include="SparkInterface\ISparkElementTransformer.cs" />
@@ -62,6 +67,7 @@
     <Compile Include="SparkInterface\SparkElementTransformer.cs" />
     <Compile Include="SparkInterface\SparkOverrideExtension.cs" />
     <Compile Include="SparkInterface\SparkWrapperFactory.cs" />
+    <Compile Include="Specification\SpecificationProvider.cs" />
     <Compile Include="Transformers\ElementTransformerService.cs" />
     <Compile Include="Transformers\IElementTransformer.cs" />
     <Compile Include="Transformers\IElementTransformerService.cs" />

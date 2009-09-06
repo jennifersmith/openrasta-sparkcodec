@@ -3,40 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OpenRasta.Codecs.Spark2.Model;
+using OpenRasta.Codecs.Spark2.Specification;
 
 namespace OpenRasta.Codecs.Spark2.Transformers
 {
 	public class ElementTransformerService : IElementTransformerService
 	{
-		public ElementTransformerService(object elementTransformsConfiguration)
+		private readonly IElementTransformerSpecification _elementTransformerSpecification;
+
+		public ElementTransformerService(ISpecificationProvider specificationProvider)
 		{
+			_elementTransformerSpecification = specificationProvider.CreateSpecification();
 		}
 
 		public IElementTransformer GetTransformerFor(IElement element)
 		{
-			return null;
+			if(IsTransformable(element)== false)
+			{
+				throw new ArgumentException("Element is not transformable");
+			}
+			return new ElementTransformer(element, _elementTransformerSpecification.GetActionsForElement(element));
 		}
 
 		public bool IsTransformable(IElement element)
 		{
-			throw new NotImplementedException();
+			return HasAtLeastOneTransform(element);
 		}
-	}
-	public class NoElementTransform : IElementTransformer
-	{
-		public static readonly NoElementTransform Instance = new NoElementTransform();
-		private NoElementTransform()
+
+		private bool HasAtLeastOneTransform(IElement element)
 		{
+			return _elementTransformerSpecification.GetActionsForElement(element).Any();
 		}
-
-		public IElement Transform(IEnumerable<INode> body)
-		{
-			throw new NotImplementedException();
-		}
-	}
-
-
-	public interface IElementTransformsConfiguration
-	{
 	}
 }

@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRasta.Codecs.Spark2.Model;
+using OpenRasta.Codecs.Spark2.Specification;
 
 namespace OpenRasta.Codecs.Spark2.Matchers
 {
-	public class Scratch
+	public class Scratch : ISpecificationProvider
 	{
-		public ElementTransformerSpecification CreateSpecification()
+		public IElementTransformerSpecification CreateSpecification()
 		{
 			var builder = new ElementTransformerSpecificationBuilder();
 
@@ -38,24 +39,9 @@ namespace OpenRasta.Codecs.Spark2.Matchers
 			_builders.Add(builder);
 		}	
 
-		public ElementTransformerSpecification Build()
+		public IElementTransformerSpecification Build()
 		{
 			return new ElementTransformerSpecification(_builders.Select(x => x.Build()));
-		}
-	}
-
-	public class ElementTransformerSpecification
-	{
-		private readonly IEnumerable<ElementTransformerActionsByMatch> _elementTransformerActionsByMatchs;
-
-		public ElementTransformerSpecification(IEnumerable<ElementTransformerActionsByMatch> elementTransformerActionsByMatchs)
-		{
-			_elementTransformerActionsByMatchs = elementTransformerActionsByMatchs;
-		}
-
-		public IEnumerable<IElementTransformerAction> GetActionsForElement(IElement element)
-		{
-			return null;
 		}
 	}
 
@@ -111,14 +97,6 @@ namespace OpenRasta.Codecs.Spark2.Matchers
 		}
 
 	}
-	
-	public class ElementTransformerActionsByMatch
-	{
-		public ElementTransformerActionsByMatch(IEnumerable<NodeMatcher> nodeMatchers, IEnumerable<IElementTransformerAction> elementTransformerActions)
-		{
-			throw new NotImplementedException();
-		}
-	}
 
 	public static class ElementTransformerExtensions
 	{
@@ -152,11 +130,6 @@ namespace OpenRasta.Codecs.Spark2.Matchers
 		{
 			throw new NotImplementedException();
 		}
-	}
-
-	public interface IElementTransformerAction
-	{
-		void Do(IElement Element);
 	}
 
 	public class ElementTransformerAction : IElementTransformerAction
