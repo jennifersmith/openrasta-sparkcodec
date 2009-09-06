@@ -64,7 +64,7 @@ namespace OpenRasta.Codecs.Spark.IntegrationTests
 
 			ISparkViewEngine sparkViewEngine = new SparkViewEngine(settings)
 			                                   	{
-			                                   		ExtensionFactory = new CodecSparkExtensionFactory(new SparkElementTransformerService(new ElementTransformerService()))
+			                                   		ExtensionFactory = new CodecSparkExtensionFactory(new SparkElementTransformerService(new ElementTransformerService(null)))
 			                                   	};
 
 			var descriptor = new SparkViewDescriptor();

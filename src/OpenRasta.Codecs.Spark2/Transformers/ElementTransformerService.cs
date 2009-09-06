@@ -8,9 +8,13 @@ namespace OpenRasta.Codecs.Spark2.Transformers
 {
 	public class ElementTransformerService : IElementTransformerService
 	{
+		public ElementTransformerService(object elementTransformsConfiguration)
+		{
+		}
+
 		public IElementTransformer GetTransformerFor(IElement element)
 		{
-			throw new NotImplementedException();
+			return null;
 		}
 
 		public bool IsTransformable(IElement element)
@@ -29,5 +33,10 @@ namespace OpenRasta.Codecs.Spark2.Transformers
 		{
 			throw new NotImplementedException();
 		}
+	}
+
+
+	public interface IElementTransformsConfiguration
+	{
 	}
 }

@@ -66,6 +66,11 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 		{
 			get { return _wrappedNode; }
 		}
+
+		public string Name
+		{
+			get { throw new NotImplementedException(); }
+		}
 	}
 
 	public class SparkAttributeWrapper : SparkNodeWrapper<AttributeNode>

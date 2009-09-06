@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Matchers\NodeMatcher.cs" />
+    <Compile Include="Matchers\Scratch.cs" />
     <Compile Include="Model\IElement.cs" />
     <Compile Include="Model\INode.cs" />
     <Compile Include="SparkInterface\ISparkElementTransformer.cs" />
@@ -61,6 +63,11 @@
     <Compile Include="SparkInterface\SparkOverrideExtension.cs" />
     <Compile Include="SparkInterface\SparkWrapperFactory.cs" />
     <Compile Include="Transformers\ElementTransformerService.cs" />
+    <Compile Include="Transformers\IElementTransformer.cs" />
+    <Compile Include="Transformers\IElementTransformerService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Configuration\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

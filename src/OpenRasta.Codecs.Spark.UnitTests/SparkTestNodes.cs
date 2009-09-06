@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using OpenRasta.Codecs.Spark2.Model;
 using OpenRasta.Codecs.Spark2.SparkInterface;
@@ -22,7 +23,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		}
 		private class UnknownNodeImpl : Node
 		{
-			
+
 		}
 	}
 
@@ -36,6 +37,25 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		public static INode BasicAttributeNode()
 		{
 			return new SparkAttributeWrapper(SparkTestNodes.BasicAttributeNode());
+		}
+		public static TestElement TestElement(string elementName)
+		{
+			return new TestElement(elementName);
+		}
+	}
+
+	public class TestElement : IElement
+	{
+		private readonly string _elementName;
+
+		public TestElement(string elementName)
+		{
+			_elementName = elementName;
+		}
+
+		public string Name
+		{
+			get { return _elementName; }
 		}
 	}
 }
