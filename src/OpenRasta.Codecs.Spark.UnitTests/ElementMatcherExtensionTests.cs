@@ -7,7 +7,7 @@ using OpenRasta.Codecs.Spark2.Model;
 namespace OpenRasta.Codecs.Spark.UnitTests
 {
 	[TestFixture]
-	public class NodeMatcherExtensionsTests
+	public class ElementMatcherExtensionTests
 	{
 		public NodeMatcherSetContext Context { get; private set; }
 		[SetUp]
@@ -20,37 +20,37 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		{
 			GivenASetOfNodeMatchers(new NodeMatcher("foo"), new NodeMatcher("BAR"));
 			WhenMatchAnyIsCalledFor(InternalTestNodes.TestElement("foo"));
-			ThenMatchResultShouldBe(NodeMatchResult.Match);
+			ThenMatchResultShouldBe(ElementMatchResult.Match);
 		}
 		[Test]
 		public void MatchAnyReturnsNegativeIfAtNonneOfTheNodeMatchersMatches()
 		{
 			GivenASetOfNodeMatchers(new NodeMatcher("foo"), new NodeMatcher("BAR"));
 			WhenMatchAnyIsCalledFor(InternalTestNodes.TestElement("neitherFooNorBar"));
-			ThenMatchResultShouldBe(NodeMatchResult.NoMatch);
+			ThenMatchResultShouldBe(ElementMatchResult.NoMatch);
 		}
 
-		private void ThenMatchResultShouldBe(NodeMatchResult result)
+		private void ThenMatchResultShouldBe(ElementMatchResult result)
 		{
 			Context.MatchResult.ShouldEqual(result);
 		}
 
-		private void WhenMatchAnyIsCalledFor(INode element)
+		private void WhenMatchAnyIsCalledFor(IElement element)
 		{
-			Context.MatchResult = Context.NodeMatchers.MatchesAtLeastOne(element);
+			Context.MatchResult = Context.ElementMatchers.MatchesAtLeastOne(element);
 		}
 
 
 		private void GivenASetOfNodeMatchers(params NodeMatcher[] nodeMatchers)
 		{
-			Context.NodeMatchers = nodeMatchers;
+			Context.ElementMatchers = nodeMatchers;
 		}
 
 		public class NodeMatcherSetContext
 		{
-			public IEnumerable<NodeMatcher> NodeMatchers { get; set; }
+			public IEnumerable<NodeMatcher> ElementMatchers { get; set; }
 
-			public NodeMatchResult MatchResult { get; set; }
+			public ElementMatchResult MatchResult { get; set; }
 		}
 	}
 }

@@ -126,5 +126,10 @@ namespace OpenRasta.Codecs.Spark.Testing.Extensions
 		{
 			val.ShouldEqual(true);
 		}
+
+		public static void ShouldHaveCount<T>(this IEnumerable<T> val, int expected)
+		{
+			Assert.That(val.ToArray(), Has.Length.EqualTo(expected));
+		}
 	}
 }

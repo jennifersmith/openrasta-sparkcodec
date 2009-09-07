@@ -50,12 +50,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Matchers\NodeMatcher.cs" />
+    <Compile Include="Specification\Builders\IElementTransformerActionsByMatchBuilder.cs" />
     <Compile Include="Specification\ElementTransformerActionsByMatch.cs" />
+    <Compile Include="Specification\Builders\ElementTransformerActionsByMatchBuilder.cs" />
     <Compile Include="Specification\ElementTransformerSpecification.cs" />
+    <Compile Include="Specification\Builders\ElementTransformerSpecificationBuilder.cs" />
     <Compile Include="Specification\IElementTransformerAction.cs" />
     <Compile Include="Specification\IElementTransformerSpecification.cs" />
     <Compile Include="Specification\ISpecificationProvider.cs" />
-    <Compile Include="Specification\Scratch.cs" />
+    <Compile Include="Specification\Helpers\Convert.cs" />
+    <Compile Include="Specification\Actions\ConvertAttributeToUriAction.cs" />
+    <Compile Include="Specification\Helpers\ElementMatchSpecificationExtensions.cs" />
+    <Compile Include="Specification\Helpers\ElementTransformerExtensions.cs" />
+    <Compile Include="Specification\Helpers\Scratch.cs" />
     <Compile Include="Model\IElement.cs" />
     <Compile Include="Model\INode.cs" />
     <Compile Include="SparkInterface\ISparkElementTransformer.cs" />
@@ -68,6 +75,8 @@
     <Compile Include="SparkInterface\SparkOverrideExtension.cs" />
     <Compile Include="SparkInterface\SparkWrapperFactory.cs" />
     <Compile Include="Specification\SpecificationProvider.cs" />
+    <Compile Include="Specification\Helpers\Tag.cs" />
+    <Compile Include="Syntax\ISyntaxProvider.cs" />
     <Compile Include="Transformers\ElementTransformerService.cs" />
     <Compile Include="Transformers\IElementTransformer.cs" />
     <Compile Include="Transformers\IElementTransformerService.cs" />

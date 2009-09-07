@@ -53,7 +53,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 
 		private void TheResultShouldWrapTheOriginalSetOfNodes()
 		{
-			var wrappedNodes = Context.WrappedNodes.Select(x => x.As<SparkNodeWrapper>().OriginalNode);
+			var wrappedNodes = Context.WrappedNodes.Select(x => x.As<SparkNodeWrapper>().WrappedNode);
 			Assert.That(wrappedNodes, Is.EqualTo(Context.NodesToWrap));
 		}
 

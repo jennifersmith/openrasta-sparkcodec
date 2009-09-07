@@ -6,11 +6,11 @@ using OpenRasta.Codecs.Spark2.Model;
 
 namespace OpenRasta.Codecs.Spark2.Matchers
 {
-	public static class NodeMatcherExtensions
+	public static class ElementMatcherExtensions
 	{
-		public static NodeMatchResult MatchesAtLeastOne(this IEnumerable<NodeMatcher> nodeMatchers, INode node)
+		public static ElementMatchResult MatchesAtLeastOne(this IEnumerable<NodeMatcher> nodeMatchers, IElement element)
 		{
-			return nodeMatchers.Select(x => x.Match(node)).Where(x => x == NodeMatchResult.Match).FirstOrDefault();
+			return nodeMatchers.Select(x => x.Match(element)).Where(x => x == ElementMatchResult.Match).FirstOrDefault();
 		}
 	}
 	public class NodeMatcher
@@ -22,18 +22,18 @@ namespace OpenRasta.Codecs.Spark2.Matchers
 			_elementName = elementName;
 		}
 
-		public NodeMatchResult Match(INode element)
+		public ElementMatchResult Match(IElement element)
 		{
-			return NodeNameMatches(element) ? NodeMatchResult.Match : NodeMatchResult.NoMatch;
+			return NodeNameMatches(element) ? ElementMatchResult.Match : ElementMatchResult.NoMatch;
 		}
 
-		private bool NodeNameMatches(INode element)
+		private bool NodeNameMatches(IElement element)
 		{
 			return string.Equals(element.Name, _elementName, StringComparison.InvariantCultureIgnoreCase);
 		}
 	}
 
-	public enum NodeMatchResult
+	public enum ElementMatchResult
 	{
 		NoMatch = 0,
 		Match = 1

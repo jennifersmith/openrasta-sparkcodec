@@ -9,7 +9,7 @@ using OpenRasta.Codecs.Spark2.Model;
 namespace OpenRasta.Codecs.Spark.UnitTests
 {
 	[TestFixture]
-	public class NodeMatcherTests
+	public class ElementMatcherTests
 	{
 		[SetUp]
 		public void SetUp()
@@ -21,38 +21,38 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		{
 			GivenANodeMatcherForElementName("foo");
 			WhenMatchedAgainstElement(InternalTestNodes.TestElement("FOo"));
-			ThenTheResultShouldBe(NodeMatchResult.Match);
+			ThenTheResultShouldBe(ElementMatchResult.Match);
 		}
 		[Test]
 		public void NodeMatcherShouldNotMatchWhenNamesAreDifferent()
 		{
 			GivenANodeMatcherForElementName("foo");
 			WhenMatchedAgainstElement(InternalTestNodes.TestElement("BaR"));
-			ThenTheResultShouldBe(NodeMatchResult.NoMatch);
+			ThenTheResultShouldBe(ElementMatchResult.NoMatch);
 		}
 
-		private void ThenTheResultShouldBe(NodeMatchResult result)
+		private void ThenTheResultShouldBe(ElementMatchResult result)
 		{
 			Context.MatchResult.ShouldEqual(result);
 		}
 
-		private void WhenMatchedAgainstElement(INode element)
+		private void WhenMatchedAgainstElement(IElement element)
 		{
-			Context.MatchResult = Context.NodeMatcher.Match(element);
+			Context.MatchResult = Context.ElementMatcher.Match(element);
 		}
 
 		private void GivenANodeMatcherForElementName(string foo)
 		{
-			Context.NodeMatcher = new NodeMatcher(foo);
+			Context.ElementMatcher = new NodeMatcher(foo);
 		}
 
 		protected NodeMatcherContextTests Context { get; set; }
 
 		public class NodeMatcherContextTests
 		{
-			public NodeMatcher NodeMatcher { get; set; }
+			public NodeMatcher ElementMatcher { get; set; }
 
-			public NodeMatchResult MatchResult { get; set; }
+			public ElementMatchResult MatchResult { get; set; }
 		}
 	}
 }

@@ -6,6 +6,7 @@ using Spark;
 using Spark.Compiler;
 using Spark.Compiler.ChunkVisitors;
 using Spark.Compiler.NodeVisitors;
+using Spark.Parser.Code;
 using Spark.Parser.Markup;
 
 namespace OpenRasta.Codecs.Spark2.SparkInterface
@@ -49,7 +50,7 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 
 	public abstract class SparkNodeWrapper
 	{
-		public abstract Node OriginalNode { get; }
+		public abstract Node WrappedNode { get; }
 	}
 
 	public class SparkNodeWrapper<NodeType> : SparkNodeWrapper, INode
@@ -62,21 +63,43 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 			_wrappedNode = node;
 		}
 
-		public override Node OriginalNode
+		public override Node WrappedNode
 		{
 			get { return _wrappedNode; }
 		}
 
+		protected NodeType Current
+		{
+			get
+			{
+				return _wrappedNode;
+			}
+		}
 		public string Name
 		{
 			get { throw new NotImplementedException(); }
 		}
 	}
 
-	public class SparkAttributeWrapper : SparkNodeWrapper<AttributeNode>
+	public class SparkAttributeWrapper : SparkNodeWrapper<AttributeNode>, IAttribute
 	{
 		public SparkAttributeWrapper(AttributeNode node) : base(node)
 		{
+		}
+		public void AddExpressionBody(string codeSnippet)
+		{
+			throw new NotImplementedException();
+		}
+
+		public ICodeExpressionNode AddExpression()
+		{
+			ExpressionNode node = new ExpressionNode(new Snippets());
+			throw new NotImplementedException();
+		}
+
+		public string GetTextValue()
+		{
+			throw new NotImplementedException();
 		}
 	}
 	public class UnrecognisedSparkNodeWrapper : SparkNodeWrapper<Node>
@@ -91,6 +114,25 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 	{
 		public SparkElementWrapper(ElementNode node) : base(node)
 		{
+		}
+
+		public IAttribute AddAttribute(string attributeName)
+		{
+			//UNTESTED!
+			var attributeNode = new AttributeNode(attributeName, "");
+			attributeNode.Nodes.RemoveAt(0);
+			Current.Attributes.Add(attributeNode);
+			return new SparkAttributeWrapper(attributeNode);
+		}
+
+		public bool HasAttribute(string attribute)
+		{
+			throw new NotImplementedException();
+		}
+
+		public IAttribute GetAttribute(string attribute)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

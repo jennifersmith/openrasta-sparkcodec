@@ -31,7 +31,7 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 		}
 		public static Node Unwrap(this INode node)
 		{
-			return ((SparkNodeWrapper) node).OriginalNode;
+			return ((SparkNodeWrapper) node).WrappedNode;
 		}
 	}
 

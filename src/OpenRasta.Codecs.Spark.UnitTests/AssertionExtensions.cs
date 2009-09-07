@@ -7,6 +7,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 {
 	public static class AssertionExtensions
 	{
+
 		public static T As<T>(this object val)
 		{
 			Assert.That(val, Is.InstanceOf(typeof (T)));
@@ -143,6 +144,10 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		public static void ShouldBeTrue(this bool val)
 		{
 			val.ShouldEqual(true);
+		}
+		public static void ShouldHaveCount<T>(this IEnumerable<T> val, int expected)
+		{
+			Assert.That(val.ToArray(), Has.Length.EqualTo(expected));
 		}
 	}
 }

@@ -47,7 +47,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 
 		private void ThenTheBodyResultShouldBeTheElementTransformerResultUnwrapped()
 		{
-			Context.TransformationResult.ShouldEqual(Context.ElementTransformerResult.As<SparkElementWrapper>().OriginalNode);
+			Context.TransformationResult.ShouldEqual(Context.ElementTransformerResult.As<SparkElementWrapper>().WrappedNode);
 		}
 
 		private void WhenNodeIsTransformed()
@@ -69,7 +69,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		private void ThenTheBodyNodesShouldBePassedIntoTheElementTransformer(IEnumerable<Node> nodes)
 		{
 			IEnumerable<INode> bodyNodes = Context.ElementTransformer.GetFirstArgumentFor<IElementTransformer, IEnumerable<INode>>(x => x.Transform(null));
-			IEnumerable<Node> unwrappedNodes = bodyNodes.Cast<SparkNodeWrapper>().Select(x => x.OriginalNode);
+			IEnumerable<Node> unwrappedNodes = bodyNodes.Cast<SparkNodeWrapper>().Select(x => x.WrappedNode);
 			Assert.That(unwrappedNodes, Is.EqualTo(nodes));
 		}
 

@@ -17,9 +17,14 @@ namespace OpenRasta.Codecs.Spark2.Specification
 		public IEnumerable<IElementTransformerAction> GetActionsForElement(IElement element)
 		{
 			var allMatches =
-				_elementTransformerActionsByMatchs.Where(x => x.NodeMatchers.MatchesAtLeastOne(element) == NodeMatchResult.Match);
+				_elementTransformerActionsByMatchs.Where(x => x.NodeMatchers.MatchesAtLeastOne(element) == ElementMatchResult.Match);
 
 			return allMatches.SelectMany(x => x.ElementTransformerActions);
+		}
+
+		public IEnumerable<ElementTransformerActionsByMatch> GetElementTransformerActionsByMatch()
+		{
+			return _elementTransformerActionsByMatchs.ToArray();
 		}
 	}
 }
