@@ -26,9 +26,5 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 				return _wrappedNode;
 			}
 		}
-		public string Name
-		{
-			get { throw new NotImplementedException(); }
-		}
 	}
 }

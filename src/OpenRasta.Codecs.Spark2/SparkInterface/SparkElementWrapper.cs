@@ -12,6 +12,11 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 		{
 		}
 
+		public string Name
+		{
+			get { return CurrentNode.Name; }
+		}
+
 		public IAttribute AddAttribute(string attributeName)
 		{
 			var attributeNode = new AttributeNode(attributeName, "");

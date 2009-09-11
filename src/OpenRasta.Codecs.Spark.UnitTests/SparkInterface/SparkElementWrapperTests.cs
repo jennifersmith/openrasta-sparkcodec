@@ -72,6 +72,19 @@ namespace OpenRasta.Codecs.Spark.UnitTests.SparkInterface
 			ThenRetrievedAttributeShouldWrap(attributeNode);
 		}
 
+
+		[Test]
+		public void NameShouldReturnTheNameOfTheWrappedNode()
+		{
+			GivenAnOriginalElement(SparkTestNodes.ElementNode("foo"));
+			ThenNodeNameShouldBe("foo");
+		}
+
+		private void ThenNodeNameShouldBe(string nodeName)
+		{
+			Context.Target.Name.ShouldEqual(nodeName);
+		}
+
 		private void ThenRetrievedAttributeShouldWrap(Node attributeNode)
 		{
 			Context.GetAttributeResult.ShouldNotBeNull();

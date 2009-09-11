@@ -10,10 +10,13 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 
 		public static T As<T>(this object val)
 		{
-			Assert.That(val, Is.InstanceOf(typeof (T)));
+			val.ShouldBe<T>();
 			return (T) val;
 		}
-
+		public static void ShouldBe<T>(this object val)
+		{
+			Assert.That(val, Is.InstanceOf(typeof(T)));
+		}
 		public static void ShouldContain<T>(this IEnumerable<T> list, T value)
 		{
 			list.ShouldNotBeNull();

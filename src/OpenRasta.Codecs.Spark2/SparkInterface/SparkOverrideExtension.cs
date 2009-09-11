@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Text;
-using OpenRasta.Codecs.Spark2.Model;
 using Spark;
 using Spark.Compiler;
 using Spark.Compiler.ChunkVisitors;
 using Spark.Compiler.NodeVisitors;
-using Spark.Parser.Code;
 using Spark.Parser.Markup;
 
 namespace OpenRasta.Codecs.Spark2.SparkInterface
@@ -53,32 +50,6 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 		public abstract Node GetWrappedNode();
 	}
 
-	public class SparkAttributeWrapper : SparkNodeWrapper<AttributeNode>, IAttribute
-	{
-		public SparkAttributeWrapper(AttributeNode node) : base(node)
-		{
-		}
-		public void AddExpressionBody(string codeSnippet)
-		{
-			throw new NotImplementedException();
-		}
-
-		public ICodeExpressionNode AddExpression()
-		{
-			ExpressionNode node = new ExpressionNode(new Snippets());
-			throw new NotImplementedException();
-		}
-
-		public string GetTextValue()
-		{
-			throw new NotImplementedException();
-		}
-
-		public bool Exists()
-		{
-			throw new NotImplementedException();
-		}
-	}
 	public class UnrecognisedSparkNodeWrapper : SparkNodeWrapper<Node>
 	{
 		public UnrecognisedSparkNodeWrapper(Node node)

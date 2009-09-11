@@ -9,6 +9,10 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 {
 	public static class SparkTestNodes
 	{
+		public static ElementNode ElementNode(string name)
+		{
+			return new ElementNode(name, new List<AttributeNode>(), false);
+		}
 		public static ElementNode BasicElementNode()
 		{
 			return new ElementNode("elementNode", new List<AttributeNode>(), false);
@@ -21,6 +25,12 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		public static AttributeNode BasicAttributeNode(string attributeName)
 		{
 			return new AttributeNode(attributeName, "attributeValue");
+		}
+		public static AttributeNode WithText(this AttributeNode attributeNode, string text)
+		{
+			attributeNode.Nodes.Clear();
+			attributeNode.Nodes.Add(new TextNode(text));
+			return attributeNode;
 		}
 		public static Node UnknownNode()
 		{
@@ -35,6 +45,11 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		{
 			elementnode.Attributes.Add(attributeNode);
 			return elementnode;
+		}
+
+		public static ExpressionNode ExpressionNode()
+		{
+			return new ExpressionNode("");
 		}
 	}
 

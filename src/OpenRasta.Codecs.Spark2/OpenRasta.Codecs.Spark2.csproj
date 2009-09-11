@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Matchers\NodeMatcher.cs" />
+    <Compile Include="SparkInterface\SparkAttributeWrapper.cs" />
     <Compile Include="SparkInterface\SparkElementWrapper.cs" />
     <Compile Include="SparkInterface\SparkNodeWrapper.cs" />
     <Compile Include="Specification\Builders\IElementTransformerActionsByMatchBuilder.cs" />
