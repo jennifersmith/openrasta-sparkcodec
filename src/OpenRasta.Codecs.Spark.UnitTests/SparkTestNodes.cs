@@ -13,10 +13,14 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		{
 			return new ElementNode("elementNode", new List<AttributeNode>(), false);
 		}
-
-		public static AttributeNode BasicAttributeNode()
+		public static ElementNode WithAttribute(this ElementNode elementNode, string name, string value)
 		{
-			return new AttributeNode("attributeName", "attributeValue");
+			elementNode.Attributes.Add(new AttributeNode(name,value));
+			return elementNode;
+		}
+		public static AttributeNode BasicAttributeNode(string attributeName)
+		{
+			return new AttributeNode(attributeName, "attributeValue");
 		}
 		public static Node UnknownNode()
 		{
@@ -25,6 +29,12 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		private class UnknownNodeImpl : Node
 		{
 
+		}
+
+		public static ElementNode WithAttribute(this ElementNode elementnode, AttributeNode attributeNode)
+		{
+			elementnode.Attributes.Add(attributeNode);
+			return elementnode;
 		}
 	}
 
@@ -37,7 +47,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 
 		public static INode BasicAttributeNode()
 		{
-			return new SparkAttributeWrapper(SparkTestNodes.BasicAttributeNode());
+			return new SparkAttributeWrapper(SparkTestNodes.BasicAttributeNode("attributeName"));
 		}
 		public static TestElement TestElement(string elementName)
 		{
@@ -125,34 +135,6 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		public void SetExpressionBody(string expression)
 		{
 			_body = expression;
-		}
-	}
-	public class TestAttributeNode :ContentContainingNode, IAttribute
-	{
-		private readonly string _value;
-
-		public TestAttributeNode(string name, string value) : base(name)
-		{
-			_value = value;
-		}
-		public IEnumerable<ICodeExpressionNode> CodeNodes
-		{
-			get
-			{
-				return Nodes.Where(x => (x is ICodeExpressionNode)).Cast<ICodeExpressionNode>();
-			}
-		}
-
-		public ICodeExpressionNode AddExpression()
-		{
-			var codeExpressionNode = new TestCodeExpressionNode();
-			Nodes.Add(codeExpressionNode);
-			return codeExpressionNode;
-		}
-
-		public string GetTextValue()
-		{
-			return _value;
 		}
 	}
 }

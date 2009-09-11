@@ -63,6 +63,7 @@
     </Compile>
     <Compile Include="ElementMatcherExtensionTests.cs" />
     <Compile Include="ElementMatcherTests.cs" />
+    <Compile Include="SparkInterface\SparkElementWrapperTests.cs" />
     <Compile Include="SparkNodeExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SparkTestNodes.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Specifications\Builders\ElementTransformerActionsByMatchBuilderTests.cs" />
     <Compile Include="Specifications\Builders\ElementTransformerSpecificationBuilderTests.cs" />
     <Compile Include="Specifications\ElementTransformerSpecificationTests.cs" />
+    <Compile Include="TestAttributeNode.cs" />
     <Compile Include="Transformers\ElementTransformerServiceTests.cs" />
     <Compile Include="Transformers\ElementTransformerTests.cs" />
   </ItemGroup>

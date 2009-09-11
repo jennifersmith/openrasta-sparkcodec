@@ -6,6 +6,7 @@ using Castle.Windsor;
 using OpenRasta.Codecs.Spark.Tests.Stubs;
 using OpenRasta.Codecs.Spark2.SparkInterface;
 using OpenRasta.Codecs.Spark2.Specification;
+using OpenRasta.Codecs.Spark2.Specification.Syntax;
 using OpenRasta.Codecs.Spark2.Transformers;
 using PanelSystem.WorkingDays.Tests;
 using Spark;
@@ -56,7 +57,7 @@ namespace OpenRasta.Codecs.Spark.IntegrationTests
 			result.AddComponent<ISparkExtensionFactory, CodecSparkExtensionFactory>();
 			result.AddComponent<ISparkElementTransformerService, SparkElementTransformerService>();
 			result.AddComponent<IElementTransformerService, ElementTransformerService>();
-			result.AddComponent<ISpecificationProvider, SpecificationProvider>();
+			result.AddComponent<ISpecificationProvider, DefaultSpecification>();
 			return result;
 		}
 		public string RenderTemplate(string templateSource, object data)

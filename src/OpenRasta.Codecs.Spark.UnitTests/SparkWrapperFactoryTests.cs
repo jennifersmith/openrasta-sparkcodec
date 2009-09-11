@@ -29,7 +29,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		[Test]
 		public void ShouldRecogniseAndWrapAttributeNodes()
 		{
-			GivenASparkNode(SparkTestNodes.BasicAttributeNode());
+			GivenASparkNode(SparkTestNodes.BasicAttributeNode("attributeName"));
 			WhenTheNodeIsWrapped();
 			ThenTheWrappedNodeShouldBe<SparkAttributeWrapper>();
 			AndTheWrappedNodeShouldWrapTheOriginalNode();
@@ -45,7 +45,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 
 		private void AndTheWrappedNodeShouldWrapTheOriginalNode()
 		{
-			Assert.That(Context.WrappedNode.As<SparkNodeWrapper>().WrappedNode, Is.EqualTo(Context.NodeToWrap));
+			Assert.That(Context.WrappedNode.As<SparkNodeWrapper>().GetWrappedNode(), Is.EqualTo(Context.NodeToWrap));
 		}
 
 		private void ThenTheWrappedNodeShouldBe<TWrapper>()

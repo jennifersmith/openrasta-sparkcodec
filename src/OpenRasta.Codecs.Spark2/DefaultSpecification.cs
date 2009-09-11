@@ -2,7 +2,7 @@ using OpenRasta.Codecs.Spark2.Specification.Builders;
 
 namespace OpenRasta.Codecs.Spark2.Specification.Syntax
 {
-	public class Scratch : ISpecificationProvider
+	public class DefaultSpecification : ISpecificationProvider
 	{
 		public IElementTransformerSpecification CreateSpecification()
 		{

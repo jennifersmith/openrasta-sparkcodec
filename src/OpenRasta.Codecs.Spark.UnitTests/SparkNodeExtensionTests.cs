@@ -22,8 +22,8 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		[Test]
 		public void WrapAllShouldBeAbleToMapAWholeBunchOfNodes()
 		{
-			GivenNodesToWrap(SparkTestNodes.BasicAttributeNode(), SparkTestNodes.BasicElementNode(),
-			                 SparkTestNodes.BasicAttributeNode());
+			GivenNodesToWrap(SparkTestNodes.BasicAttributeNode("attributeName"), SparkTestNodes.BasicElementNode(),
+			                 SparkTestNodes.BasicAttributeNode("attributeName"));
 
 			WhenAllNodesAreMapped();
 			TheResultShouldWrapTheOriginalSetOfNodes();
@@ -53,7 +53,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 
 		private void TheResultShouldWrapTheOriginalSetOfNodes()
 		{
-			var wrappedNodes = Context.WrappedNodes.Select(x => x.As<SparkNodeWrapper>().WrappedNode);
+			var wrappedNodes = Context.WrappedNodes.Select(x => x.As<SparkNodeWrapper>().GetWrappedNode());
 			Assert.That(wrappedNodes, Is.EqualTo(Context.NodesToWrap));
 		}
 

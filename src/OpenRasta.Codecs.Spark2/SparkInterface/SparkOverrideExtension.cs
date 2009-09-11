@@ -50,35 +50,7 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 
 	public abstract class SparkNodeWrapper
 	{
-		public abstract Node WrappedNode { get; }
-	}
-
-	public class SparkNodeWrapper<NodeType> : SparkNodeWrapper, INode
-		where NodeType : Node
-	{
-		private NodeType _wrappedNode;
-
-		public SparkNodeWrapper(NodeType node)
-		{
-			_wrappedNode = node;
-		}
-
-		public override Node WrappedNode
-		{
-			get { return _wrappedNode; }
-		}
-
-		protected NodeType Current
-		{
-			get
-			{
-				return _wrappedNode;
-			}
-		}
-		public string Name
-		{
-			get { throw new NotImplementedException(); }
-		}
+		public abstract Node GetWrappedNode();
 	}
 
 	public class SparkAttributeWrapper : SparkNodeWrapper<AttributeNode>, IAttribute
@@ -101,38 +73,17 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 		{
 			throw new NotImplementedException();
 		}
+
+		public bool Exists()
+		{
+			throw new NotImplementedException();
+		}
 	}
 	public class UnrecognisedSparkNodeWrapper : SparkNodeWrapper<Node>
 	{
 		public UnrecognisedSparkNodeWrapper(Node node)
 			: base(node)
 		{
-		}
-	}
-
-	public class SparkElementWrapper : SparkNodeWrapper<ElementNode>, IElement
-	{
-		public SparkElementWrapper(ElementNode node) : base(node)
-		{
-		}
-
-		public IAttribute AddAttribute(string attributeName)
-		{
-			//UNTESTED!
-			var attributeNode = new AttributeNode(attributeName, "");
-			attributeNode.Nodes.RemoveAt(0);
-			Current.Attributes.Add(attributeNode);
-			return new SparkAttributeWrapper(attributeNode);
-		}
-
-		public bool HasAttribute(string attribute)
-		{
-			throw new NotImplementedException();
-		}
-
-		public IAttribute GetAttribute(string attribute)
-		{
-			throw new NotImplementedException();
 		}
 	}
 }

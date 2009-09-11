@@ -21,5 +21,6 @@ namespace OpenRasta.Codecs.Spark2.Model
 		string Name { get; }
 		ICodeExpressionNode AddExpression();
 		string GetTextValue();
+		bool Exists();
 	}
 }
