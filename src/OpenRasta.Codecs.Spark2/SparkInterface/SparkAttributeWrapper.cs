@@ -1,21 +1,9 @@
 using System;
 using OpenRasta.Codecs.Spark2.Model;
-using Spark.Parser.Code;
 using Spark.Parser.Markup;
 
 namespace OpenRasta.Codecs.Spark2.SparkInterface
 {
-	public class SparkExpressionNodeWrapper : SparkNodeWrapper<ExpressionNode>, ICodeExpressionNode
-	{
-		public SparkExpressionNodeWrapper(ExpressionNode node) : base(node)
-		{
-		}
-
-		public void SetExpressionBody(string expression)
-		{
-			CurrentNode.Code.Add(new Snippet(){Value = expression});
-		}
-	}
 	public class SparkAttributeWrapper : SparkNodeWrapper<AttributeNode>, IAttribute
 	{
 		public SparkAttributeWrapper(AttributeNode node) : base(node)
@@ -30,11 +18,11 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 			}
 		}
 
-		public ICodeExpressionNode AddExpression()
+		public IConditionalExpressionNode AddConditionalExpressionNode()
 		{
-			ExpressionNode node = new ExpressionNode(string.Empty);
+			var node = new ConditionNode();
 			CurrentNode.Nodes.Add(node);
-			return new SparkExpressionNodeWrapper(node);
+			return new SparkConditionNodeWrapper(node);
 		}
 
 		public string GetTextValue()

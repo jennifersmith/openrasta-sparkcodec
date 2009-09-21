@@ -21,17 +21,29 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Syntax
 		{
 			GivenAParam("myUriExpression");
 			WhenCreateUriIsCalled();
-			ThenTheResultShouldBe("UriCreator.Create(\'myUriExpression\')");
+			ThenTheResultShouldBe("Uris.Create(myUriExpression)");
+		}
+		[Test]
+		public void NullCheckExpressionShouldReturnParameterWrappedInCorrectCodecall()
+		{
+			GivenAParam("myUriExpression");
+			WhenNullCheckIscalled();
+			ThenTheResultShouldBe("myUriExpression.IsNull()");
+		}
+
+		private void WhenNullCheckIscalled()
+		{
+			Context.Result = Context.Target.CreateNullCheckExpression(Context.InputParam);
 		}
 
 		private void ThenTheResultShouldBe(string expected)
 		{
-			Context.CreateUriResult.ShouldEqual(expected);
+			Context.Result.ShouldEqual(expected);
 		}
 
 		private void WhenCreateUriIsCalled()
 		{
-			Context.CreateUriResult = Context.Target.CreateUriExpression(Context.InputParam);
+			Context.Result = Context.Target.CreateUriExpression(Context.InputParam);
 		}
 
 		private void GivenAParam(string myuriexpression)
@@ -48,7 +60,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Syntax
 
 			public string InputParam { get; set; }
 
-			public string CreateUriResult { get; set; }
+			public string Result { get; set; }
 		}
 	}
 }

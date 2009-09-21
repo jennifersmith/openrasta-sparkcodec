@@ -8,7 +8,10 @@ using OpenRasta.Codecs.Spark2.SparkInterface;
 using OpenRasta.Codecs.Spark2.Specification;
 using OpenRasta.Codecs.Spark2.Specification.Syntax;
 using OpenRasta.Codecs.Spark2.Transformers;
-using PanelSystem.WorkingDays.Tests;
+using OpenRasta.Codecs.Spark2.ViewHelpers;
+using OpenRasta.DI;
+using OpenRasta.DI.Windsor;
+using OpenRasta.Web;
 using Spark;
 
 namespace OpenRasta.Codecs.Spark.IntegrationTests
@@ -16,6 +19,7 @@ namespace OpenRasta.Codecs.Spark.IntegrationTests
 	public abstract class TestSparkView : AbstractSparkView
 	{
 		public TestViewData ViewData { set; get; }
+		public IUriGenerator Uris { set; get; }
 	}
 
 	public class TestViewData
@@ -58,6 +62,12 @@ namespace OpenRasta.Codecs.Spark.IntegrationTests
 			result.AddComponent<ISparkElementTransformerService, SparkElementTransformerService>();
 			result.AddComponent<IElementTransformerService, ElementTransformerService>();
 			result.AddComponent<ISpecificationProvider, DefaultSpecification>();
+			
+			// openrasta stuff
+			var resolver = new WindsorDependencyResolver(result);
+			resolver.AddDependency(typeof(IUriResolver), typeof(TestUriResolver), DependencyLifetime.Singleton);
+			resolver.AddDependency(typeof(ICommunicationContext), typeof(TestCommunicationContext),DependencyLifetime.Singleton);
+			DependencyManager.SetResolver(resolver);
 			return result;
 		}
 		public string RenderTemplate(string templateSource, object data)
@@ -76,13 +86,14 @@ namespace OpenRasta.Codecs.Spark.IntegrationTests
 
 			IWindsorContainer dependencies = CreateTestDependencies();
 			ISparkViewEngine sparkViewEngine = new SparkViewEngine(settings)
-			                                   	{
+			                                   	{	
 			                                   		ExtensionFactory =dependencies.Resolve<ISparkExtensionFactory>()
 			                                   	};
 
-			var descriptor = new SparkViewDescriptor();
+			var descriptor = new SparkViewDescriptor();	
 			descriptor.AddTemplate(TestingViewFolder.SingleTemplateName);
 			var view = (TestSparkView)sparkViewEngine.CreateInstance(descriptor);
+			view.Uris = new UriGenerator();
 			view.ViewData = new TestViewData(data);
 			return Render(view);
 		}

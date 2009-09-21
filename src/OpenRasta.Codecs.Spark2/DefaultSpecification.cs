@@ -13,15 +13,17 @@ namespace OpenRasta.Codecs.Spark2.Specification.Syntax
 				Convert.ToAttributeToHref(),
 				Convert.ToTypeAttributeToHref()
 				);
+			builder.MatchAll(Tag.IframeTag)
+				.Do(
+				Convert.ToAttributeToSrc()
+				);
+			builder.MatchAll(Tag.ImageTag)
+				.Do(
+				Convert.ToAttributeToSrc()
+				);
 			builder.MatchAll(Tag.FormTag)
 				.Do(
-				Convert.ToAttributeToHref(),
-				Convert.ToTypeAttributeToHref()
-				);
-			builder.MatchAll(Tag.AllInputTags)
-				.Do(
-				Convert.ToAttributeToHref(),
-				Convert.ToTypeAttributeToHref()
+				Convert.ForAttributeToAction()
 				);
 			return builder.Build();
 		}

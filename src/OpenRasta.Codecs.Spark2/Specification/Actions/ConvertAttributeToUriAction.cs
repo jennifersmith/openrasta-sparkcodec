@@ -25,8 +25,17 @@ namespace OpenRasta.Codecs.Spark2.Specification.Actions
 			}
 			IAttribute fromAttribute = element.GetAttribute(_fromAttribute);
 			IAttribute attribute = element.AddAttribute(_toAttribute);
-			ICodeExpressionNode expression = attribute.AddExpression();
-			expression.SetExpressionBody(_syntaxProvider.CreateUriExpression(fromAttribute.GetTextValue())); 
+			IConditionalExpressionNode expression = attribute.AddConditionalExpressionNode();
+			ConditionalExpression conditionalExpression = GetConditionalResourceExpression(fromAttribute);
+			expression.SetExpressionBody(conditionalExpression); 
+		}
+
+		private ConditionalExpression GetConditionalResourceExpression(IAttribute fromAttribute)
+		{
+			string targetResource = fromAttribute.GetTextValue();
+			string nullCheck = _syntaxProvider.CreateNullCheckExpression(targetResource);
+			string uriExpression = _syntaxProvider.CreateUriExpression(targetResource);
+			return new ConditionalExpression(nullCheck, uriExpression);
 		}
 	}
 }

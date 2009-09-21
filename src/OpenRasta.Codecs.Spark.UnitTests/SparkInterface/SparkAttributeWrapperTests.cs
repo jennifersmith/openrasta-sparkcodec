@@ -17,19 +17,19 @@ namespace OpenRasta.Codecs.Spark.UnitTests.SparkInterface
 		}
 
 		[Test]
-		public void AddCodeExpressionNodeAddsANewExpressionNodeToTheAttributeBody()
+		public void AddConditionNodeAddsANewConditionNodeToTheAttributeBody()
 		{
 			GivenAnAttribute(SparkTestNodes.BasicAttributeNode("attribute"));
-			WhenACodeExpressionNodeIsAdded();
-			ThenTheAttributeShouldContainACodeExpressionNode();
+			WhenAConditionNodeIsAdded();
+			ThenTheAttributeShouldContainAConditionNode();
 		}
 
 		[Test]
-		public void AddCodeExpressionNodeShouldReturnExpressionNodeWrapped()
+		public void AddCodeExpressionNodeShouldReturnConditionNodeWrapped()
 		{
 			AttributeNode attributeNode = SparkTestNodes.BasicAttributeNode("attribute");
 			GivenAnAttribute(attributeNode);
-			WhenACodeExpressionNodeIsAdded();
+			WhenAConditionNodeIsAdded();
 			CodeExpressionResultShouldWrap(attributeNode.Nodes.Last());
 		}
 		[Test]
@@ -91,17 +91,19 @@ namespace OpenRasta.Codecs.Spark.UnitTests.SparkInterface
 
 		private void CodeExpressionResultShouldWrap(Node node)
 		{
-			Context.AddCodeExpressionResult.Unwrap().ShouldEqual(node);
+			Context.AddConditionalExpressionResult.Unwrap().ShouldEqual(node);
 		}
 
-		private void ThenTheAttributeShouldContainACodeExpressionNode()
+		private void ThenTheAttributeShouldContainAConditionNode()
 		{
-			Context.Target.Unwrap().As<AttributeNode>().Nodes.ShouldBeTrueForOne(x=>x is ExpressionNode);
+			var attributeNode = Context.Target.Unwrap().As<AttributeNode>();
+			attributeNode.Nodes.Count.ShouldBeAtLeast(1);
+			attributeNode.Nodes.Last().ShouldBe<ConditionNode>();
 		}
 
-		private void WhenACodeExpressionNodeIsAdded()
+		private void WhenAConditionNodeIsAdded()
 		{
-			Context.AddCodeExpressionResult = Context.Target.AddExpression();
+			Context.AddConditionalExpressionResult = Context.Target.AddConditionalExpressionNode();
 		}
 
 		private void GivenAnAttribute(AttributeNode node)
@@ -115,7 +117,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests.SparkInterface
 		{
 			public SparkAttributeWrapper Target { get; set; }
 
-			public ICodeExpressionNode AddCodeExpressionResult
+			public IConditionalExpressionNode AddConditionalExpressionResult
 			{
 				get; set;
 			}

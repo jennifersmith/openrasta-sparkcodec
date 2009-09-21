@@ -12,6 +12,8 @@ namespace OpenRasta.Codecs.Spark2.Specification.Syntax
 		}
 
 		public readonly static Tag AnchorTag = new Tag("A");
+		public readonly static Tag IframeTag = new Tag("iframe");
+		public readonly static Tag ImageTag = new Tag("img");
 		public readonly static Tag FormTag = new Tag("form");
 		public static IEnumerable<Tag> AllInputTags = new []{new Tag("Input"), new Tag("select"), new Tag("textarea")};
 

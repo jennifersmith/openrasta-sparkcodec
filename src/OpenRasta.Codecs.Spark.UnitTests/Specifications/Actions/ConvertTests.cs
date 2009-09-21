@@ -11,10 +11,19 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Actions
 		{
 			return GetTestCreateUriExpression(targetResource);
 		}
+		public string CreateNullCheckExpression(string targetResource)
+		{
+			return GetTestNullCheckExpression(targetResource);
+		}
 
 		public static string GetTestCreateUriExpression(string targetResource)
 		{
 			return string.Format("CREATEURI FOR {0}", targetResource);
+		}
+		public static string GetTestNullCheckExpression(string targetResource)
+		{
+
+			return string.Format("NULLCHECK FOR {0}", targetResource);
 		}
 	}
 	public static class StubSyntaxProviderExtensions
@@ -23,7 +32,9 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Actions
 		{
 			attribute.CodeNodes.ShouldHaveCount(1);
 			string createUriExpression = StubSyntaxProvider.GetTestCreateUriExpression(originalValue);
-			attribute.CodeNodes.First().As<TestCodeExpressionNode>().Body.ShouldEqual(createUriExpression);
+			string nullCheckExpression = StubSyntaxProvider.GetTestNullCheckExpression(originalValue);
+			ConditionalExpression expectedExpression = new ConditionalExpression(nullCheckExpression, createUriExpression);
+			attribute.CodeNodes.First().As<TestConditionalExpressionNode>().ConditionalExpression.ShouldEqual(expectedExpression);
 		}
 	}
 }

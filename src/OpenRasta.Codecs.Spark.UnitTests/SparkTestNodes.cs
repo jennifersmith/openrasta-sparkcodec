@@ -51,6 +51,10 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		{
 			return new ExpressionNode("");
 		}
+		public static ConditionNode ConditionNode()
+		{
+			return new ConditionNode();
+		}
 	}
 
 	public static class InternalTestNodes
@@ -136,20 +140,20 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 			return Attributes.Where(x => x.Name.Equals(attribute, StringComparison.InvariantCultureIgnoreCase)).First();
 		}
 	}
-	public class TestCodeExpressionNode : ICodeExpressionNode
+	public class TestConditionalExpressionNode : IConditionalExpressionNode
 	{
-		private string _body;
+		private ConditionalExpression _conditionalExpression;
 
-		public string Body
+		public ConditionalExpression ConditionalExpression
 		{
 			get {
-				return _body;
+				return _conditionalExpression;
 			}
 		}
 
-		public void SetExpressionBody(string expression)
+		public void SetExpressionBody(ConditionalExpression conditionalExpression)
 		{
-			_body = expression;
+			_conditionalExpression = conditionalExpression;
 		}
 	}
 }

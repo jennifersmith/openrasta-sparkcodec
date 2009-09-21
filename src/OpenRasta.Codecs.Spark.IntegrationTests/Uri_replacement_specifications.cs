@@ -313,7 +313,6 @@ namespace Uri_replacement_specifications
 			}
 		}
 
-
 		[TestFixture]
 		public class When_rendering_iframe_tag_with_a_templated_src_using_entity_reference :
 			Using_spark_codec_to_render_an_element_with_a_uri_attributes

@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace PanelSystem.WorkingDays.Tests
+namespace OpenRasta.Codecs.Spark.IntegrationTests
 {
 	public abstract class BaseContext
 	{

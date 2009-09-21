@@ -41,6 +41,7 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 
 		public void VisitChunk(IChunkVisitor visitor, OutputLocation location, IList<Chunk> body, StringBuilder output)
 		{
+			visitor.Accept(body);
 		}
 	}
 

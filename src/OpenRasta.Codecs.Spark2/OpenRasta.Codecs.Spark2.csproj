@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="OpenRasta, Version=2.0.2036.303, Culture=neutral, PublicKeyToken=e04bf464d7caae73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\OpenRasta\net-35\OpenRasta.dll</HintPath>
+    </Reference>
     <Reference Include="Spark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Spark\Spark.dll</HintPath>
@@ -50,7 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Matchers\NodeMatcher.cs" />
+    <Compile Include="Model\ConditionalExpression.cs" />
     <Compile Include="SparkInterface\SparkAttributeWrapper.cs" />
+    <Compile Include="SparkInterface\SparkConditionNodeWrapper.cs" />
     <Compile Include="SparkInterface\SparkElementWrapper.cs" />
     <Compile Include="SparkInterface\SparkNodeWrapper.cs" />
     <Compile Include="Specification\Builders\IElementTransformerActionsByMatchBuilder.cs" />
@@ -82,6 +88,7 @@
     <Compile Include="Transformers\ElementTransformerService.cs" />
     <Compile Include="Transformers\IElementTransformer.cs" />
     <Compile Include="Transformers\IElementTransformerService.cs" />
+    <Compile Include="ViewHelpers\UriGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Configuration\" />
