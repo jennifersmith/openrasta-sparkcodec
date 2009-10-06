@@ -250,7 +250,7 @@ namespace Uri_replacement_specifications
 		{
 			public override string TemplateSource
 			{
-				get { return @"<form totype=""IEnumerable<TestEntity>"" anotherattribute=""leave this alone"">Inner text</form>"; }
+				get { return @"<form fortype=""IEnumerable<TestEntity>"" anotherattribute=""leave this alone"">Inner text</form>"; }
 			}
 
 			[Test]

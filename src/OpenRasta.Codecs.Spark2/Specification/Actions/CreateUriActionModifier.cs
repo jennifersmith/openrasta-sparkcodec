@@ -30,6 +30,7 @@ namespace OpenRasta.Codecs.Spark2.Specification.Actions
 			IAttribute fromAttribute = element.GetAttribute(_fromAttribute);
 			IAttribute attribute = element.AddAttribute(_toAttribute);
 			_attributeModifer.Modify(fromAttribute, attribute);
+			element.RemoveAttribute(fromAttribute);
 		}
 	}
 	public class CreateUriActionModifier : IAttributeModifer

@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 using OpenRasta.Codecs.Spark2.Model;
 using OpenRasta.Codecs.Spark2.Specification.Actions;
@@ -16,6 +17,17 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Actions
 			          		AttributeModifier = MockRepository.GenerateStub<IAttributeModifer>()
 			          	};
 		}
+
+		[Test]
+		public void ShouldRemoveOriginalAttribute()
+		{
+			TestElement element = InternalTestNodes.TestElement("").WithAttribute("from", "aValue");
+			GivenToAndFromAttributes("to", "from");
+			GivenElementTarget(element);
+			WhenActionCalledOnElement();
+			ThenAttributeIsRemoved("from");
+		}
+
 
 		[Test]
 		public void ShouldAddAnAttributeOfTheSpecifiedNameWhenActionIsCalledAndFromAttributeExists()
@@ -42,9 +54,10 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Actions
 		{
 			TestElement element = InternalTestNodes.TestElement("").WithAttribute("from", "aValue");
 			GivenToAndFromAttributes("to", "from");
+			IAttribute originalAttribute = element.GetAttribute("from");
 			GivenElementTarget(element);
-			WhenActionCalledOnElement();	
-			ThenHasCalledModiferWithAttributes(element.GetAttribute("from"), element.GetAttribute("to"));
+			WhenActionCalledOnElement();
+			ThenHasCalledModiferWithAttributes(originalAttribute, element.GetAttribute("to"));
 		}
 
 		private void ThenHasCalledModiferWithAttributes(IAttribute originalAttribute, IAttribute newAttribute)
@@ -53,6 +66,10 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Actions
 		}
 
 
+		private void ThenAttributeIsRemoved(string attributeName)
+		{
+			Context.ElementTarget.Attributes.ShouldNotContain(x=>x.Name==attributeName);
+		}
 		private void ThenAttributeWithNameIsNotInserted(string attributeName)
 		{
 			Context.ElementTarget.Attributes.ShouldNotContain(x => x.Name == attributeName);

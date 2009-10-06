@@ -16,15 +16,18 @@ namespace OpenRasta.Codecs.Spark2.Specification.Syntax
 				);
 			builder.MatchAll(Tag.IframeTag)
 				.Do(
-				Convert.ToAttributeToSrc()
+				Convert.ToAttributeToSrc(),
+				Convert.ToTypeAttributeToSrc()
 				);
 			builder.MatchAll(Tag.ImageTag)
 				.Do(
-				Convert.ToAttributeToSrc()
+				Convert.ToAttributeToSrc(),
+				Convert.ToTypeAttributeToSrc()
 				);
 			builder.MatchAll(Tag.FormTag)
 				.Do(
-				Convert.ForAttributeToAction()
+				Convert.ForAttributeToAction(),
+				Convert.ForTypeAttributeToAction()
 				);
 			return builder.Build();
 		}

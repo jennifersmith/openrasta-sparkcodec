@@ -80,6 +80,25 @@ namespace OpenRasta.Codecs.Spark.UnitTests.SparkInterface
 			ThenNodeNameShouldBe("foo");
 		}
 
+		[Test]
+		public void RemoveAttributeShouldRemoveFromTheWrappedNode()
+		{
+			AttributeNode attributeNode = SparkTestNodes.BasicAttributeNode("fred");
+			GivenAnOriginalElement(SparkTestNodes.ElementNode("foo").WithAttribute(attributeNode));
+			WhenAttributeIsRemoved(new SparkAttributeWrapper(attributeNode));
+			ThenTheElementShouldNotContainAttribute(attributeNode);
+		}
+
+		private void ThenTheElementShouldNotContainAttribute(AttributeNode node)
+		{
+			Context.Target.Unwrap().As<ElementNode>().Attributes.ShouldNotContain(x=>x.Name == node.Name);
+		}
+
+		private void WhenAttributeIsRemoved(SparkAttributeWrapper wrapper)
+		{
+			Context.Target.RemoveAttribute(wrapper);
+		}
+
 		private void ThenNodeNameShouldBe(string nodeName)
 		{
 			Context.Target.Name.ShouldEqual(nodeName);

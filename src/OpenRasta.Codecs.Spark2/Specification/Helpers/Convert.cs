@@ -13,7 +13,7 @@ namespace OpenRasta.Codecs.Spark2.Specification.Helpers
 
 		public static IElementTransformerAction ToTypeAttributeToHref()
 		{
-			return CreateToAttributeToCreateUriFromTypeConverter("hrewwwf", "to");
+			return CreateToAttributeToCreateUriFromTypeConverter("href", "totype");
 		}
 
 		private static IElementTransformerAction CreateToAttributeToCreateUriFromTypeConverter(string toAttribute, string originalAttributeName)
@@ -34,6 +34,16 @@ namespace OpenRasta.Codecs.Spark2.Specification.Helpers
 		public static IElementTransformerAction ForAttributeToAction()
 		{
 			return CreateToAttributeToCreateUriConverter("action", "for");
+		}
+
+		public static IElementTransformerAction ForTypeAttributeToAction()
+		{
+			return CreateToAttributeToCreateUriFromTypeConverter("action", "fortype");
+		}
+
+		public static IElementTransformerAction ToTypeAttributeToSrc()
+		{
+			return CreateToAttributeToCreateUriFromTypeConverter("src", "totype");
 		}
 	}
 }

@@ -84,6 +84,7 @@ namespace OpenRasta.Codecs.Spark.IntegrationTests
 			settings.AddNamespace("OpenRasta.Codecs.Spark.Tests.TestObjects");
 			settings.AddNamespace("OpenRasta.Codecs.Spark.IntegrationTests");
 			settings.AddNamespace("OpenRasta.Codecs.Spark2.ViewHelpers");
+			settings.AddNamespace("System.Collections.Generic");
             
 
 			IWindsorContainer dependencies = CreateTestDependencies();
@@ -95,7 +96,7 @@ namespace OpenRasta.Codecs.Spark.IntegrationTests
 			var descriptor = new SparkViewDescriptor();	
 			descriptor.AddTemplate(TestingViewFolder.SingleTemplateName);
 			var view = (TestSparkView)sparkViewEngine.CreateInstance(descriptor);
-			view.Uris = new UriGenerator();
+			view.Uris = new UriGenerator(DependencyManager.GetService<IUriResolver>());
 			view.ViewData = new TestViewData(data);
 			return Render(view);
 		}

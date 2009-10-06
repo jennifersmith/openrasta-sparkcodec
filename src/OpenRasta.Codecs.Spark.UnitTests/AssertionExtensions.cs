@@ -79,9 +79,9 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 			values.Where(eval).Count().ShouldBeAtLeast(1);
 		}
 
-		public static void ShouldNotContain<T>(this IEnumerable<T> values, Func<T, bool> eval)
+		public static void ShouldNotContain<T>(this IEnumerable<T> values, Func<T, bool> predicate)
 		{
-			values.ShouldBeTrueForAll(x => !eval(x));
+			Assert.That(values.Where(predicate).Any(), Is.False, "Expected no elements matching predicate");
 		}
 
 		public static void ShouldEqualDate(this DateTime? value, DateTime shouldEqual)

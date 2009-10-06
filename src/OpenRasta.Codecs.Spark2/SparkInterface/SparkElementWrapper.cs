@@ -44,5 +44,14 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 			AttributeNode attributeNode = GetAttributeByName(attribute);
 			return new SparkAttributeWrapper(attributeNode);
 		}
+
+		public void RemoveAttribute(IAttribute attribute)
+		{
+			var existingAttribute = CurrentNode.Attributes.Where(x => x.Name == attribute.Name).FirstOrDefault();
+			if(existingAttribute!=null)
+			{
+				CurrentNode.Attributes.Remove(existingAttribute);
+			}
+		}
 	}
 }

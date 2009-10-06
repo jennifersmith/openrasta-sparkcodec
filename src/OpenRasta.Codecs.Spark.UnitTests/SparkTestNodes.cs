@@ -139,6 +139,15 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		{
 			return Attributes.Where(x => x.Name.Equals(attribute, StringComparison.InvariantCultureIgnoreCase)).First();
 		}
+
+		public void RemoveAttribute(IAttribute attribute)
+		{
+			var toRemove = Attributes.Where(x => x.Name == attribute.Name).FirstOrDefault();
+			if(toRemove!=null)
+			{
+				Nodes.Remove(attribute);				
+			}
+		}
 	}
 	public class TestCodeExpressionNode :  ICodeExpressionNode
 	{
