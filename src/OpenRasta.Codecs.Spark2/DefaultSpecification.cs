@@ -1,4 +1,5 @@
 using OpenRasta.Codecs.Spark2.Specification.Builders;
+using OpenRasta.Codecs.Spark2.Specification.Helpers;
 
 namespace OpenRasta.Codecs.Spark2.Specification.Syntax
 {

@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 using OpenRasta.Codecs.Spark2.Model;
 using OpenRasta.Codecs.Spark2.SparkInterface;
@@ -30,6 +31,23 @@ namespace OpenRasta.Codecs.Spark.UnitTests.SparkInterface
 			AttributeNode attributeNode = SparkTestNodes.BasicAttributeNode("attribute");
 			GivenAnAttribute(attributeNode);
 			WhenAConditionNodeIsAdded();
+			ConditionalExpressionNodeShouldWrap(attributeNode.Nodes.Last());
+		}
+
+		[Test]
+		public void AddCodeNodeAddsANewConditionNodeToTheAttributeBody()
+		{
+			GivenAnAttribute(SparkTestNodes.BasicAttributeNode("attribute"));
+			WhenACodeExpressionNodeIsAdded();
+			ThenTheAttributeShouldContainACodeExpressionNode();
+		}
+
+		[Test]
+		public void AddCodeNodeShouldReturnConditionNodeWrapped()
+		{
+			AttributeNode attributeNode = SparkTestNodes.BasicAttributeNode("attribute");
+			GivenAnAttribute(attributeNode);
+			WhenACodeExpressionNodeIsAdded();
 			CodeExpressionResultShouldWrap(attributeNode.Nodes.Last());
 		}
 		[Test]
@@ -89,9 +107,13 @@ namespace OpenRasta.Codecs.Spark.UnitTests.SparkInterface
 			Context.GetTextResult = Context.Target.GetTextValue();
 		}
 
-		private void CodeExpressionResultShouldWrap(Node node)
+		private void ConditionalExpressionNodeShouldWrap(Node node)
 		{
 			Context.AddConditionalExpressionResult.Unwrap().ShouldEqual(node);
+		}
+		private void CodeExpressionResultShouldWrap(Node node)
+		{
+			Context.AddCodeExpressionNodeResult.Unwrap().ShouldEqual(node);
 		}
 
 		private void ThenTheAttributeShouldContainAConditionNode()
@@ -101,9 +123,21 @@ namespace OpenRasta.Codecs.Spark.UnitTests.SparkInterface
 			attributeNode.Nodes.Last().ShouldBe<ConditionNode>();
 		}
 
+		private void ThenTheAttributeShouldContainACodeExpressionNode()
+		{
+			var attributeNode = Context.Target.Unwrap().As<AttributeNode>();
+			attributeNode.Nodes.Count.ShouldBeAtLeast(1);
+			attributeNode.Nodes.Last().ShouldBe<ExpressionNode>();
+		}
+
 		private void WhenAConditionNodeIsAdded()
 		{
 			Context.AddConditionalExpressionResult = Context.Target.AddConditionalExpressionNode();
+		}
+
+		private void WhenACodeExpressionNodeIsAdded()
+		{
+			Context.AddCodeExpressionNodeResult = Context.Target.AddCodeExpressionNode();
 		}
 
 		private void GivenAnAttribute(AttributeNode node)
@@ -117,7 +151,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests.SparkInterface
 		{
 			public SparkAttributeWrapper Target { get; set; }
 
-			public IConditionalExpressionNode AddConditionalExpressionResult
+			public IConditionalExpressionNodeWrapper AddConditionalExpressionResult
 			{
 				get; set;
 			}
@@ -125,6 +159,8 @@ namespace OpenRasta.Codecs.Spark.UnitTests.SparkInterface
 			public string GetTextResult { get; set; }
 
 			public bool ExistsResult { get; set; }
+
+			public ICodeExpressionNode AddCodeExpressionNodeResult { get; set; }
 		}
 	}
 }

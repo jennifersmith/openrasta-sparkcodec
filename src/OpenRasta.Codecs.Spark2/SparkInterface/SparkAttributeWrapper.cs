@@ -1,4 +1,3 @@
-using System;
 using OpenRasta.Codecs.Spark2.Model;
 using Spark.Parser.Markup;
 
@@ -18,11 +17,18 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 			}
 		}
 
-		public IConditionalExpressionNode AddConditionalExpressionNode()
+		public IConditionalExpressionNodeWrapper AddConditionalExpressionNode()
 		{
 			var node = new ConditionNode();
 			CurrentNode.Nodes.Add(node);
 			return new SparkConditionNodeWrapper(node);
+		}
+
+		public ICodeExpressionNode AddCodeExpressionNode()
+		{
+			var node = new ExpressionNode("");
+			CurrentNode.Nodes.Add(node);
+			return new SparkCodeExpressionNodeWrapper(node);
 		}
 
 		public string GetTextValue()

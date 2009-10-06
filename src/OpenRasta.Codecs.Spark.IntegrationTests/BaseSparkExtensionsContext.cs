@@ -83,6 +83,8 @@ namespace OpenRasta.Codecs.Spark.IntegrationTests
 
 			settings.AddNamespace("OpenRasta.Codecs.Spark.Tests.TestObjects");
 			settings.AddNamespace("OpenRasta.Codecs.Spark.IntegrationTests");
+			settings.AddNamespace("OpenRasta.Codecs.Spark2.ViewHelpers");
+            
 
 			IWindsorContainer dependencies = CreateTestDependencies();
 			ISparkViewEngine sparkViewEngine = new SparkViewEngine(settings)

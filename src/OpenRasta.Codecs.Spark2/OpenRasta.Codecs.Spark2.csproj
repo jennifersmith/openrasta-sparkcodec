@@ -56,9 +56,11 @@
     <Compile Include="Matchers\NodeMatcher.cs" />
     <Compile Include="Model\ConditionalExpression.cs" />
     <Compile Include="SparkInterface\SparkAttributeWrapper.cs" />
+    <Compile Include="SparkInterface\SparkCodeExpressionNodeWrapper.cs" />
     <Compile Include="SparkInterface\SparkConditionNodeWrapper.cs" />
     <Compile Include="SparkInterface\SparkElementWrapper.cs" />
     <Compile Include="SparkInterface\SparkNodeWrapper.cs" />
+    <Compile Include="Specification\Actions\CreateUriFromTypeAttributeModifier.cs" />
     <Compile Include="Specification\Builders\IElementTransformerActionsByMatchBuilder.cs" />
     <Compile Include="Specification\ElementTransformerActionsByMatch.cs" />
     <Compile Include="Specification\Builders\ElementTransformerActionsByMatchBuilder.cs" />
@@ -68,7 +70,7 @@
     <Compile Include="Specification\IElementTransformerSpecification.cs" />
     <Compile Include="Specification\ISpecificationProvider.cs" />
     <Compile Include="Specification\Helpers\Convert.cs" />
-    <Compile Include="Specification\Actions\ConvertAttributeToUriAction.cs" />
+    <Compile Include="Specification\Actions\CreateUriActionModifier.cs" />
     <Compile Include="Specification\Helpers\ElementMatchSpecificationExtensions.cs" />
     <Compile Include="Specification\Helpers\ElementTransformerExtensions.cs" />
     <Compile Include="DefaultSpecification.cs" />

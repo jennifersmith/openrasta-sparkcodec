@@ -21,6 +21,13 @@ namespace OpenRasta.Codecs.Spark.UnitTests.ViewHelpers
 			WhenIsNullIsCalled();
 			ThenTheResultShouldBe(true);
 		}
+		[Test]
+		public void NullCheckShouldReturnFalseIfTargetIsNotNull()
+		{
+			GivenATarget("A target");
+			WhenIsNullIsCalled();
+			ThenTheResultShouldBe(false);
+		}
 
 		private void ThenTheResultShouldBe(bool value)
 		{

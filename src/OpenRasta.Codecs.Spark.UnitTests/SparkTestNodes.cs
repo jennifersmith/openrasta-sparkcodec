@@ -64,7 +64,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 			return new SparkElementWrapper(SparkTestNodes.BasicElementNode());
 		}
 
-		public static INode BasicAttributeNode()
+		public static IAttribute BasicAttributeNode()
 		{
 			return new SparkAttributeWrapper(SparkTestNodes.BasicAttributeNode("attributeName"));
 		}
@@ -140,10 +140,27 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 			return Attributes.Where(x => x.Name.Equals(attribute, StringComparison.InvariantCultureIgnoreCase)).First();
 		}
 	}
-	public class TestConditionalExpressionNode : IConditionalExpressionNode
+	public class TestCodeExpressionNode :  ICodeExpressionNode
+	{
+		private CodeExpression _codeExpression;
+
+		public CodeExpression CodeExpression
+		{
+			get
+			{
+				return _codeExpression;
+			}
+		}
+
+		public void SetExpressionBody(CodeExpression codeExpression)
+		{
+			_codeExpression = codeExpression;
+		}
+	}
+
+	public class TestConditionalExpressionNode : IConditionalExpressionNodeWrapper
 	{
 		private ConditionalExpression _conditionalExpression;
-
 		public ConditionalExpression ConditionalExpression
 		{
 			get {
@@ -154,6 +171,10 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		public void SetExpressionBody(ConditionalExpression conditionalExpression)
 		{
 			_conditionalExpression = conditionalExpression;
+		}
+
+		public void SetExpressionBody(CodeExpression codeExpression)
+		{
 		}
 	}
 }

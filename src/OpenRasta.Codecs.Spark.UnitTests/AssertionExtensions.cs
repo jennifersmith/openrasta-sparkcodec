@@ -146,7 +146,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 
 		public static void ShouldBeTrue(this bool val)
 		{
-			val.ShouldEqual(true);
+			val.ShouldEqual(true);	
 		}
 		public static void ShouldHaveCount<T>(this IEnumerable<T> val, int expected)
 		{

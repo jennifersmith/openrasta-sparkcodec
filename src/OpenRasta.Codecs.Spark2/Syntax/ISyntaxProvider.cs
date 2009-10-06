@@ -5,6 +5,7 @@ namespace OpenRasta.Codecs.Spark2.Syntax
 	public interface ISyntaxProvider
 	{
 		string CreateUriExpression(string targetResource);
+		string CreateUriFromTypeExpression(string targetResource);
 		string CreateNullCheckExpression(string targetResource);
 	}
 
@@ -14,10 +15,14 @@ namespace OpenRasta.Codecs.Spark2.Syntax
 		{
 			return string.Format("Uris.Create({0})", targetResource);
 		}
+		public string CreateUriFromTypeExpression(string targetResource)
+		{
+			return string.Format("Uris.Create<{0}>()", targetResource);
+		}
 
 		public string CreateNullCheckExpression(string targetResource)
 		{
-			return string.Format("{0}.IsNull()", targetResource);
+			return string.Format("{0}.IsNull()==false", targetResource);
 		}
 	}
 }

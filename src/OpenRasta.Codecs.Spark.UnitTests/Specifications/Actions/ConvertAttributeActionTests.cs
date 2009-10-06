@@ -1,17 +1,20 @@
-using System.Linq;
 using NUnit.Framework;
+using OpenRasta.Codecs.Spark2.Model;
 using OpenRasta.Codecs.Spark2.Specification.Actions;
+using Rhino.Mocks;
 
 namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Actions
 {
 	[TestFixture]
-	public class ConvertAttributeToUriActionTests
+	public class ConvertAttributeActionTests
 	{
 		[SetUp]
 		public void SetUp()
 		{
-			Context = new ConvertAttributeToUriActionTestContext();
-			Context.SyntaxProvider = new StubSyntaxProvider();
+			Context = new ConvertAttributeToActionTestContext
+			          	{
+			          		AttributeModifier = MockRepository.GenerateStub<IAttributeModifer>()
+			          	};
 		}
 
 		[Test]
@@ -21,7 +24,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Actions
 			GivenToAndFromAttributes("to", "from");
 			GivenElementTarget(element);
 			WhenActionCalledOnElement();
-			ThenAttributeIsInsertedWithName("to");
+			ThenAttributeIsInsertedWithName("to");	
 		}
 
 		[Test]
@@ -35,19 +38,20 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Actions
 		}
 
 		[Test]
-		public void ShouldAddToAttributeWithCreateUriCodeExpression()
+		public void ShouldCallAttributeModiferToTransformAttributeToTheNewValue()
 		{
 			TestElement element = InternalTestNodes.TestElement("").WithAttribute("from", "aValue");
 			GivenToAndFromAttributes("to", "from");
 			GivenElementTarget(element);
-			WhenActionCalledOnElement();
-			ThenHasCreateUriCodeAttribute("to", "aValue" );
+			WhenActionCalledOnElement();	
+			ThenHasCalledModiferWithAttributes(element.GetAttribute("from"), element.GetAttribute("to"));
 		}
 
-		private void ThenHasCreateUriCodeAttribute(string attributeName, string resource)
+		private void ThenHasCalledModiferWithAttributes(IAttribute originalAttribute, IAttribute newAttribute)
 		{
-			Context.ElementTarget.Attributes.Where(x=>x.Name==attributeName).First().As<TestAttributeNode>().ShouldBeCreateUriExpressionFor(resource);
+			Context.AttributeModifier.AssertWasCalled(x => x.Modify(originalAttribute, newAttribute));
 		}
+
 
 		private void ThenAttributeWithNameIsNotInserted(string attributeName)
 		{
@@ -71,18 +75,19 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Actions
 
 		private void GivenToAndFromAttributes(string toAttribute, string fromAttribute)
 		{
-			Context.Target = new ConvertAttributeToUriAction(toAttribute, fromAttribute, Context.SyntaxProvider);
+			Context.Target = new ConvertAttributeAction(toAttribute, fromAttribute, Context.AttributeModifier);
 		}
 
-		public ConvertAttributeToUriActionTestContext Context { get; set; }
+		public ConvertAttributeToActionTestContext Context { get; set; }
 
-		public class ConvertAttributeToUriActionTestContext
+		public class ConvertAttributeToActionTestContext
 		{
-			public ConvertAttributeToUriAction Target { get; set; }
+			public ConvertAttributeAction Target { get; set; }
 
 			public TestElement ElementTarget { get; set; }
 
-			public StubSyntaxProvider SyntaxProvider { get; set; }
+
+			public IAttributeModifer AttributeModifier { get; set; }
 		}
 	}
 }

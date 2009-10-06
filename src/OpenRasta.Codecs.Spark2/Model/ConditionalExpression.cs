@@ -1,5 +1,24 @@
 namespace OpenRasta.Codecs.Spark2.Model
 {
+	public struct CodeExpression
+	{
+		private readonly string _expression;
+
+		public CodeExpression(string expression)
+		{
+			_expression = expression;
+		}
+
+		public override string ToString()
+		{
+			return string.Format("Expression: {0}", _expression??"EMPTY");
+		}
+
+		internal string Render()
+		{
+			return _expression;
+		}
+	}
 	public struct ConditionalExpression
 	{
 		private readonly string _condition;

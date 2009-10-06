@@ -1,33 +1,39 @@
+using System;
 using OpenRasta.Codecs.Spark2.Specification.Actions;
 using OpenRasta.Codecs.Spark2.Syntax;
 
-namespace OpenRasta.Codecs.Spark2.Specification.Syntax
+namespace OpenRasta.Codecs.Spark2.Specification.Helpers
 {
 	public static class Convert
 	{
 		public static IElementTransformerAction ToAttributeToHref()
 		{
-			return CreateToAttributeConverter("href");
+			return CreateToAttributeToCreateUriConverter("href", "to");
 		}
 
 		public static IElementTransformerAction ToTypeAttributeToHref()
 		{
-			return new ConvertAttributeToUriAction("href", "totype", new CSharpSyntaxProvider());
+			return CreateToAttributeToCreateUriFromTypeConverter("hrewwwf", "to");
+		}
+
+		private static IElementTransformerAction CreateToAttributeToCreateUriFromTypeConverter(string toAttribute, string originalAttributeName)
+		{
+			return new ConvertAttributeAction(toAttribute, originalAttributeName, new CreateUriFromTypeAttributeModifier(new CSharpSyntaxProvider()));
 		}
 
 		public static IElementTransformerAction ToAttributeToSrc()
 		{
-			return CreateToAttributeConverter("src");
+			return CreateToAttributeToCreateUriConverter("src", "to");
 		}
 
-		private static IElementTransformerAction CreateToAttributeConverter(string toAttribute)
+		private static IElementTransformerAction CreateToAttributeToCreateUriConverter(string toAttribute, string originalAttributeName)
 		{
-			return new ConvertAttributeToUriAction(toAttribute, "to", new CSharpSyntaxProvider());
+			return new ConvertAttributeAction(toAttribute, originalAttributeName, new CreateUriActionModifier(new CSharpSyntaxProvider()));
 		}
 
 		public static IElementTransformerAction ForAttributeToAction()
 		{
-			return new ConvertAttributeToUriAction("action", "for", new CSharpSyntaxProvider());
+			return CreateToAttributeToCreateUriConverter("action", "for");
 		}
 	}
 }

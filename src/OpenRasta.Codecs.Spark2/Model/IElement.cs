@@ -12,14 +12,20 @@ namespace OpenRasta.Codecs.Spark2.Model
 		bool HasAttribute(string attribute);
 		IAttribute GetAttribute(string attribute);
 	}
-	public interface IConditionalExpressionNode : INode
+	public interface ICodeExpressionNode : INode
+	{
+		void SetExpressionBody(CodeExpression expression);
+	}
+	public interface IConditionalExpressionNodeWrapper : INode
 	{
 		void SetExpressionBody(ConditionalExpression conditionalExpression);
+		void SetExpressionBody(CodeExpression codeExpression);
 	}
 	public interface IAttribute : INode
 	{
 		string Name { get; }
-		IConditionalExpressionNode AddConditionalExpressionNode();
+		IConditionalExpressionNodeWrapper AddConditionalExpressionNode();
+		ICodeExpressionNode AddCodeExpressionNode();
 		string GetTextValue();
 		bool Exists();
 	}

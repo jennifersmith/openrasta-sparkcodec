@@ -10,7 +10,7 @@ namespace OpenRasta.Codecs.Spark2.ViewHelpers
 	{
 		public static bool IsNull(this object target)
 		{
-			return false;
+			return target == null;
 		}
 	}
 	public interface IUriGenerator

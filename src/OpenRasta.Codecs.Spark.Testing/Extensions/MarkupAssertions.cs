@@ -72,8 +72,16 @@ namespace OpenRasta.Codecs.Spark.Testing.Extensions
 
 		public static XElement AsXml(this string item)
 		{
-			XDocument doc = XDocument.Load(new StringReader("<documentElement>" + item + "</documentElement>"));
-			return doc.Element(XName.Get("documentElement"));
+			try
+			{
+				XDocument doc = XDocument.Load(new StringReader("<documentElement>" + item + "</documentElement>"));
+				return doc.Element(XName.Get("documentElement"));
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine("XML: " + item);
+				throw;
+			}
 		}
 	}
 }

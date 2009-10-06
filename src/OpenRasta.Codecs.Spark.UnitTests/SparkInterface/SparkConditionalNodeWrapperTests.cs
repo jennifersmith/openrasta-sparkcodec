@@ -43,7 +43,6 @@ namespace OpenRasta.Codecs.Spark.UnitTests.SparkInterface
 		{
 			Context.Target = new SparkConditionNodeWrapper(node);
 		}
-
 		public SparkConditionalNodeWrapperTestContext Context { get; set; }
 
 		public class SparkConditionalNodeWrapperTestContext
@@ -52,7 +51,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests.SparkInterface
 		}
 
 		[Test]
-		public void SetExpressionBodyShouldSetBody()
+		public void SetExpressionBodyShouldSetConditionalCorrectly()
 		{
 			GivenAnExpressionNode(SparkTestNodes.ConditionNode());
 			WhenSetExpressionBodyIsCalledWith("someCondition", "someCode");
