@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenRasta.Codecs.Spark2
 {
@@ -11,6 +12,10 @@ namespace OpenRasta.Codecs.Spark2
 			{
 				action(item);
 			}
+		}
+		public static bool Contains<T>(this IEnumerable<T> enumerable, Func<T, bool> action)
+		{
+			return enumerable.Where(action).Any();
 		}
 	}
 }

@@ -53,14 +53,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Matchers\NodeMatcher.cs" />
+    <Compile Include="Matchers\TagMatcher.cs" />
     <Compile Include="Model\ConditionalExpression.cs" />
     <Compile Include="SparkInterface\SparkAttributeWrapper.cs" />
     <Compile Include="SparkInterface\SparkCodeExpressionNodeWrapper.cs" />
     <Compile Include="SparkInterface\SparkConditionNodeWrapper.cs" />
     <Compile Include="SparkInterface\SparkElementWrapper.cs" />
     <Compile Include="SparkInterface\SparkNodeWrapper.cs" />
+    <Compile Include="Specification\Actions\ConvertPropertyValueToInnerText.cs" />
     <Compile Include="Specification\Actions\CreateUriFromTypeAttributeModifier.cs" />
+    <Compile Include="Specification\Actions\PropertyPathActionModifier.cs" />
     <Compile Include="Specification\Builders\IElementTransformerActionsByMatchBuilder.cs" />
     <Compile Include="Specification\ElementTransformerActionsByMatch.cs" />
     <Compile Include="Specification\Builders\ElementTransformerActionsByMatchBuilder.cs" />
@@ -90,6 +92,9 @@
     <Compile Include="Transformers\ElementTransformerService.cs" />
     <Compile Include="Transformers\IElementTransformer.cs" />
     <Compile Include="Transformers\IElementTransformerService.cs" />
+    <Compile Include="ViewHelpers\IUriGenerator.cs" />
+    <Compile Include="ViewHelpers\NullCheckExtensions.cs" />
+    <Compile Include="ViewHelpers\PropertyPaths.cs" />
     <Compile Include="ViewHelpers\UriGenerator.cs" />
   </ItemGroup>
   <ItemGroup>

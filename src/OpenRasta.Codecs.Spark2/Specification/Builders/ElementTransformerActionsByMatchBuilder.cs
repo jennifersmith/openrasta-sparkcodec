@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 using OpenRasta.Codecs.Spark2.Matchers;
+using OpenRasta.Codecs.Spark2.Specification.Syntax;
 
 namespace OpenRasta.Codecs.Spark2.Specification.Builders
 {
 	public class ElementTransformerActionsByMatchBuilder : IElementTransformerActionsByMatchBuilder
 	{
-		private readonly IEnumerable<NodeMatcher> _matchers;
+		private readonly IEnumerable<Tag> _tags;
 		private readonly IList<IElementTransformerAction> _actions = new List<IElementTransformerAction>();
 
-		public ElementTransformerActionsByMatchBuilder(IEnumerable<NodeMatcher> matchers)
+		public ElementTransformerActionsByMatchBuilder(IEnumerable<Tag> tags)
 		{
-			_matchers = matchers;
+			_tags = tags;
 		}
 
 		public void AddAction(IElementTransformerAction action)
@@ -19,7 +20,7 @@ namespace OpenRasta.Codecs.Spark2.Specification.Builders
 		}
 		public ElementTransformerActionsByMatch Build()
 		{
-			return new ElementTransformerActionsByMatch(_matchers, _actions);
+			return new ElementTransformerActionsByMatch(_tags, _actions);
 		}
 
 	}

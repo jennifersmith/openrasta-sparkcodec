@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using OpenRasta.Codecs.Spark2.Model;
 using OpenRasta.Codecs.Spark2.Specification;
+using OpenRasta.Codecs.Spark2.Specification.Syntax;
 using OpenRasta.Codecs.Spark2.Transformers;
 
 namespace OpenRasta.Codecs.Spark.UnitTests.Transformers
@@ -26,12 +27,12 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Transformers
 		[Test]
 		public void ShouldReturnAnElementTransformerContainingAllMatchesForCurrentNode()
 		{
-			TestElement element = InternalTestNodes.TestElement("fred");
+			Tag tag = new Tag("fred");
 			var transformerAction = new StubElementTransformerAction();
 			var transformerAction2 = new StubElementTransformerAction();
 
-			GivenAnElementTarget(element);
-			GivenASpecification(element, transformerAction, transformerAction2);
+			GivenAnElementTarget(tag);
+			GivenASpecification(tag, transformerAction, transformerAction2);
 			WhenAnElementTransformerIsRequested();
 			ThenTheElementTransformerShouldContainOnly(transformerAction, transformerAction2);
 		}
@@ -39,10 +40,10 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Transformers
 		[Test]
 		public void IsTransformableShouldBeTrueIfAtLeastOneTransformAvailableForNode()
 		{
-			TestElement element = InternalTestNodes.TestElement("fred");
+			Tag tag = new Tag("fred");
 
-			GivenAnElementTarget(element);
-			GivenASpecification(element, new StubElementTransformerAction(), new StubElementTransformerAction());
+			GivenAnElementTarget(tag);
+			GivenASpecification(tag, new StubElementTransformerAction(), new StubElementTransformerAction());
 			WhenIsTransformableIsCalled();
 			ThenElementShouldBeTransformable();
 		}
@@ -50,9 +51,8 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Transformers
 		[Test]
 		public void IsTransformableShouldBeFalseIfNoTransformsAvailable()
 		{
-			TestElement element = InternalTestNodes.TestElement("fred");
-
-			GivenAnElementTarget(element);
+			Tag tag = new Tag("fred");
+			GivenAnElementTarget(tag);
 			WhenIsTransformableIsCalled();
 			ThenElementShouldNotBeTransformable();
 		}
@@ -60,15 +60,14 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Transformers
 		[Test]
 		public void ShouldThrowIfNonTranformableElementRequestedForTransform()
 		{
-			TestElement element = InternalTestNodes.TestElement("fred");
-
-			GivenAnElementTarget(element);
+			Tag tag = new Tag("fred");
+			GivenAnElementTarget(tag);
 			ThenRequestingAnElementTransformShouldThrow();
 		}
 
 		private void ThenRequestingAnElementTransformShouldThrow()
 		{
-			var exception = Assert.Throws<ArgumentException>(() => Context.Target.GetTransformerFor(Context.ElementTarget));
+			var exception = Assert.Throws<ArgumentException>(() => Context.Target.GetTransformerFor(Context.Tag));
 			exception.Message.ShouldEqual("Element is not transformable");
 		}
 
@@ -84,7 +83,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Transformers
 
 		private void WhenIsTransformableIsCalled()
 		{
-			Context.IsTransformableResult = Context.Target.IsTransformable(Context.ElementTarget);
+			Context.IsTransformableResult = Context.Target.IsTransformable(Context.Tag);
 		}
 
 		private void ThenTheElementTransformerShouldContainOnly(params StubElementTransformerAction[] expectedActions)
@@ -95,18 +94,18 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Transformers
 
 		private void WhenAnElementTransformerIsRequested()
 		{
-			Context.ElementTransformerResult = Context.Target.GetTransformerFor(Context.ElementTarget);
+			Context.ElementTransformerResult = Context.Target.GetTransformerFor(Context.Tag);
 		}
 
-		private void GivenASpecification(IElement element, params StubElementTransformerAction[] transformers)
+		private void GivenASpecification(Tag tag, params StubElementTransformerAction[] transformers)
 		{
 			Context.ElementTransformerSpecification =
-				Context.ElementTransformerSpecification.WithActionForElement(element, transformers);
+				Context.ElementTransformerSpecification.WithActionForTag(tag, transformers);
 		}
 
-		private void GivenAnElementTarget(TestElement element)
+		private void GivenAnElementTarget(Tag element)
 		{
-			Context.ElementTarget = element;
+			Context.Tag = element;
 		}
 
 		public class ElementTransformerServiceTestContext
@@ -115,7 +114,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Transformers
 
 			public ElementTransformerService Target { get; set; }
 
-			public TestElement ElementTarget { get; set; }
+			public Tag Tag { get; set; }
 
 			public IElementTransformer ElementTransformerResult { get; set; }
 
@@ -126,24 +125,31 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Transformers
 
 	public class StubElementTransformerSpecification : IElementTransformerSpecification
 	{
-		Dictionary<IElement, List<IElementTransformerAction>> _actionsByElement = new Dictionary<IElement, List<IElementTransformerAction>>();
-		public StubElementTransformerSpecification WithActionForElement(IElement element, params StubElementTransformerAction[] actions )
+		Dictionary<Tag, List<IElementTransformerAction>> _actionsByTag = new Dictionary<Tag, List<IElementTransformerAction>>();
+		public StubElementTransformerSpecification WithActionForTag(Tag tag, params StubElementTransformerAction[] actions)
 		{
-			if(!_actionsByElement.ContainsKey(element))
+			if (!_actionsByTag.ContainsKey(tag))
 			{
-				_actionsByElement[element] = new List<IElementTransformerAction>();
+				_actionsByTag[tag] = new List<IElementTransformerAction>();
 			}
-			_actionsByElement[element].AddRange(actions);
+			_actionsByTag[tag].AddRange(actions);
 			return this;
 		}
+
 		public IEnumerable<IElementTransformerAction> GetActionsForElement(IElement element)
 		{
-			if(_actionsByElement.ContainsKey(element))
+			throw new NotImplementedException();
+		}
+
+		public IEnumerable<IElementTransformerAction> GetActionsForTag(Tag tag)
+		{
+			if (_actionsByTag.ContainsKey(tag))
 			{
-				return _actionsByElement[element].ToArray();
+				return _actionsByTag[tag].ToArray();
 			}
 			return new IElementTransformerAction[0];
 		}
+
 	}
 
 	public class StubSpecificationProvider : ISpecificationProvider

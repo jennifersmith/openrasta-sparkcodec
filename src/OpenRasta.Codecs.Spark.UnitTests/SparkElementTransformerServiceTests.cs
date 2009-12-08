@@ -5,6 +5,7 @@ using NUnit.Framework;
 using OpenRasta.Codecs.Spark.UnitTests.Transformers;
 using OpenRasta.Codecs.Spark2.Model;
 using OpenRasta.Codecs.Spark2.SparkInterface;
+using OpenRasta.Codecs.Spark2.Specification.Syntax;
 using OpenRasta.Codecs.Spark2.Transformers;
 using Spark.Parser.Markup;
 
@@ -22,6 +23,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 			          		ElementTransformerService = new StubElementTransformerService()
 			          	};
 			Context.Target = new SparkElementTransformerService(Context.ElementTransformerService);
+			Context.SparkElementNode = SparkTestNodes.ElementNode("test");
 		}
 
 		protected SparkElementTransformerServiceTestContext Context { get; set; }
@@ -61,7 +63,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		private void GivenATransformableSparkElementNode(IElementTransformer elementTransformer)
 		{
 			Context.SparkElementNode = new ElementNode("transformable", new List<AttributeNode>(), true);
-			Context.ElementTransformerService.WithAvailableTransform(new SparkElementWrapper(Context.SparkElementNode), elementTransformer);
+			Context.ElementTransformerService.WithAvailableTransform(new Tag(Context.SparkElementNode.Name), elementTransformer);
 		}
 
 		protected class SparkElementTransformerServiceTestContext
@@ -78,7 +80,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 
 	public class StubElementTransformer : IElementTransformer
 	{
-		public IElement Transform(IEnumerable<INode> body)
+		public IElement Transform(IElement element)
 		{
 			throw new NotImplementedException();
 		}
@@ -86,34 +88,33 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 	
 	public class StubElementTransformerService : IElementTransformerService
 	{
-		Dictionary<IElement, IElementTransformer> _transforms = new Dictionary<IElement, IElementTransformer>(new WrappedElementEqualityComparer());
+		Dictionary<Tag, IElementTransformer> _transformsByTag = new Dictionary<Tag, IElementTransformer>();
 
-		public void WithAvailableTransform(IElement node, IElementTransformer transformer)
+		public void WithAvailableTransform(Tag tag, IElementTransformer transformer)
 		{
-			_transforms[node] = transformer;
+			_transformsByTag[tag] = transformer;
+		}
+
+		public IElementTransformer GetTransformerFor(Tag element)
+		{
+			return _transformsByTag[element];
 		}
 
 		public IElementTransformer GetTransformerFor(IElement element)
 		{
-			return _transforms[element];
+			throw new NotImplementedException();
 		}
 
 		public bool IsTransformable(IElement element)
 		{
-			return _transforms.ContainsKey(element);
+			throw new NotImplementedException();
+		}
+
+		public bool IsTransformable(Tag element)
+		{
+			return _transformsByTag.ContainsKey(element);
 		}
 	}
 
-	internal class WrappedElementEqualityComparer : IEqualityComparer<IElement>
-	{
-		public bool Equals(IElement x, IElement y)
-		{
-			return x.Unwrap() == y.Unwrap();
-		}
-
-		public int GetHashCode(IElement obj)
-		{
-			return obj.Unwrap().GetHashCode();
-		}
-	}
+	
 }

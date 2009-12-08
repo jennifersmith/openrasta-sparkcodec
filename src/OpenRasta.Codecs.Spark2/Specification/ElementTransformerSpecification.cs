@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRasta.Codecs.Spark2.Matchers;
 using OpenRasta.Codecs.Spark2.Model;
+using OpenRasta.Codecs.Spark2.Specification.Syntax;
 
 namespace OpenRasta.Codecs.Spark2.Specification
 {
@@ -14,12 +16,16 @@ namespace OpenRasta.Codecs.Spark2.Specification
 			_elementTransformerActionsByMatchs = elementTransformerActionsByMatchs;
 		}
 
-		public IEnumerable<IElementTransformerAction> GetActionsForElement(IElement element)
+		public IEnumerable<IElementTransformerAction> GetActionsForTag(Tag tag)
 		{
 			var allMatches =
-				_elementTransformerActionsByMatchs.Where(x => x.NodeMatchers.MatchesAtLeastOne(element) == ElementMatchResult.Match);
+				_elementTransformerActionsByMatchs.Where(x => x.Tags.MatchesAtLeastOne(tag));
 
 			return allMatches.SelectMany(x => x.ElementTransformerActions);
+		}
+		public IEnumerable<IElementTransformerAction> GetActionsForElement(IElement element)
+		{
+			throw new Exception("Use the other one");
 		}
 
 		public IEnumerable<ElementTransformerActionsByMatch> GetElementTransformerActionsByMatch()

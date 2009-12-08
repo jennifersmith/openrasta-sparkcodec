@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using OpenRasta.Codecs.Spark2.Model;
 using Spark;
 using Spark.Compiler;
 using Spark.Compiler.ChunkVisitors;
@@ -10,10 +11,12 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 {
 	public class SparkOverrideExtension : ISparkExtension
 	{
+		private readonly ElementNode _element;
 		private readonly ISparkElementTransformer _sparkElementTransformer;
 
-		public SparkOverrideExtension(ISparkElementTransformer transformerService)
+		public SparkOverrideExtension(ElementNode element, ISparkElementTransformer transformerService)
 		{
+			_element = element;
 			_sparkElementTransformer = transformerService;
 		}
 
@@ -25,18 +28,19 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 
 		public void VisitNode(INodeVisitor visitor, IList<Node> body, IList<Chunk> chunks)
 		{
-			Node transformed = _sparkElementTransformer.Transform(body);
-			visitor.Accept(transformed);
-			if(IsNonEmptyElement(transformed))
+			SparkElementWrapper sparkElementWrapper = new SparkElementWrapper(_element, body);
+			_sparkElementTransformer.Transform(sparkElementWrapper);
+			visitor.Accept(_element);
+			if (sparkElementWrapper.Body.Count > 0)
 			{
-				visitor.Accept(body);
-				visitor.Accept(new EndElementNode(((ElementNode)transformed).Name));
+				_element.IsEmptyElement = false;
+				visitor.Accept(sparkElementWrapper.Body);
+				visitor.Accept(new EndElementNode(_element.Name));
 			}
-		}
-
-		private static bool IsNonEmptyElement(Node node)
-		{
-			return node is ElementNode && !((ElementNode) node).IsEmptyElement;
+			else
+			{
+				_element.IsEmptyElement = true;
+			}
 		}
 
 		public void VisitChunk(IChunkVisitor visitor, OutputLocation location, IList<Chunk> body, StringBuilder output)
@@ -46,9 +50,9 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 	}
 
 
-	public abstract class SparkNodeWrapper
+	public interface ISparkNodeWrapper
 	{
-		public abstract Node GetWrappedNode();
+		Node GetWrappedNode();
 	}
 
 	public class UnrecognisedSparkNodeWrapper : SparkNodeWrapper<Node>

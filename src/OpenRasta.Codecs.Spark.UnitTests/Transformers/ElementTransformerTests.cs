@@ -21,7 +21,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Transformers
 		{
 			TestElement element = InternalTestNodes.TestElement("fred");
 			GivenATransformerWithActions(element, MockRepository.GenerateStub<IElementTransformerAction>(), MockRepository.GenerateStub<IElementTransformerAction>());
-			WhenTransformIsCalled();
+			WhenTransformIsCalledForElement(element);
 			EachActionIsExecutedWithElement(element);
 		}
 		[Test]
@@ -29,7 +29,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Transformers
 		{
 			TestElement element = InternalTestNodes.TestElement("fred");
 			GivenATransformerWithActions(element);
-			WhenTransformIsCalled();
+			WhenTransformIsCalledForElement(element);
 			ThenTheResultIs(element);
 		}
 
@@ -43,14 +43,14 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Transformers
 			Context.Target.GetActions().ForEach(x=>x.AssertWasCalled(y=>y.Do(element)));
 		}
 
-		private void WhenTransformIsCalled()
+		private void WhenTransformIsCalledForElement(IElement element)
 		{
-			Context.ElementResult = Context.Target.Transform(null);
+			Context.ElementResult = Context.Target.Transform(element);
 		}
 
 		private void GivenATransformerWithActions(IElement forElement, params IElementTransformerAction[] actions)
 		{
-			Context.Target = new ElementTransformer( forElement, actions);
+			Context.Target = new ElementTransformer(actions);
 		}
 
 		protected ElementTransformerTestContext Context { get; set; }

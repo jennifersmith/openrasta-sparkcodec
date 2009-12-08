@@ -24,18 +24,30 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Syntax
 			ThenTheResultShouldBe("Uris.Create(myUriExpression)");
 		}
 		[Test]
-		public void CreateUriFromTypeExpressionShouldReturnParameterWrappedInCorrectCodecall()
+		public void CreateUriFromTypeExpressionShouldReturnParameterWrappedInCorrectCode()
 		{
 			GivenAParam("ThisIsAType");
 			WhenCreateUriFromTypeIsCalled();
 			ThenTheResultShouldBe("Uris.Create<ThisIsAType>()");
 		}
 		[Test]
-		public void NullCheckExpressionShouldReturnParameterWrappedInCorrectCodecall()
+		public void NullCheckExpressionShouldReturnParameterWrappedInCorrectCode()
 		{
 			GivenAParam("myUriExpression");
 			WhenNullCheckIscalled();
 			ThenTheResultShouldBe("myUriExpression.IsNull()==false");
+		}
+		[Test]
+		public void GetPropertyPathSHouldReturnParameterWrappedInCorrectCode()
+		{
+			GivenAParam("path.ToAProperty");
+			WhenGetPropertyPathIsCalled();
+			ThenTheResultShouldBe("PropertyPaths.PathFor(()=>path.ToAProperty)");
+		}
+
+		private void WhenGetPropertyPathIsCalled()
+		{
+			Context.Result = Context.Target.CreateGetPropertyPathExpression(Context.InputParam);
 		}
 
 		private void WhenNullCheckIscalled()

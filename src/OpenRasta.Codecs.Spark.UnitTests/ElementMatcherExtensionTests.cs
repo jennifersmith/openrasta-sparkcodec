@@ -1,56 +1,67 @@
-using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using OpenRasta.Codecs.Spark2.Matchers;
-using OpenRasta.Codecs.Spark2.Model;
+using OpenRasta.Codecs.Spark2.Specification.Syntax;
 
 namespace OpenRasta.Codecs.Spark.UnitTests
 {
 	[TestFixture]
 	public class ElementMatcherExtensionTests
 	{
-		public NodeMatcherSetContext Context { get; private set; }
+		#region Setup/Teardown
+
 		[SetUp]
 		public void SetUp()
 		{
-			Context = new NodeMatcherSetContext();
+			Context = new ElementMatcherExtensionTestContext();
 		}
-		[Test]
-		public void MatchAnyReturnsPositiveIfAtLeastOneOfTheNodeMatchersMatches()
+
+		#endregion
+
+		public ElementMatcherExtensionTestContext Context { get; private set; }
+
+		private void ThenShouldBeAMatch()
 		{
-			GivenASetOfNodeMatchers(new NodeMatcher("foo"), new NodeMatcher("BAR"));
-			WhenMatchAnyIsCalledFor(InternalTestNodes.TestElement("foo"));
-			ThenMatchResultShouldBe(ElementMatchResult.Match);
+			Context.MatchResult.ShouldBeTrue();
 		}
+
+		private void ThenShouldNotBeAMatch()
+		{
+			Context.MatchResult.ShouldBeFalse();
+		}
+
+		private void WhenMatchAnyIsCalledFor(Tag element)
+		{
+			Context.MatchResult = Context.Tags.MatchesAtLeastOne(element);
+		}
+
+
+		private void GivenASetOfTags(params Tag[] tags)
+		{
+			Context.Tags = tags;
+		}
+
+		public class ElementMatcherExtensionTestContext
+		{
+			public IEnumerable<Tag> Tags { get; set; }
+
+			public bool MatchResult { get; set; }
+		}
+
 		[Test]
 		public void MatchAnyReturnsNegativeIfAtNonneOfTheNodeMatchersMatches()
 		{
-			GivenASetOfNodeMatchers(new NodeMatcher("foo"), new NodeMatcher("BAR"));
-			WhenMatchAnyIsCalledFor(InternalTestNodes.TestElement("neitherFooNorBar"));
-			ThenMatchResultShouldBe(ElementMatchResult.NoMatch);
+			GivenASetOfTags((new Tag("foo")), (new Tag("BAR")));
+			WhenMatchAnyIsCalledFor(new Tag("neitherFooNorBar"));
+			ThenShouldNotBeAMatch();
 		}
 
-		private void ThenMatchResultShouldBe(ElementMatchResult result)
+		[Test]
+		public void MatchAnyReturnsPositiveIfAtLeastOneOfTheNodeMatchersMatches()
 		{
-			Context.MatchResult.ShouldEqual(result);
-		}
-
-		private void WhenMatchAnyIsCalledFor(IElement element)
-		{
-			Context.MatchResult = Context.ElementMatchers.MatchesAtLeastOne(element);
-		}
-
-
-		private void GivenASetOfNodeMatchers(params NodeMatcher[] nodeMatchers)
-		{
-			Context.ElementMatchers = nodeMatchers;
-		}
-
-		public class NodeMatcherSetContext
-		{
-			public IEnumerable<NodeMatcher> ElementMatchers { get; set; }
-
-			public ElementMatchResult MatchResult { get; set; }
+			GivenASetOfTags((new Tag("foo")), (new Tag("BAR")));
+			WhenMatchAnyIsCalledFor(new Tag("foo"));
+			ThenShouldBeAMatch();
 		}
 	}
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
+using OpenRasta.Codecs.Spark2.Model;
 using OpenRasta.Codecs.Spark2.SparkInterface;
 using Rhino.Mocks;
 using Spark;
@@ -72,7 +73,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		
 		protected  class StubSparkElementTransformer : ISparkElementTransformer
 		{
-			public Node Transform(IList<Node> innerNodes)
+			public void Transform(IElement element)
 			{
 				throw new NotImplementedException();
 			}

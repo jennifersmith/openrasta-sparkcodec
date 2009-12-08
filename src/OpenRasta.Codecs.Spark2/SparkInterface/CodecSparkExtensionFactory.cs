@@ -20,7 +20,7 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 			{
 				return null;
 			}
-			return new SparkOverrideExtension(elementTransformer);
+			return new SparkOverrideExtension(node, elementTransformer);
 		}
 	}
 }

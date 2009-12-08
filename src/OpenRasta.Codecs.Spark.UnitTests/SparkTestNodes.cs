@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using OpenRasta.Codecs.Spark2.Model;
 using OpenRasta.Codecs.Spark2.SparkInterface;
 using Spark.Parser.Markup;
@@ -61,7 +62,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 	{
 		public static IElement BasicElementNode()
 		{
-			return new SparkElementWrapper(SparkTestNodes.BasicElementNode());
+			return new SparkElementWrapper(SparkTestNodes.BasicElementNode(), new Node[0]);
 		}
 
 		public static IAttribute BasicAttributeNode()
@@ -118,6 +119,21 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 				return Nodes.Where(x => (x is IAttribute)).Cast<IAttribute>();
 			}
 		}
+
+		public IEnumerable<TestTextNode> TextNodes
+		{
+			get
+			{
+				return Nodes.Where(x => (x is TestTextNode)).Cast<TestTextNode>();
+			}
+		}
+		public IEnumerable<IConditionalExpressionNodeWrapper> ConditionalExpressionNodes
+		{
+			get
+			{
+				return Nodes.Where(x => (x is IConditionalExpressionNodeWrapper)).Cast<IConditionalExpressionNodeWrapper>();
+			}
+		}
 		public void AddAttribute(IAttribute attribute)
 		{
 			AddNode(attribute);
@@ -148,7 +164,60 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 				Nodes.Remove(attribute);				
 			}
 		}
+
+		public ICodeExpressionNode AddCodeExpressionNode()
+		{
+			TestCodeExpressionNode node = new TestCodeExpressionNode();
+			AddNode(node);
+			return node;
+		}
+
+		public IConditionalExpressionNodeWrapper AddConditionalExpressionNode()
+		{
+			TestConditionalExpressionNode node = new TestConditionalExpressionNode();
+			Nodes.Add(node);
+			return node;
+		}
+
+		public void ClearInnerText()
+		{
+			foreach (var node in TextNodes.ToArray())
+			{
+				Nodes.Remove(node);
+			}
+		}
+
+		public void AddTextElement(string value)
+		{
+			AddNode(new TestTextNode(value));
+		}
+
+		public string InnerText()
+		{
+			StringBuilder builder = new StringBuilder();
+			foreach (var node in TextNodes)
+			{
+				builder.Append(node.Value);
+			}
+			return builder.ToString();
+		}
 	}
+
+	public class TestTextNode : INode
+	{
+		private readonly string _value;
+
+		public TestTextNode(string value)
+		{
+			_value = value;
+		}
+
+		public string Value
+		{
+			get { return _value; }
+		}
+	}
+
 	public class TestCodeExpressionNode :  ICodeExpressionNode
 	{
 		private CodeExpression _codeExpression;

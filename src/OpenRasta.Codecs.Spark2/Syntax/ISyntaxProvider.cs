@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenRasta.Codecs.Spark2.Model;
 
 namespace OpenRasta.Codecs.Spark2.Syntax
 {
@@ -7,6 +8,7 @@ namespace OpenRasta.Codecs.Spark2.Syntax
 		string CreateUriExpression(string targetResource);
 		string CreateUriFromTypeExpression(string targetResource);
 		string CreateNullCheckExpression(string targetResource);
+		string CreateGetPropertyPathExpression(string propertyPath);
 	}
 
 	public class CSharpSyntaxProvider : ISyntaxProvider
@@ -23,6 +25,11 @@ namespace OpenRasta.Codecs.Spark2.Syntax
 		public string CreateNullCheckExpression(string targetResource)
 		{
 			return string.Format("{0}.IsNull()==false", targetResource);
+		}
+
+		public string CreateGetPropertyPathExpression(string propertyPath)
+		{
+			return string.Format("PropertyPaths.PathFor(()=>{0})", propertyPath);
 		}
 	}
 }

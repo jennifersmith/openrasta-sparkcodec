@@ -24,36 +24,20 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 			Context.InnerNodes = new Node[0];
 		}
 		[Test]
-		public void ShouldPassTheInnerNodesToTheElementTransformerWhenTransforming()
+		public void ShouldPassTheElementToTheElementTransformerWhenTransforming()
 		{
 			IList<Node> innerNodes = new Node[]
 			                               	{
 			                               		SparkTestNodes.BasicAttributeNode("attributeName"),
 												SparkTestNodes.BasicElementNode()
 			                               	};
-			GivenAnElementResultOf(new SparkElementWrapper(SparkTestNodes.BasicElementNode()));
+			SparkElementWrapper sparkElementWrapper = new SparkElementWrapper(SparkTestNodes.BasicElementNode(), innerNodes);
+			GivenAnElementResultOf(sparkElementWrapper);
 			GivenInnerNodesOf(innerNodes);
-			WhenNodeIsTransformedWithBody(innerNodes);
-			ThenTheBodyNodesShouldBePassedIntoTheElementTransformer(innerNodes);
+			WhenNodeIsTransformedWithElementAndBody(sparkElementWrapper);
+			ThenTheElementTransformerShouldReceive(sparkElementWrapper);
 		}
 
-		[Test]
-		public void ShouldReturnUnwrappedElementNode()
-		{
-			GivenAnElementResultOf(new SparkElementWrapper(SparkTestNodes.BasicElementNode()));
-			WhenNodeIsTransformed();
-			ThenTheBodyResultShouldBeTheElementTransformerResultUnwrapped();
-		}
-
-		private void ThenTheBodyResultShouldBeTheElementTransformerResultUnwrapped()
-		{
-			Context.TransformationResult.ShouldEqual(Context.ElementTransformerResult.As<SparkElementWrapper>().GetWrappedNode());
-		}
-
-		private void WhenNodeIsTransformed()
-		{
-			WhenNodeIsTransformedWithBody(new Node[0]);
-		}
 
 		private void GivenAnElementResultOf(SparkElementWrapper elementWrapper)
 		{
@@ -66,22 +50,18 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 			Context.InnerNodes = nodes;
 		}
 
-		private void ThenTheBodyNodesShouldBePassedIntoTheElementTransformer(IEnumerable<Node> nodes)
+		private void ThenTheElementTransformerShouldReceive(SparkElementWrapper elementWrapper)
 		{
-			IEnumerable<INode> bodyNodes = Context.ElementTransformer.GetFirstArgumentFor<IElementTransformer, IEnumerable<INode>>(x => x.Transform(null));
-			IEnumerable<Node> unwrappedNodes = bodyNodes.Cast<SparkNodeWrapper>().Select(x => x.GetWrappedNode());
-			Assert.That(unwrappedNodes, Is.EqualTo(nodes));
+			Context.ElementTransformer.AssertWasCalled(x=>x.Transform(Arg<IElement>.Is.Equal(elementWrapper)));
 		}
 
-		private void WhenNodeIsTransformedWithBody(IList<Node> innerNodes)
+		private void WhenNodeIsTransformedWithElementAndBody(IElement element)
 		{
-			Context.TransformationResult = Context.Target.Transform(innerNodes);
+			Context.Target.Transform(element);
 		}
 
 		public class SparkElementTransformerTestContext
 		{
-			public Node TransformationResult { get; set; }
-
 			public IElementTransformer ElementTransformer { get; set; }
 
 			public SparkElementTransformer Target { get; set; }
@@ -100,6 +80,13 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 			Assert.That(firstCallArguments, Is.Not.Null, "Method was not called");
 			Assert.That(firstCallArguments.Length, Is.GreaterThanOrEqualTo(1), "Method has no parameters");
 			return firstCallArguments.First().As<TProperty>();
+		}
+		public static TProperty GetSecondArgumentFor<T, TProperty>(this T target, Action<T> action)
+		{
+			object[] firstCallArguments = target.GetArgumentsForCallsMadeOn(action).FirstOrDefault();
+			Assert.That(firstCallArguments, Is.Not.Null, "Method was not called");
+			Assert.That(firstCallArguments.Length, Is.GreaterThanOrEqualTo(1), "Method has no parameters");
+			return firstCallArguments.Skip(1).First().As<TProperty>();
 		}
 	}
 }

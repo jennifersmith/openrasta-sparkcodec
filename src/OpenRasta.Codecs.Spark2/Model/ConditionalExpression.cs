@@ -14,7 +14,7 @@ namespace OpenRasta.Codecs.Spark2.Model
 			return string.Format("Expression: {0}", _expression??"EMPTY");
 		}
 
-		internal string Render()
+		public string Render()		
 		{
 			return _expression;
 		}
@@ -25,7 +25,7 @@ namespace OpenRasta.Codecs.Spark2.Model
 		private readonly string _expression;
 
 		public ConditionalExpression(string condition, string expression)
-		{
+		{	
 			_condition = condition;
 			_expression = expression;
 		}

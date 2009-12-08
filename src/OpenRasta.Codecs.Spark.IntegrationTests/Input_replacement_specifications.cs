@@ -29,7 +29,7 @@ namespace Input_replacement_specifications
 		}
 
 		public override void When()
-		{
+		{	
 			base.When();
 			TemplateResult = RenderTemplate(TemplateSource, Entity);
 		}

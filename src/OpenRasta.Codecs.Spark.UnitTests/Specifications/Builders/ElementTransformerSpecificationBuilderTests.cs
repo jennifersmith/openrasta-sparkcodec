@@ -8,6 +8,7 @@ using OpenRasta.Codecs.Spark.UnitTests.Transformers;
 using OpenRasta.Codecs.Spark2.Matchers;
 using OpenRasta.Codecs.Spark2.Specification;
 using OpenRasta.Codecs.Spark2.Specification.Builders;
+using OpenRasta.Codecs.Spark2.Specification.Syntax;
 
 namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Builders
 {
@@ -49,7 +50,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Builders
 
 		private static ElementTransformerActionsByMatch CreateElementTransformActionMatch()
 		{
-			return new ElementTransformerActionsByMatch(new[] {new NodeMatcher("AMatch")}, new[]
+			return new ElementTransformerActionsByMatch(new[] {new Tag("AMatch")}, new[]
 			                                                                               	{
 			                                                                               		new StubElementTransformerAction()
 			                                                                               	});

@@ -7,6 +7,7 @@ using OpenRasta.Codecs.Spark.UnitTests.Transformers;
 using OpenRasta.Codecs.Spark2.Matchers;
 using OpenRasta.Codecs.Spark2.Model;
 using OpenRasta.Codecs.Spark2.Specification;
+using OpenRasta.Codecs.Spark2.Specification.Syntax;
 
 namespace OpenRasta.Codecs.Spark.UnitTests.Specifications
 {
@@ -22,36 +23,35 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications
 		protected ElementTransformerSpecificationTestContext Context { get; set; }
 
 		[Test]
-		public void ShouldReturnActionsWhenOnlyOneNodeMatch()
+		public void ShouldReturnActionsWhenOnlyOneTagMatch()
 		{
-			const string currentElementName = "currentElement";
-			TestElement element = InternalTestNodes.TestElement(currentElementName);
+			Tag currentTag = new Tag("current");
+			Tag anotherTag = new Tag("foobar123");
 			var applicableAction1 = new StubElementTransformerAction();
 			var applicableAction2 = new StubElementTransformerAction();
 
-			GivenAMatcherAndAction(new NodeMatcher(currentElementName), applicableAction1, applicableAction2);
-			GivenAMatcherAndAction(new NodeMatcher("anotherElement"), new StubElementTransformerAction(), new StubElementTransformerAction());
-			WhenActionsRequestedFor(element);
+			GivenATagAndAction(currentTag, applicableAction1, applicableAction2);
+			GivenATagAndAction(anotherTag, new StubElementTransformerAction(), new StubElementTransformerAction());
+			WhenActionsRequestedFor(currentTag);
 			ReturnedActionsShouldbe(applicableAction1, applicableAction2);
 		}
 		[Test]
 		public void ShouldReturnActionsWhenMoreThanOneNodeMatch()
 		{
-			const string currentElementName = "currentElement";
-			TestElement element = InternalTestNodes.TestElement(currentElementName);
+			Tag currentTag = new Tag("currentTag");
 			var applicableAction1 = new StubElementTransformerAction();
 			var applicableAction2 = new StubElementTransformerAction();
 
-			GivenAMatcherAndAction(new NodeMatcher(currentElementName), applicableAction1);
-			GivenAMatcherAndAction(new NodeMatcher(currentElementName), applicableAction2);
-			WhenActionsRequestedFor(element);
+			GivenATagAndAction(currentTag, applicableAction1);
+			GivenATagAndAction(currentTag, applicableAction2);
+			WhenActionsRequestedFor(currentTag);
 			ReturnedActionsShouldbe(applicableAction1, applicableAction2);
 		}
 		[Test]
 		public void ShouldReturnEmptyEnumerableIfNoMatches()
 		{
-			GivenAMatcherAndAction(new NodeMatcher("notTheCurrentElement"), new StubElementTransformerAction());
-			WhenActionsRequestedFor(InternalTestNodes.TestElement("currentElement"));
+			GivenATagAndAction(new Tag("notTheCurrentElement"), new StubElementTransformerAction());
+			WhenActionsRequestedFor(new Tag("theCurrentElement"));
 			ReturnedActionsShouldbeEmpty();
 		}
 
@@ -65,19 +65,19 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications
 			Context.ResultActions.ShouldEqual(actions);
 		}
 
-		private void WhenActionsRequestedFor(IElement element)
+		private void WhenActionsRequestedFor(Tag tag)
 		{
 			Context.ResultActions =
-				new ElementTransformerSpecification(Context.ElementTransformerActionsByMatch).GetActionsForElement(element);
+				new ElementTransformerSpecification(Context.ElementTransformerActionsByMatch).GetActionsForTag(tag);
 		}
 
-		private void GivenAMatcherAndAction(NodeMatcher matcher, params IElementTransformerAction[] actions)
+		private void GivenATagAndAction(Tag tag, params IElementTransformerAction[] actions)
 		{
-			Context.ElementTransformerActionsByMatch.Add(new ElementTransformerActionsByMatch(new []{matcher}, actions));
+			Context.ElementTransformerActionsByMatch.Add(new ElementTransformerActionsByMatch(new []{tag}, actions));
 		}
-		private void GivenTwoMatchersAndAction(NodeMatcher matcher1, NodeMatcher matcher2, params IElementTransformerAction[] actions)
+		private void GivenTwoTagsAndActions(Tag tag1, Tag tag2, params IElementTransformerAction[] actions)
 		{
-			Context.ElementTransformerActionsByMatch.Add(new ElementTransformerActionsByMatch(new[] { matcher1, matcher2 }, actions));
+			Context.ElementTransformerActionsByMatch.Add(new ElementTransformerActionsByMatch(new[] { tag1, tag2 }, actions));
 		}
 		public class ElementTransformerSpecificationTestContext
 		{

@@ -1,4 +1,5 @@
 using System;
+using OpenRasta.Codecs.Spark2.Model;
 using OpenRasta.Codecs.Spark2.Specification.Actions;
 using OpenRasta.Codecs.Spark2.Syntax;
 
@@ -45,5 +46,21 @@ namespace OpenRasta.Codecs.Spark2.Specification.Helpers
 		{
 			return CreateToAttributeToCreateUriFromTypeConverter("src", "totype");
 		}
+
+		public static IElementTransformerAction ForAttributeToName()
+		{
+			return CreateToAttributeToPropertyPathConverter("name", "for");
+		}
+
+		private static IElementTransformerAction CreateToAttributeToPropertyPathConverter(string toAttribute, string fromAttribute)
+		{
+			return new ConvertAttributeAction(toAttribute, fromAttribute, new PropertyPathActionModifier(new CSharpSyntaxProvider()));
+		}
+
+		public static IElementTransformerAction ResourceValueToInnerText()
+		{
+			return new ConvertPropertyValueToInnerText(new CSharpSyntaxProvider());
+		}
 	}
+
 }

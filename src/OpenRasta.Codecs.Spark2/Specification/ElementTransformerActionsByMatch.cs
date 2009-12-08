@@ -1,17 +1,18 @@
 using System;
 using System.Collections.Generic;
 using OpenRasta.Codecs.Spark2.Specification;
+using OpenRasta.Codecs.Spark2.Specification.Syntax;
 
 namespace OpenRasta.Codecs.Spark2.Matchers
 {
 	public struct ElementTransformerActionsByMatch
 	{
-		private readonly IEnumerable<NodeMatcher> _nodeMatchers;
+		private readonly IEnumerable<Tag> _tags;
 		private readonly IEnumerable<IElementTransformerAction> _elementTransformerActions;
 
-		public ElementTransformerActionsByMatch(IEnumerable<NodeMatcher> nodeMatchers, IEnumerable<IElementTransformerAction> elementTransformerActions)
+		public ElementTransformerActionsByMatch(IEnumerable<Tag> tags, IEnumerable<IElementTransformerAction> elementTransformerActions)
 		{
-			_nodeMatchers = nodeMatchers;
+			_tags = tags;
 			_elementTransformerActions = elementTransformerActions;
 		}
 
@@ -20,9 +21,9 @@ namespace OpenRasta.Codecs.Spark2.Matchers
 			get { return _elementTransformerActions; }
 		}
 
-		public IEnumerable<NodeMatcher> NodeMatchers
+		public IEnumerable<Tag> Tags
 		{
-			get { return _nodeMatchers; }
+			get { return _tags; }
 		}
 	}
 }

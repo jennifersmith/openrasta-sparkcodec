@@ -20,10 +20,9 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 			get { return wrappedTransformer; }
 		}
 
-		public Node Transform(IList<Node> innerNodes)
+		public void Transform(IElement element)
 		{
-			IElement transformed = wrappedTransformer.Transform(innerNodes.WrapAll());
-			return transformed.Unwrap();
+			wrappedTransformer.Transform(element);
 		}
 	}
 }

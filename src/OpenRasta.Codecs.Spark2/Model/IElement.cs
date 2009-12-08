@@ -12,6 +12,9 @@ namespace OpenRasta.Codecs.Spark2.Model
 		bool HasAttribute(string attribute);
 		IAttribute GetAttribute(string attribute);
 		void RemoveAttribute(IAttribute attribute);
+		ICodeExpressionNode AddCodeExpressionNode();
+		IConditionalExpressionNodeWrapper AddConditionalExpressionNode();
+		void ClearInnerText();
 	}
 	public interface ICodeExpressionNode : INode
 	{

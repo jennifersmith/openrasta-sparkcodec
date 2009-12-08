@@ -4,6 +4,7 @@ using OpenRasta.Codecs.Spark.UnitTests.Transformers;
 using OpenRasta.Codecs.Spark2.Matchers;
 using OpenRasta.Codecs.Spark2.Specification;
 using OpenRasta.Codecs.Spark2.Specification.Builders;
+using OpenRasta.Codecs.Spark2.Specification.Syntax;
 
 namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Builders
 {
@@ -19,11 +20,11 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Builders
 		[Test]
 		public void ShouldBuildInstanceWithGivenMatchers()
 		{
-			var matcher1 = new NodeMatcher("thisElement");
-			var matcher2 = new NodeMatcher("thatElement");
-			GivenATargetWithNodeMatchers(matcher1, matcher2);
+			var matcher1 = new Tag("thisElement");
+			var matcher2 = new Tag("thatElement");
+			GivenATargetWithTags(matcher1, matcher2);
 			WhenBuilt();
-			ResultShouldHaveMatchers(matcher1, matcher2);
+			ResultShouldHaveTags(matcher1, matcher2);
 		}
 		[Test]
 		public void ShouldBuildInstanceWithGivenActions()
@@ -49,12 +50,12 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Builders
 
 		private void GivenATarget()
 		{
-			Context.Target = new ElementTransformerActionsByMatchBuilder(new NodeMatcher[0]);
+			Context.Target = new ElementTransformerActionsByMatchBuilder(new Tag[0]);
 		}
 
-		private void ResultShouldHaveMatchers(params NodeMatcher[] matchers)
+		private void ResultShouldHaveTags(params Tag[] tags)
 		{
-			Context.Result.NodeMatchers.ShouldEqual(matchers);
+			Context.Result.Tags.ShouldEqual(tags);
 		}
 
 		private void WhenBuilt()
@@ -67,9 +68,9 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Builders
 			Context.Target.AddAction(elementTransformerAction);
 		}
 
-		private void GivenATargetWithNodeMatchers(params NodeMatcher[] matchers)
+		private void GivenATargetWithTags(params Tag[] tags)
 		{
-			Context.Target = new ElementTransformerActionsByMatchBuilder(matchers);
+			Context.Target = new ElementTransformerActionsByMatchBuilder(tags);
 		}
 
 		public ElementTransformerActionsByMatchBuilderTestContext Context { get; set; }

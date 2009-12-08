@@ -8,21 +8,19 @@ namespace OpenRasta.Codecs.Spark2.Transformers
 {
 	public interface IElementTransformer
 	{
-		IElement Transform(IEnumerable<INode> body);
+		IElement Transform(IElement element);
 	}
 
 	public class ElementTransformer : IElementTransformer
 	{
-		private readonly IElement _elementTarget;
 		private readonly List<IElementTransformerAction> _elementTransformerActions = new List<IElementTransformerAction>();
-		public IElement Transform(IEnumerable<INode> body)
+		public IElement Transform(IElement element)
 		{
-			_elementTransformerActions.ForEach(x=>x.Do(_elementTarget));
-			return _elementTarget;
+			_elementTransformerActions.ForEach(x => x.Do(element));
+			return element;
 		}
-		public ElementTransformer(IElement elementTarget, IEnumerable<IElementTransformerAction> actions )
+		public ElementTransformer(IEnumerable<IElementTransformerAction> actions)
 		{
-			_elementTarget = elementTarget;
 			_elementTransformerActions.AddRange(actions);
 		}
 

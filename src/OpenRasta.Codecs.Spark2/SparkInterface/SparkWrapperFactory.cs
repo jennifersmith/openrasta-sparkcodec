@@ -13,7 +13,7 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 		{
 			if (node is ElementNode)
 			{
-				return new SparkElementWrapper((ElementNode)node);
+				return new SparkElementWrapper((ElementNode)node, new Node[0]);
 			}
 			if (node is AttributeNode)
 			{
@@ -31,7 +31,7 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 		}
 		public static Node Unwrap(this INode node)
 		{
-			return ((SparkNodeWrapper) node).GetWrappedNode();
+			return ((ISparkNodeWrapper) node).GetWrappedNode();
 		}
 	}
 

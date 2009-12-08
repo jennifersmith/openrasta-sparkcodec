@@ -22,6 +22,11 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Actions
 			return GetTestNullCheckExpression(targetResource);
 		}
 
+		public string CreateGetPropertyPathExpression(string propertyPath)
+		{
+			return GetTestGetPropertyPathExpression(propertyPath);
+		}
+
 		public static string GetTestCreateUriExpression(string targetResource)
 		{
 			return string.Format("CREATEURI FOR {0}", targetResource);
@@ -35,16 +40,26 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Actions
 
 			return string.Format("NULLCHECK FOR {0}", targetResource);
 		}
+
+		public static string GetTestGetPropertyPathExpression(string propertyPath)
+		{
+			return string.Format("GETPROPERTYPATH FOR {0}", propertyPath);
+		}
 	}
 	public static class StubSyntaxProviderExtensions
 	{
+		public static void ShouldBeGetPropertyPathExpressionFor(this TestAttributeNode attribute, string originalValue)
+		{
+			CodeExpression expectedPropertyPathExpresion = new CodeExpression(StubSyntaxProvider.GetTestGetPropertyPathExpression(originalValue));
+			attribute.CodeNodes.First().As<TestCodeExpressionNode>().CodeExpression.ShouldEqual(expectedPropertyPathExpresion);
+		}
 		public static void ShouldBeCreateUriExpressionFor(this TestAttributeNode attribute, string originalValue)
 		{
-			attribute.CodeExpressionNodes.ShouldHaveCount(1);
+			attribute.ConditionalExpressionNodes.ShouldHaveCount(1);
 			string createUriExpression = StubSyntaxProvider.GetTestCreateUriExpression(originalValue);
 			string nullCheckExpression = StubSyntaxProvider.GetTestNullCheckExpression(originalValue);
 			ConditionalExpression expectedExpression = new ConditionalExpression(nullCheckExpression, createUriExpression);
-			attribute.CodeExpressionNodes.First().As<TestConditionalExpressionNode>().ConditionalExpression.ShouldEqual(expectedExpression);
+			attribute.ConditionalExpressionNodes.First().As<TestConditionalExpressionNode>().ConditionalExpression.ShouldEqual(expectedExpression);
 		}
 		public static void ShouldBeCreateUriFromTypeExpressionFor(this TestAttributeNode attribute, string originalValue)
 		{

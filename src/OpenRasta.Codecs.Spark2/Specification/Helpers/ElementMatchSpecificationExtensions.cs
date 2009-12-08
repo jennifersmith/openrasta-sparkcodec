@@ -13,7 +13,7 @@ namespace OpenRasta.Codecs.Spark2.Specification.Syntax
 		}
 		public static IElementTransformerActionsByMatchBuilder MatchAll(this ElementTransformerSpecificationBuilder config, IEnumerable<Tag> tags)
 		{
-			var builder = new ElementTransformerActionsByMatchBuilder(tags.Select(x => new NodeMatcher(x.Name)));
+			var builder = new ElementTransformerActionsByMatchBuilder(tags);
 			config.AddTranformationBuilder(builder);
 			return builder;
 		}
