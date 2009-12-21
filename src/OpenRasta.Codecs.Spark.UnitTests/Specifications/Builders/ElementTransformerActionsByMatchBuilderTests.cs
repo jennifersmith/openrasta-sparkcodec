@@ -2,9 +2,9 @@ using System;
 using NUnit.Framework;
 using OpenRasta.Codecs.Spark.UnitTests.Transformers;
 using OpenRasta.Codecs.Spark2.Matchers;
+using OpenRasta.Codecs.Spark2.Model;
 using OpenRasta.Codecs.Spark2.Specification;
 using OpenRasta.Codecs.Spark2.Specification.Builders;
-using OpenRasta.Codecs.Spark2.Specification.Syntax;
 
 namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Builders
 {
@@ -36,6 +36,50 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Builders
 			GivenAction(action2);
 			WhenBuilt();
 			ResultShouldHaveActions(action1, action2);
+		}
+		[Test]
+		public void ShouldBuildInstanceWithGivenFinalActions()
+		{
+			var action1 = new StubElementTransformerAction();
+			var action2 = new StubElementTransformerAction();
+			var action3 = new StubElementTransformerAction();
+			GivenATarget();
+			GivenAction(action1);
+			GivenAction(action2);
+			GivenAFinalAction(action3);
+			WhenBuilt();
+			ResultShouldHaveActions(action1, action2);
+			ResultShouldHaveFinalActions(action3);
+		}
+
+		[Test]
+		public void ResultShouldNotHaveSameReferenceAsOriginal()
+		{
+			var action1 = new StubElementTransformerAction();
+			var action2 = new StubElementTransformerAction();
+			var action3 = new StubElementTransformerAction();
+			GivenATarget();
+			GivenAction(action1);
+			GivenAction(action2);
+			GivenAFinalAction(action3);
+			WhenBuilt();
+			ResultShouldNotBeReferenceEqualToTheOriginal();
+		}
+
+		private void ResultShouldNotBeReferenceEqualToTheOriginal()
+		{
+			(Context.Result.ElementTransformerActions == Context.Target.Actions).ShouldBeFalse();
+			(Context.Result.FinalElementTransformerActions == Context.Target.FinalActions).ShouldBeFalse();
+		}
+
+		private void ResultShouldHaveFinalActions(params IElementTransformerAction[] elementTransformerActions)
+		{
+			Context.Result.FinalElementTransformerActions.ShouldEqual(elementTransformerActions);
+		}
+
+		private void GivenAFinalAction(StubElementTransformerAction elementTransformerAction)
+		{
+			Context.Target.AddFinalAction(elementTransformerAction);
 		}
 
 		private void ResultShouldHaveActions(params IElementTransformerAction[] actions)

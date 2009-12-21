@@ -17,5 +17,14 @@ namespace OpenRasta.Codecs.Spark2
 		{
 			return enumerable.Where(action).Any();
 		}
+		public static bool IsEmpty<T>(this IEnumerable<T> enumerable)
+		{
+			// surely this exists!
+			return !enumerable.Any();
+		}
+		public static bool TrueForAll<T>(this IEnumerable<T> enumerable, Func<T, bool> func)
+		{
+			return enumerable.Where(func).SequenceEqual(enumerable);
+		}
 	}
 }

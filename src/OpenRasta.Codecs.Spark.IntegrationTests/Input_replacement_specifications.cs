@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using OpenRasta.Codecs.Spark.IntegrationTests;
 using OpenRasta.Codecs.Spark.Testing.Extensions;
 using OpenRasta.Codecs.Spark.Tests.TestObjects;
@@ -238,6 +239,32 @@ namespace Input_replacement_specifications
 			}
 		}
 
+		[TestFixture]
+		public class aaaa :
+			Using_spark_codec_to_render_an_input_element
+		{
+			public override void CreateContext()
+			{
+				base.CreateContext();
+				WithTestEntity(false);
+			}
+
+			public override string TemplateSource
+			{
+				get
+				{
+					return
+						@"<viewdata resource=""TestEntity""/> 
+							<mine checked=""true?{!resource.Enabled.IsNull()&&resource.Enabled}"" />";
+				}
+			}
+
+			[Test]
+			public void Checked_attribute_should_not_be_set()
+			{
+				Console.WriteLine(TemplateResult);
+			}
+		}
 		[TestFixture]
 		public class When_rendering_a_check_box_with_a_for_attribute_with_boolean_false :
 			Using_spark_codec_to_render_an_input_element

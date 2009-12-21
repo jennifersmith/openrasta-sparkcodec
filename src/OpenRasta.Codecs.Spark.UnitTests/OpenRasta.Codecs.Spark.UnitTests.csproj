@@ -66,6 +66,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ElementMatcherExtensionTests.cs" />
+    <Compile Include="Model\TagTests.cs" />
     <Compile Include="SparkInterface\SparkAttributeWrapperTests.cs" />
     <Compile Include="SparkInterface\SparkCodeExpressionNodeWrapperTests.cs" />
     <Compile Include="SparkInterface\SparkElementWrapperTests.cs" />
@@ -84,6 +85,8 @@
     <Compile Include="Specifications\Actions\CreateUriFromTypeAttributeModifierTests.cs" />
     <Compile Include="Specifications\Actions\ConvertTests.cs" />
     <Compile Include="Specifications\Actions\PropertyPathActionModifierTests.cs" />
+    <Compile Include="Specifications\Actions\RemoveAttributeActionTests.cs" />
+    <Compile Include="Specifications\Actions\ValueToConditionalAttributeModifierTests.cs" />
     <Compile Include="Specifications\Builders\ElementTransformerActionsByMatchBuilderTests.cs" />
     <Compile Include="Specifications\Builders\ElementTransformerSpecificationBuilderTests.cs" />
     <Compile Include="Specifications\ElementTransformerSpecificationTests.cs" />
@@ -99,6 +102,9 @@
       <Project>{AC553C43-7F19-4F2B-870C-BB3264090A6E}</Project>
       <Name>OpenRasta.Codecs.Spark2</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Specifications\Helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

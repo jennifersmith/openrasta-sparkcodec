@@ -1,4 +1,3 @@
-using System;
 using OpenRasta.Codecs.Spark2.Model;
 using OpenRasta.Codecs.Spark2.Syntax;
 

@@ -7,7 +7,6 @@ using OpenRasta.Codecs.Spark.UnitTests.Transformers;
 using OpenRasta.Codecs.Spark2.Matchers;
 using OpenRasta.Codecs.Spark2.Model;
 using OpenRasta.Codecs.Spark2.Specification;
-using OpenRasta.Codecs.Spark2.Specification.Syntax;
 
 namespace OpenRasta.Codecs.Spark.UnitTests.Specifications
 {
@@ -47,6 +46,23 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications
 			WhenActionsRequestedFor(currentTag);
 			ReturnedActionsShouldbe(applicableAction1, applicableAction2);
 		}
+
+		[Test]
+		public void ShouldPlaceFinalElementTransformtionsAtEndOfList()
+		{
+			Tag currentTag = new Tag("currentTag");
+			var applicableAction1 = new StubElementTransformerAction();
+			var applicableAction2 = new StubElementTransformerAction();
+			var finalAction1 = new StubElementTransformerAction();
+			var finalAction2 = new StubElementTransformerAction();
+
+			GivenATagActionAndFinal(currentTag, new[] { applicableAction1 }, new[] { finalAction1 });
+			GivenATagActionAndFinal(currentTag, new[] { applicableAction2 }, new[] { finalAction2 });
+			WhenActionsRequestedFor(currentTag);
+			ReturnedActionsShouldbe(applicableAction1, applicableAction2, finalAction1, finalAction2);
+
+		}
+
 		[Test]
 		public void ShouldReturnEmptyEnumerableIfNoMatches()
 		{
@@ -73,11 +89,21 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications
 
 		private void GivenATagAndAction(Tag tag, params IElementTransformerAction[] actions)
 		{
-			Context.ElementTransformerActionsByMatch.Add(new ElementTransformerActionsByMatch(new []{tag}, actions));
+			Context.ElementTransformerActionsByMatch.Add(new ElementTransformerActionsByMatch(new[] { tag }, actions, new[]
+			                                                                       	{
+			                                                                       		new StubElementTransformerAction()
+			                                                                       	}));
+		}
+		private void GivenATagActionAndFinal(Tag tag, IEnumerable<IElementTransformerAction> actions, IEnumerable<IElementTransformerAction> finalActions)
+		{
+			Context.ElementTransformerActionsByMatch.Add(new ElementTransformerActionsByMatch(new[] { tag }, actions, finalActions));
 		}
 		private void GivenTwoTagsAndActions(Tag tag1, Tag tag2, params IElementTransformerAction[] actions)
 		{
-			Context.ElementTransformerActionsByMatch.Add(new ElementTransformerActionsByMatch(new[] { tag1, tag2 }, actions));
+			Context.ElementTransformerActionsByMatch.Add(new ElementTransformerActionsByMatch(new[] { tag1, tag2 }, actions, new[]
+			                                                                       	{
+			                                                                       		new StubElementTransformerAction()
+			                                                                       	}));
 		}
 		public class ElementTransformerSpecificationTestContext
 		{

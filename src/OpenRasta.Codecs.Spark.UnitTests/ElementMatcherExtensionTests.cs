@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using OpenRasta.Codecs.Spark2.Matchers;
-using OpenRasta.Codecs.Spark2.Specification.Syntax;
+using OpenRasta.Codecs.Spark2.Model;
 
 namespace OpenRasta.Codecs.Spark.UnitTests
 {
@@ -49,7 +49,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		}
 
 		[Test]
-		public void MatchAnyReturnsNegativeIfAtNonneOfTheNodeMatchersMatches()
+		public void MatchAnyReturnsNegativeIfNoneOfTheNodeMatchersMatches()
 		{
 			GivenASetOfTags((new Tag("foo")), (new Tag("BAR")));
 			WhenMatchAnyIsCalledFor(new Tag("neitherFooNorBar"));

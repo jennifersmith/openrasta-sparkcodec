@@ -5,6 +5,13 @@ using OpenRasta.Codecs.Spark2.Syntax;
 
 namespace OpenRasta.Codecs.Spark2.Specification.Helpers
 {
+	public static class Remove
+	{
+		public static IElementTransformerAction ToAttributes() { return new RemoveAttributeAction("To"); }
+		public static IElementTransformerAction ToTypeAttributes() { return new RemoveAttributeAction("ToType"); }
+		public static IElementTransformerAction ForAttributes() { return new RemoveAttributeAction("For"); }
+		public static IElementTransformerAction ForTypeAttributes() { return new RemoveAttributeAction("ForType"); }
+	}
 	public static class Convert
 	{
 		public static IElementTransformerAction ToAttributeToHref()
@@ -61,6 +68,12 @@ namespace OpenRasta.Codecs.Spark2.Specification.Helpers
 		{
 			return new ConvertPropertyValueToInnerText(new CSharpSyntaxProvider());
 		}
+
+		public static IElementTransformerAction ResourceValueToCheckedAttribute()
+		{
+			return new ConvertAttributeAction("checked", "for", new ValueToConditionalAttribute(new CSharpSyntaxProvider()));
+		}
 	}
 
+	
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using OpenRasta.Codecs.Spark2.Matchers;
+using OpenRasta.Codecs.Spark2.Model;
 using OpenRasta.Codecs.Spark2.Specification.Builders;
 
 namespace OpenRasta.Codecs.Spark2.Specification.Syntax

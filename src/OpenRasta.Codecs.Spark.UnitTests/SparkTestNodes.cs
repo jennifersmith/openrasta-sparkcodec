@@ -95,7 +95,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		}
 
 
-		protected IList<INode> Nodes
+		public IList<INode> Nodes
 		{
 			get { return _nodes; }
 		}

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using OpenRasta.Codecs.Spark2.Model;
 using OpenRasta.Codecs.Spark2.Specification;
-using OpenRasta.Codecs.Spark2.Specification.Syntax;
 using OpenRasta.Codecs.Spark2.Transformers;
 
 namespace OpenRasta.Codecs.Spark.UnitTests.Transformers
@@ -35,6 +34,21 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Transformers
 			GivenASpecification(tag, transformerAction, transformerAction2);
 			WhenAnElementTransformerIsRequested();
 			ThenTheElementTransformerShouldContainOnly(transformerAction, transformerAction2);
+		}
+		
+		[Test]
+		public void ShouldPlaceFinalElementTransformtionsAtEndOfList()
+		{
+			Tag tag = new Tag("fred");
+			var transformerAction = new StubElementTransformerAction();
+			var transformerAction2 = new StubElementTransformerAction();
+			var finalAction1 = new StubElementTransformerAction();
+			var finalAction2 = new StubElementTransformerAction();
+
+			GivenAnElementTarget(tag);
+			GivenASpecification(tag, transformerAction, transformerAction2);
+			WhenAnElementTransformerIsRequested();
+			ThenTheElementTransformerShouldContainOnly(transformerAction, transformerAction2, finalAction1, finalAction2);
 		}
 
 		[Test]

@@ -6,5 +6,6 @@ namespace OpenRasta.Codecs.Spark2.Specification.Builders
 	{
 		void AddAction(IElementTransformerAction ElementTransformerAction);
 		ElementTransformerActionsByMatch Build();
+		void AddFinalAction(IElementTransformerAction elementTransformerAction);
 	}
 }

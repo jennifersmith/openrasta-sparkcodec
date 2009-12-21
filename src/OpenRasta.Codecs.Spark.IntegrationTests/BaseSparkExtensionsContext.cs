@@ -74,7 +74,8 @@ namespace OpenRasta.Codecs.Spark.IntegrationTests
 		{
 			var settings = new SparkSettings
 			               	{
-			               		PageBaseType = typeof(TestSparkView).Name
+			               		PageBaseType = typeof(TestSparkView).Name, 
+								Debug = true
 			               	};
 			settings.AddViewFolder(typeof (TestingViewFolder), new Dictionary<string, string>
 			                                                   	{

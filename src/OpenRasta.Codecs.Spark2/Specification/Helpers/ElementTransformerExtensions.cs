@@ -9,5 +9,10 @@ namespace OpenRasta.Codecs.Spark2.Specification.Syntax
 			actions.ForEach(elementTransformerActionsByMatchBuilder.AddAction);
 			return elementTransformerActionsByMatchBuilder;
 		}
+		public static IElementTransformerActionsByMatchBuilder Finally(this IElementTransformerActionsByMatchBuilder elementTransformerActionsByMatchBuilder, params IElementTransformerAction[] actions)
+		{
+			actions.ForEach(elementTransformerActionsByMatchBuilder.AddFinalAction);
+			return elementTransformerActionsByMatchBuilder;
+		}
 	}
 }

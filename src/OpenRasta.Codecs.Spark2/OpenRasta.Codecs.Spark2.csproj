@@ -55,14 +55,18 @@
   <ItemGroup>
     <Compile Include="Matchers\TagMatcher.cs" />
     <Compile Include="Model\ConditionalExpression.cs" />
+    <Compile Include="Model\Tags.cs" />
     <Compile Include="SparkInterface\SparkAttributeWrapper.cs" />
     <Compile Include="SparkInterface\SparkCodeExpressionNodeWrapper.cs" />
     <Compile Include="SparkInterface\SparkConditionNodeWrapper.cs" />
     <Compile Include="SparkInterface\SparkElementWrapper.cs" />
     <Compile Include="SparkInterface\SparkNodeWrapper.cs" />
+    <Compile Include="Specification\Actions\ConvertAttributeAction.cs" />
     <Compile Include="Specification\Actions\ConvertPropertyValueToInnerText.cs" />
     <Compile Include="Specification\Actions\CreateUriFromTypeAttributeModifier.cs" />
     <Compile Include="Specification\Actions\PropertyPathActionModifier.cs" />
+    <Compile Include="Specification\Actions\RemoveAttributeAction.cs" />
+    <Compile Include="Specification\Actions\ValueToConditionalAttribute.cs" />
     <Compile Include="Specification\Builders\IElementTransformerActionsByMatchBuilder.cs" />
     <Compile Include="Specification\ElementTransformerActionsByMatch.cs" />
     <Compile Include="Specification\Builders\ElementTransformerActionsByMatchBuilder.cs" />
@@ -87,7 +91,7 @@
     <Compile Include="SparkInterface\SparkElementTransformer.cs" />
     <Compile Include="SparkInterface\SparkOverrideExtension.cs" />
     <Compile Include="SparkInterface\SparkWrapperFactory.cs" />
-    <Compile Include="Specification\Helpers\Tag.cs" />
+    <Compile Include="Model\Tag.cs" />
     <Compile Include="Syntax\ISyntaxProvider.cs" />
     <Compile Include="Transformers\ElementTransformerService.cs" />
     <Compile Include="Transformers\IElementTransformer.cs" />

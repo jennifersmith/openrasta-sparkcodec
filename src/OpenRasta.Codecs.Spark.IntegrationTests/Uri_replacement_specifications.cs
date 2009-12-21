@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using OpenRasta.Codecs.Spark.IntegrationTests;
 using OpenRasta.Codecs.Spark.Testing.Extensions;
 using OpenRasta.Codecs.Spark.Tests.TestObjects;
@@ -29,6 +30,29 @@ namespace Uri_replacement_specifications
 				TemplateResult = RenderTemplate(TemplateSource, Entity);
 			}
 		}
+	[TestFixture]
+	public class testingandstuff : Using_spark_codec_to_render_an_element_with_a_uri_attributes
+	{
+		public override string TemplateSource
+		{
+			get
+			{
+				return "";
+			}
+		}
+		public override void When()
+		{
+			base.When();
+			WithTestEntity();
+		}
+		[Test]
+		public void blah()
+		{
+			string src = @"<viewdata resource=""TestEntity""/> <input type=""check"" checked=""false?{resource.Enabled}""/>";
+			string result = RenderTemplate(src, new TestEntity() {Enabled = false});
+			Console.WriteLine(result);
+		}
+	}
 
 	namespace Given_that_testentity_is_null
 	{

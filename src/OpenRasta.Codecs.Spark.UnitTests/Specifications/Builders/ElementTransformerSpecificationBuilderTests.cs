@@ -6,9 +6,9 @@ using System.Text;
 using NUnit.Framework;
 using OpenRasta.Codecs.Spark.UnitTests.Transformers;
 using OpenRasta.Codecs.Spark2.Matchers;
+using OpenRasta.Codecs.Spark2.Model;
 using OpenRasta.Codecs.Spark2.Specification;
 using OpenRasta.Codecs.Spark2.Specification.Builders;
-using OpenRasta.Codecs.Spark2.Specification.Syntax;
 
 namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Builders
 {
@@ -38,6 +38,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Builders
 			ThenTheSpecificationShouldConain(elementTransformerActionsByMatch, elementTransformerActionsByMatch2);
 		}
 
+
 		private void ThenTheSpecificationShouldConain(params ElementTransformerActionsByMatch[] matches)
 		{
 			Context.Result.As<ElementTransformerSpecification>().GetElementTransformerActionsByMatch().ShouldEqual(matches);
@@ -51,9 +52,12 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Builders
 		private static ElementTransformerActionsByMatch CreateElementTransformActionMatch()
 		{
 			return new ElementTransformerActionsByMatch(new[] {new Tag("AMatch")}, new[]
-			                                                                               	{
-			                                                                               		new StubElementTransformerAction()
-			                                                                               	});
+			                                                                       	{
+			                                                                       		new StubElementTransformerAction()
+			                                                                       	}, new[]
+			                                                                       	{
+			                                                                       		new StubElementTransformerAction()
+			                                                                       	});
 		}
 
 		private void GivenAnElementTransformationMatcher(ElementTransformerActionsByMatch elementTransformerActionsByMatch)
@@ -90,6 +94,11 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Builders
 		public ElementTransformerActionsByMatch Build()
 		{
 			return _elementTransformerActionsByMatch;
+		}
+
+		public void AddFinalAction(IElementTransformerAction elementTransformerAction)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

@@ -1,5 +1,4 @@
 using OpenRasta.Codecs.Spark2.Model;
-using OpenRasta.Codecs.Spark2.Specification.Syntax;
 
 namespace OpenRasta.Codecs.Spark2.Transformers
 {

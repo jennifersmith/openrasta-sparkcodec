@@ -19,13 +19,13 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Actions
 		}
 
 		[Test]
-		public void ShouldRemoveOriginalAttribute()
+		public void ShouldNotRemoveOriginalAttribute()
 		{
 			TestElement element = InternalTestNodes.TestElement("").WithAttribute("from", "aValue");
 			GivenToAndFromAttributes("to", "from");
 			GivenElementTarget(element);
 			WhenActionCalledOnElement();
-			ThenAttributeIsRemoved("from");
+			ThenAttributeIsStillPresent("from");
 		}
 
 
@@ -66,9 +66,9 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Actions
 		}
 
 
-		private void ThenAttributeIsRemoved(string attributeName)
+		private void ThenAttributeIsStillPresent(string attributeName)
 		{
-			Context.ElementTarget.Attributes.ShouldNotContain(x=>x.Name==attributeName);
+			Context.ElementTarget.Attributes.ShouldContain(x=>x.Name==attributeName);
 		}
 		private void ThenAttributeWithNameIsNotInserted(string attributeName)
 		{

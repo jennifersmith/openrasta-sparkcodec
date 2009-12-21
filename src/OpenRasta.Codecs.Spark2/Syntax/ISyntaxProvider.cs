@@ -9,6 +9,7 @@ namespace OpenRasta.Codecs.Spark2.Syntax
 		string CreateUriFromTypeExpression(string targetResource);
 		string CreateNullCheckExpression(string targetResource);
 		string CreateGetPropertyPathExpression(string propertyPath);
+		string CreateNullCheckAndEvalExpression(string targetResource);
 	}
 
 	public class CSharpSyntaxProvider : ISyntaxProvider
@@ -30,6 +31,12 @@ namespace OpenRasta.Codecs.Spark2.Syntax
 		public string CreateGetPropertyPathExpression(string propertyPath)
 		{
 			return string.Format("PropertyPaths.PathFor(()=>{0})", propertyPath);
+		}
+
+		public string CreateNullCheckAndEvalExpression(string targetResource)
+		{
+
+			return string.Format("({0}.IsNull()==false)&&{0}", targetResource);
 		}
 	}
 }

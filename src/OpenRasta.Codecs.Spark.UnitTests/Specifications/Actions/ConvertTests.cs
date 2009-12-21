@@ -22,6 +22,11 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Actions
 			return GetTestNullCheckExpression(targetResource);
 		}
 
+		public string CreateNullCheckAndEvalExpression(string targetResource)
+		{
+			return GetTestNulLCheckAndEvalFor(targetResource);
+		}
+
 		public string CreateGetPropertyPathExpression(string propertyPath)
 		{
 			return GetTestGetPropertyPathExpression(propertyPath);
@@ -37,8 +42,11 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Specifications.Actions
 		}
 		public static string GetTestNullCheckExpression(string targetResource)
 		{
-
 			return string.Format("NULLCHECK FOR {0}", targetResource);
+		}
+		public static string GetTestNulLCheckAndEvalFor(string targetResource)
+		{
+			return string.Format("GetTestNulLCheckAndEvalFor FOR {0}", targetResource);
 		}
 
 		public static string GetTestGetPropertyPathExpression(string propertyPath)

@@ -38,6 +38,15 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Syntax
 			ThenTheResultShouldBe("myUriExpression.IsNull()==false");
 		}
 		[Test]
+		public void NullCheckAndEvalExpressionShouldReturnParameterWrappedInCorrectCode()
+		{
+			GivenAParam("myUriExpression");
+			WhenNullCheckAndEvalIscalled();
+			ThenTheResultShouldBe("(myUriExpression.IsNull()==false)&&myUriExpression");
+		}
+
+
+		[Test]
 		public void GetPropertyPathSHouldReturnParameterWrappedInCorrectCode()
 		{
 			GivenAParam("path.ToAProperty");
@@ -53,6 +62,10 @@ namespace OpenRasta.Codecs.Spark.UnitTests.Syntax
 		private void WhenNullCheckIscalled()
 		{
 			Context.Result = Context.Target.CreateNullCheckExpression(Context.InputParam);
+		}
+		private void WhenNullCheckAndEvalIscalled()
+		{
+			Context.Result = Context.Target.CreateNullCheckAndEvalExpression(Context.InputParam);
 		}
 
 		private void ThenTheResultShouldBe(string expected)

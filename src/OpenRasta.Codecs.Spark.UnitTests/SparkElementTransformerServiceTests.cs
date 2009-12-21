@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using NUnit.Framework;
 using OpenRasta.Codecs.Spark.UnitTests.Transformers;
 using OpenRasta.Codecs.Spark2.Model;
 using OpenRasta.Codecs.Spark2.SparkInterface;
-using OpenRasta.Codecs.Spark2.Specification.Syntax;
 using OpenRasta.Codecs.Spark2.Transformers;
 using Spark.Parser.Markup;
 
@@ -44,6 +44,29 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 			WhenWeAskForAnElementTransformer();
 			ThenReturnedElementTransformerShouldWrap(transformer);
 		}
+		[Test]
+		public void ShouldRetreiveTransformationsForATagIfHasMatchingAttributes()
+		{
+			var transformer = new StubElementTransformer();
+			GivenAnElementNode(SparkTestNodes.ElementNode("foo").WithAttribute("bar", "wibble"));
+			GivenATransformForATag(transformer, new Tag("foo", new TagAttribute("bar", "wibble")));
+			WhenWeAskForAnElementTransformer();
+			ThenReturnedElementTransformerShouldWrap(transformer);
+		}
+		[Test]
+		public void ShouldNotRetreiveTransformationsForATagIfNotMatchingAttributes()
+		{
+			var transformer = new StubElementTransformer();
+			GivenAnElementNode(SparkTestNodes.ElementNode("foo").WithAttribute("bar", "wibble"));
+			GivenATransformForATag(transformer, new Tag("foo", new TagAttribute("bar", "bah")));
+			WhenWeAskForAnElementTransformer();
+			ThenReturnedElementTransformerShouldBeNullTransform();
+		}
+
+		private void GivenAnElementNode(ElementNode node)
+		{
+			Context.SparkElementNode = node;
+		}
 
 		private void ThenReturnedElementTransformerShouldBeNullTransform()
 		{
@@ -59,7 +82,11 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		{
 			Context.ReturnedElementTransformer = Context.Target.CreateElementTransformer(Context.SparkElementNode);
 		}
+		private void GivenATransformForATag(IElementTransformer transformer, Tag tag)
+		{
+			Context.ElementTransformerService.WithAvailableTransform(tag, transformer);
 
+		}
 		private void GivenATransformableSparkElementNode(IElementTransformer elementTransformer)
 		{
 			Context.SparkElementNode = new ElementNode("transformable", new List<AttributeNode>(), true);
@@ -95,9 +122,9 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 			_transformsByTag[tag] = transformer;
 		}
 
-		public IElementTransformer GetTransformerFor(Tag element)
+		public IElementTransformer GetTransformerFor(Tag tag)
 		{
-			return _transformsByTag[element];
+			return _transformsByTag.Where(x => x.Key.Matches(tag)).Select(x => x.Value).FirstOrDefault();
 		}
 
 		public IElementTransformer GetTransformerFor(IElement element)
@@ -110,9 +137,9 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 			throw new NotImplementedException();
 		}
 
-		public bool IsTransformable(Tag element)
+		public bool IsTransformable(Tag tag)
 		{
-			return _transformsByTag.ContainsKey(element);
+			return GetTransformerFor(tag) != null;
 		}
 	}
 
