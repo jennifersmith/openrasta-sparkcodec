@@ -80,6 +80,17 @@ namespace OpenRasta.Codecs.Spark2.SparkInterface
 			Body.Where(x => x is TextNode).ToArray().ForEach(x => Body.Remove(x));
 		}
 
+		public IEnumerable<IElement> GetChildElements(string name)
+		{
+			return BodyElementNodes().Where(x=>x.HasName(name)).WrapAll();
+		}
+
+
+		private IEnumerable<ElementNode> BodyElementNodes()
+		{
+			return Body.Where(x => x is ElementNode).Cast<ElementNode>();
+		}
+
 		#endregion
 
 		public Node GetWrappedNode()

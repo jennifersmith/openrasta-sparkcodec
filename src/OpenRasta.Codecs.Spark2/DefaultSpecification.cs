@@ -62,6 +62,13 @@ namespace OpenRasta.Codecs.Spark2
 				.Finally(
 					Remove.ForAttributes()
 				);
+			builder.MatchAll(Tags.Select)
+				.Do(
+					Convert.ResourceValueToSelectedOption()
+				)
+				.Finally(
+					Remove.ForAttributes()
+				);
 			builder.MatchAll(Tags.InputTags)
 				.Do(
 				Convert.ForAttributeToName()

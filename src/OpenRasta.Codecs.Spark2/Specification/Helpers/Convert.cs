@@ -73,7 +73,11 @@ namespace OpenRasta.Codecs.Spark2.Specification.Helpers
 		{
 			return new ConvertAttributeAction("checked", "for", new ValueToConditionalAttribute(new CSharpSyntaxProvider()));
 		}
+
+		public static IElementTransformerAction ResourceValueToSelectedOption()
+		{
+			return new ConvertResourceValueToSelectedOptionAction(new CSharpSyntaxProvider());
+		}
 	}
 
-	
 }

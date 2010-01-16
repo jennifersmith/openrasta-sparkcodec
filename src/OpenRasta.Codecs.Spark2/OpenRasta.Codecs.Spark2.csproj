@@ -60,9 +60,11 @@
     <Compile Include="SparkInterface\SparkCodeExpressionNodeWrapper.cs" />
     <Compile Include="SparkInterface\SparkConditionNodeWrapper.cs" />
     <Compile Include="SparkInterface\SparkElementWrapper.cs" />
+    <Compile Include="SparkInterface\SparkNodeExtensions.cs" />
     <Compile Include="SparkInterface\SparkNodeWrapper.cs" />
     <Compile Include="Specification\Actions\ConvertAttributeAction.cs" />
     <Compile Include="Specification\Actions\ConvertPropertyValueToInnerText.cs" />
+    <Compile Include="Specification\Actions\ConvertResourceValueToSelectedOptionAction.cs" />
     <Compile Include="Specification\Actions\CreateUriFromTypeAttributeModifier.cs" />
     <Compile Include="Specification\Actions\PropertyPathActionModifier.cs" />
     <Compile Include="Specification\Actions\RemoveAttributeAction.cs" />

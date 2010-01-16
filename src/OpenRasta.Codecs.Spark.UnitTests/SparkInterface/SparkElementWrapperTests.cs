@@ -142,6 +142,37 @@ namespace OpenRasta.Codecs.Spark.UnitTests.SparkInterface
 			WhenInnerTextCleared();
 			ThenNodeHasNoBody();
 		}
+		[Test]
+		public void GetChildElementsShouldReturnThoseWithMatchingName()
+		{
+			ElementNode node = SparkTestNodes.ElementNode("bar");
+			ElementNode matching1 = SparkTestNodes.ElementNode("foo");
+			ElementNode matching2 = SparkTestNodes.ElementNode("foo");
+			GivenAnOriginalElement(node, matching1, matching2, SparkTestNodes.ElementNode("bar2")); 
+			WhenGetChildElements("foo");
+			ThenGetChildElementsResultShouldBe(matching1, matching2);
+		}
+		[Test]
+		public void GetChildElementsShouldBeCaseSensitive()
+		{
+			ElementNode node = SparkTestNodes.ElementNode("bar");
+			ElementNode matching1 = SparkTestNodes.ElementNode("FOO");
+			ElementNode matching2 = SparkTestNodes.ElementNode("foo");
+			GivenAnOriginalElement(node, matching1, matching2);
+			WhenGetChildElements("foo");
+			ThenGetChildElementsResultShouldBe(matching1, matching2);
+		}
+
+		private void ThenGetChildElementsResultShouldBe(params ElementNode[] elements)
+		{
+			IEnumerable<IElement> elementWrappers = elements.Select(x=>new SparkElementWrapper(x, new Node[0])).Cast<IElement>();
+			Context.GetChildElementsResult.ToArray().ShouldEqual(elementWrappers.ToArray());
+		}
+
+		private void WhenGetChildElements(string name)
+		{
+			Context.GetChildElementsResult = Context.Target.GetChildElements(name);
+		}
 
 		private void ThenNodeHasNoBody()
 		{
@@ -240,7 +271,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests.SparkInterface
 			Context.OriginalElement = elementNode;
 		}
 
-		private void GivenAnOriginalElement(ElementNode node, params TextNode[] textNodes)
+		private void GivenAnOriginalElement(ElementNode node, params Node[] textNodes)
 		{
 			Context.Target = new SparkElementWrapper(node, textNodes);
 			Context.OriginalElement = node;
@@ -251,6 +282,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests.SparkInterface
 		public class SparkElementWrapperTestContext
 		{
 			public ICodeExpressionNode AddCodeExpressionResult;
+			public IEnumerable<IElement> GetChildElementsResult { get; set;}
 			public SparkElementWrapper Target { get; set; }
 
 			public IAttribute AddAttributeResult { get; set; }

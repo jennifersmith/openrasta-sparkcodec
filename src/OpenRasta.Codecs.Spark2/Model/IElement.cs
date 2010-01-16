@@ -15,6 +15,7 @@ namespace OpenRasta.Codecs.Spark2.Model
 		ICodeExpressionNode AddCodeExpressionNode();
 		IConditionalExpressionNodeWrapper AddConditionalExpressionNode();
 		void ClearInnerText();
+		IEnumerable<IElement> GetChildElements(string name);
 	}
 	public interface ICodeExpressionNode : INode
 	{

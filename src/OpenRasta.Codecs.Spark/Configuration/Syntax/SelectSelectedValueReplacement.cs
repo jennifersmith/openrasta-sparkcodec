@@ -6,7 +6,7 @@ using Spark.Parser.Markup;
 
 namespace OpenRasta.Codecs.Spark.Extensions
 {
-	internal class SelectSelectedValueReplacement : SpecifiedReplacement
+	internal class	SelectSelectedValueReplacement : SpecifiedReplacement
 	{
 		public SelectSelectedValueReplacement(ReplacementSpecification replacementSpecification)
 			: base(replacementSpecification)

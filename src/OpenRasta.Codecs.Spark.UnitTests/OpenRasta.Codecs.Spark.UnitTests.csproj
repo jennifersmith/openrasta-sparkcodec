@@ -81,6 +81,7 @@
     <Compile Include="SparkWrapperFactoryTests.cs" />
     <Compile Include="Specifications\Actions\ConvertAttributeActionTests.cs" />
     <Compile Include="Specifications\Actions\ConvertPropertyValueToInnerTextTests.cs" />
+    <Compile Include="Specifications\Actions\ConvertResourceToSelectedOptionActionTests.cs" />
     <Compile Include="Specifications\Actions\CreateUriActionModifierTests.cs" />
     <Compile Include="Specifications\Actions\CreateUriFromTypeAttributeModifierTests.cs" />
     <Compile Include="Specifications\Actions\ConvertTests.cs" />

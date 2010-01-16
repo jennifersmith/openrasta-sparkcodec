@@ -13,11 +13,11 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		{
 			_value = value;
 		}
-		public IEnumerable<IConditionalExpressionNodeWrapper> ConditionalExpressionNodes
+		public IEnumerable<TestConditionalExpressionNode> ConditionalExpressionNodes
 		{
 			get
 			{
-				return Nodes.Where(x => (x is IConditionalExpressionNodeWrapper)).Cast<IConditionalExpressionNodeWrapper>();
+				return Nodes.Where(x => (x is TestConditionalExpressionNode)).Cast<TestConditionalExpressionNode>();
 			}
 		}
 		public IEnumerable<ICodeExpressionNode> CodeNodes

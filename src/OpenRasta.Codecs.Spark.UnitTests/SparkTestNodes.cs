@@ -119,6 +119,13 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 				return Nodes.Where(x => (x is IAttribute)).Cast<IAttribute>();
 			}
 		}
+		public IEnumerable<IElement> Elements
+		{
+			get
+			{
+				return Nodes.Where(x => (x is IElement)).Cast<IElement>();
+			}
+		}
 
 		public IEnumerable<TestTextNode> TextNodes
 		{
@@ -187,6 +194,11 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 			}
 		}
 
+		public IEnumerable<IElement> GetChildElements(string name)
+		{
+			return Elements.Where(e => e.Name == name);
+		}
+
 		public void AddTextElement(string value)
 		{
 			AddNode(new TestTextNode(value));
@@ -200,6 +212,18 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 				builder.Append(node.Value);
 			}
 			return builder.ToString();
+		}
+
+		public TestElement WithChildElement(string elementName)
+		{
+			TestElement	newTestElement = new TestElement(elementName);
+			Nodes.Add(newTestElement);
+			return this;
+		}
+		public TestElement WithChildElement(TestElement element)
+		{
+			Nodes.Add(element);
+			return this;
 		}
 	}
 

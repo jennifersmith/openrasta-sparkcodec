@@ -36,6 +36,40 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 			ThenTheResultShouldBeASparkElement();
 		}
 
+		[Test]
+		public void HasNameShouldBeTrueIfElementHasName()
+		{
+			GivenNodeTarget(SparkTestNodes.ElementNode("fred"));
+			ThenHasNameShouldBeTrueFor("fred");
+		}
+		[Test]
+		public void HasNameShouldBeFalseIfElementDoesnotHaveName()
+		{
+			GivenNodeTarget(SparkTestNodes.ElementNode("barney"));
+			ThenHasNameShouldBeFalseFor("fred");
+		}
+
+		[Test]
+		public void HasNameShouldBeTrueIfHasNameButDifferentCase()
+		{
+			GivenNodeTarget(SparkTestNodes.ElementNode("FRED"));
+			ThenHasNameShouldBeTrueFor("fred");
+		}
+
+		private void ThenHasNameShouldBeTrueFor(string name)
+		{
+			Context.NodeTarget.HasName(name).ShouldBeTrue();
+		}
+		private void ThenHasNameShouldBeFalseFor(string name)
+		{
+			Context.NodeTarget.HasName(name).ShouldBeFalse();
+		}
+
+		private void GivenNodeTarget(ElementNode node)
+		{
+			Context.NodeTarget = node;
+		}
+
 		private void ThenTheResultShouldBeASparkElement()
 		{
 			Context.UnwrappedNode.As<ElementNode>();
@@ -83,6 +117,9 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 			public IElement NodeToUnwrap { get; set; }
 
 			public Node UnwrappedNode { get; set; }
+
+			public ElementNode NodeTarget { get; set; }
+
 		}
 	}
 }
