@@ -1,5 +1,6 @@
 ﻿using OpenRasta.Configuration.Fluent;
 using OpenRasta.DI;
+using Spark;
 
 namespace OpenRasta.Codecs.Spark.Configuration
 {
@@ -13,9 +14,15 @@ namespace OpenRasta.Codecs.Spark.Configuration
 
 		public static void SparkCodec(this IUses uses)
 		{
-			DependencyManager.GetService<IDependencyResolver>().AddDependency<ISparkConfiguration, SparkConfiguration>();
-			DependencyManager.GetService<IDependencyResolver>().AddDependency<ISparkCodecNamespacesConfiguration, SparkCodecNamespacesConfiguration>();
-			DependencyManager.GetService<IDependencyResolver>().AddDependency<ISparkServiceContainerFactory,SparkServiceContainerFactory>();
+			IDependencyResolver resolver = DependencyManager.GetService<IDependencyResolver>();
+			resolver.AddDependency<ISparkConfiguration, SparkConfiguration>();
+			resolver.AddDependency<ISparkCodecNamespacesConfiguration, SparkCodecNamespacesConfiguration>();
+
+			// new stuff
+			resolver.AddDependency<ISparkServiceContainerFactory, SparkServiceContainerFactory>();
+			resolver.AddDependency<ISparkRenderer, SparkRenderer>();
+			resolver.AddDependency<ISparkViewResolver, SparkViewResolverWithServiceContainerWrapper>();
+			resolver.AddDependency<ISparkServiceContainerFactory, SparkServiceContainerFactory>();
 		}
 	}
 }

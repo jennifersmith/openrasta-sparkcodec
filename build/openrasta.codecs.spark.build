@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<project name="OpenRasta.Codecs.Spark" default="build">
+<project name="OpenRasta.Codecs.Spark" default="update-and-build">
 	<loadtasks assembly="../lib/nantcontrib/NAnt.Contrib.Tasks.dll" />
 
     <property name="configuration" value="debug"/>
     <property name="solution-file-path" value="../src/OpenRasta.Codecs.Spark.sln"/>
-    <property name="open-rasta-bin-dir" value="../../openrasta/bin/Release/net-35"/>
+    <property name="open-rasta-bin-dir" value="../../openrasta2.0.3/bin/Release/net-35"/>
     <property name="open-rasta-local-bin-dir" value="../lib/OpenRasta/net-35"/>
     <property name="build-dir" value="../bin"/>
     <property name="binaries-root-dir" value="../src/OpenRasta.Codecs.Spark/"/>

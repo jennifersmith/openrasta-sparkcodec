@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -11,15 +12,50 @@ using Spark;
 
 namespace OpenRasta.Codecs.Spark
 {
+	[MediaType("application/xhtml+xml;q=0.9", "xhtml")]
+	[MediaType("text/html", "html")]
+	[MediaType("application/vnd.openrasta.htmlfragment+xml;q=0.5")]
+	public class SparkCodec : IMediaTypeWriter
+	{
+		private readonly ISparkRenderer _renderer;
+
+		public SparkCodec(ISparkRenderer renderer)
+		{
+			_renderer = renderer;
+		}
+
+		public object Configuration { get; set; }
+
+		public void WriteTo(object entity, IHttpEntity response, string[] codecParameters)
+		{
+			if(response is ISupportsTextWriter)
+			{
+				TextWriter textWriter = ((ISupportsTextWriter)response).TextWriter;
+				Render(entity, textWriter);
+			}
+			else
+			{
+				using (var streamWriter = new DeterministicStreamWriter(response.Stream, new UTF8Encoding(), StreamActionOnDispose.None))
+				{
+					Render(entity, streamWriter);
+				}
+			}
+		}
+
+		private void Render(object entity, TextWriter textWriter)
+		{
+			_renderer.Render(entity, textWriter, Configuration.ToCaseInvariantDictionary());
+		}
+	}
 	[MediaType("application/xhtml+xml;q=0.9", "xhtml"), MediaType("text/html", "html"),
 	 MediaType("application/vnd.openrasta.htmlfragment+xml;q=0.5")]
-	public class SparkCodec : IMediaTypeWriter
+	public class SparkCodecOld : IMediaTypeWriter
 	{
 		private readonly IRequest _request;
 		private readonly IDependencyResolver _resolver;
 		private ISparkServiceContainer _sparkServiceContainer;
 
-		public SparkCodec(IRequest request, ISparkServiceContainerFactory sparkServiceContainerFactory, IDependencyResolver resolver)
+		public SparkCodecOld(IRequest request, ISparkServiceContainerFactory sparkServiceContainerFactory, IDependencyResolver resolver)
 		{
 			_request = request;
 			_sparkServiceContainer = sparkServiceContainerFactory.CreateServiceContainer();
@@ -59,7 +95,7 @@ namespace OpenRasta.Codecs.Spark
 			var engine = _sparkServiceContainer.GetService<ISparkViewEngine>();
 			var view = (SparkResourceView) engine.CreateInstance(descriptor);
 			view.ViewData = new ViewData(entity);
-			view.Resolver = _resolver;
+			view.Resolver = _resolver;							
 			try
 			{
 				RenderToResponse(response, view);
@@ -110,4 +146,6 @@ namespace OpenRasta.Codecs.Spark
 			return null;
 		}
 	}
+
+	
 }

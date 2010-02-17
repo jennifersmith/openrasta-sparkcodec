@@ -47,13 +47,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\nunit\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="OpenRasta, Version=2.0.2064.335, Culture=neutral, PublicKeyToken=e04bf464d7caae73, processorArchitecture=MSIL">
+    <Reference Include="OpenRasta, Version=2.0.3.0, Culture=neutral, PublicKeyToken=e04bf464d7caae73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\OpenRasta\net-35\OpenRasta.dll</HintPath>
     </Reference>
     <Reference Include="OpenRasta.DI.Windsor, Version=2.0.2036.303, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\OpenRasta\net-35\OpenRasta.DI.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenRasta.Testing, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\openrasta\bin\Release\net-35\OpenRasta.Testing.dll</HintPath>
     </Reference>
     <Reference Include="Spark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -75,18 +79,18 @@
   <ItemGroup>
     <Compile Include="BaseContext.cs" />
     <Compile Include="BaseSparkExtensionsContext.cs" />
-    <Compile Include="Input_replacement_specifications.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Uri_replacement_specifications.cs" />
+    <Compile Include="Server_context.cs" />
+    <Compile Include="SparkCodecIntegrationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenRasta.Codecs.Spark.Testing\OpenRasta.Codecs.Spark.Testing.csproj">
       <Project>{A190F8BC-97BA-40B6-A469-1937C4B01ACF}</Project>
       <Name>OpenRasta.Codecs.Spark.Testing</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenRasta.Codecs.Spark2\OpenRasta.Codecs.Spark2.csproj">
-      <Project>{AC553C43-7F19-4F2B-870C-BB3264090A6E}</Project>
-      <Name>OpenRasta.Codecs.Spark2</Name>
+    <ProjectReference Include="..\OpenRasta.Codecs.Spark\OpenRasta.Codecs.Spark.csproj">
+      <Project>{E975B88A-90AB-4392-882E-E2C17486C651}</Project>
+      <Name>OpenRasta.Codecs.Spark</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

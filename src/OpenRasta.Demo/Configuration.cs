@@ -10,7 +10,6 @@ using OpenRasta.DI;
 using OpenRasta.DI.Windsor;
 using OpenRasta.IO;
 using OpenRasta.Web;
-using OpenRasta.Web.Pipeline;
 using OpenRasta.Web.UriDecorators;
 
 namespace OpenRasta.Demo

@@ -30,13 +30,13 @@ namespace OpenRasta.Demo.Handlers
 				using(Stream newImageStream =item.NewImage.OpenStream())
 				{
 					// I am basically crap at this...
-					string path = HttpContext.Current.Server.MapPath("~/images/") + item.NewImage.OriginalName;
+					string path = HttpContext.Current.Server.MapPath("~/images/") + item.NewImage.FileName;
 					var buffer = new byte[newImageStream.Length];
 					newImageStream.Read(buffer, 0, buffer.Length);
 					File.WriteAllBytes(path, buffer);
 					
 				}
-				item.Image = new ShoppingListItemImage(item.NewImage.OriginalName, item);
+				item.Image = new ShoppingListItemImage(item.NewImage.FileName, item);
 			}
 			return new OperationResult.SeeOther {RedirectLocation = item.CreateUri()};
 		}

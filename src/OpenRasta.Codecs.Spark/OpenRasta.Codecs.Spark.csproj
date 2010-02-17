@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OpenRasta, Version=2.0.1.0, Culture=neutral, PublicKeyToken=e04bf464d7caae73, processorArchitecture=MSIL">
+    <Reference Include="OpenRasta, Version=2.0.3.0, Culture=neutral, PublicKeyToken=e04bf464d7caae73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\OpenRasta\net-35\OpenRasta.dll</HintPath>
     </Reference>
@@ -60,6 +60,8 @@
     <Compile Include="Configuration\MissingEnumerableExtensions.cs" />
     <Compile Include="Configuration\SparkCodecNamespacesConfiguration.cs" />
     <Compile Include="Configuration\SparkServiceContainerFactory.cs" />
+    <Compile Include="ISparkRenderer.cs" />
+    <Compile Include="ISparkViewResolver.cs" />
     <Compile Include="OpenRastaSparkExtensionsFactory.cs" />
     <Compile Include="ISparkConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

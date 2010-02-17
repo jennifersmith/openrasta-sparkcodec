@@ -35,7 +35,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\nunit\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="OpenRasta, Version=2.0.2036.303, Culture=neutral, PublicKeyToken=e04bf464d7caae73, processorArchitecture=MSIL">
+    <Reference Include="OpenRasta, Version=2.0.3.0, Culture=neutral, PublicKeyToken=e04bf464d7caae73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\OpenRasta\net-35\OpenRasta.dll</HintPath>
     </Reference>
@@ -62,50 +62,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssertionExtensions.cs" />
-    <Compile Include="CodecSparkExtensionFactoryTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ElementMatcherExtensionTests.cs" />
-    <Compile Include="Model\TagTests.cs" />
-    <Compile Include="SparkInterface\SparkAttributeWrapperTests.cs" />
-    <Compile Include="SparkInterface\SparkCodeExpressionNodeWrapperTests.cs" />
-    <Compile Include="SparkInterface\SparkElementWrapperTests.cs" />
-    <Compile Include="SparkInterface\SparkConditionalNodeWrapperTests.cs" />
-    <Compile Include="SparkInterface\TestSparkNodeWrapper.cs" />
-    <Compile Include="SparkNodeExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SparkTestNodes.cs" />
-    <Compile Include="SparkElementTransformerServiceTests.cs" />
-    <Compile Include="SparkElementTransformerTests.cs" />
-    <Compile Include="SparkOverrideExtensionTests.cs" />
-    <Compile Include="SparkWrapperFactoryTests.cs" />
-    <Compile Include="Specifications\Actions\ConvertAttributeActionTests.cs" />
-    <Compile Include="Specifications\Actions\ConvertPropertyValueToInnerTextTests.cs" />
-    <Compile Include="Specifications\Actions\ConvertResourceToSelectedOptionActionTests.cs" />
-    <Compile Include="Specifications\Actions\CreateUriActionModifierTests.cs" />
-    <Compile Include="Specifications\Actions\CreateUriFromTypeAttributeModifierTests.cs" />
-    <Compile Include="Specifications\Actions\ConvertTests.cs" />
-    <Compile Include="Specifications\Actions\PropertyPathActionModifierTests.cs" />
-    <Compile Include="Specifications\Actions\RemoveAttributeActionTests.cs" />
-    <Compile Include="Specifications\Actions\ValueToConditionalAttributeModifierTests.cs" />
-    <Compile Include="Specifications\Builders\ElementTransformerActionsByMatchBuilderTests.cs" />
-    <Compile Include="Specifications\Builders\ElementTransformerSpecificationBuilderTests.cs" />
-    <Compile Include="Specifications\ElementTransformerSpecificationTests.cs" />
-    <Compile Include="Syntax\CSharpSyntaxProviderTests.cs" />
-    <Compile Include="TestAttributeNode.cs" />
-    <Compile Include="Transformers\ElementTransformerServiceTests.cs" />
-    <Compile Include="Transformers\ElementTransformerTests.cs" />
-    <Compile Include="ViewHelpers\NullCheckTests.cs" />
-    <Compile Include="ViewHelpers\UriGeneratorTests.cs" />
+    <Compile Include="RhinoArgumentExtensions.cs" />
+    <Compile Include="SparkCodecTests.cs" />
+    <Compile Include="SparkRendererBuilder.cs" />
+    <Compile Include="SparkRendererTests.cs" />
+    <Compile Include="SparkViewResolverBuilder.cs" />
+    <Compile Include="SparkViewResolverTests.cs" />
+    <Compile Include="SparkViewTestExtensions.cs" />
+    <Compile Include="StubSparkViewResolver.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OpenRasta.Codecs.Spark2\OpenRasta.Codecs.Spark2.csproj">
-      <Project>{AC553C43-7F19-4F2B-870C-BB3264090A6E}</Project>
-      <Name>OpenRasta.Codecs.Spark2</Name>
+    <ProjectReference Include="..\OpenRasta.Codecs.Spark\OpenRasta.Codecs.Spark.csproj">
+      <Project>{E975B88A-90AB-4392-882E-E2C17486C651}</Project>
+      <Name>OpenRasta.Codecs.Spark</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Specifications\Helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

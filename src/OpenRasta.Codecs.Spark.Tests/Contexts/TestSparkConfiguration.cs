@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using OpenRasta.Codecs.Spark.Configuration;
 using OpenRasta.Codecs.Spark.Tests.Stubs;
@@ -29,6 +30,11 @@ namespace OpenRasta.Codecs.Spark.Tests.Contexts
 			new SparkCodecNamespacesConfiguration().AddNamespaces(settings);
 			settings.AddNamespace("OpenRasta.Codecs.Spark.Tests.TestObjects");
 			return settings;
+		}
+
+		public void Configure(object configuration)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

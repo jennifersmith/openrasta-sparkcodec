@@ -56,7 +56,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\castle-2.0\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="OpenRasta, Version=2.0.100.235, Culture=neutral, PublicKeyToken=e04bf464d7caae73, processorArchitecture=MSIL">
+    <Reference Include="OpenRasta, Version=2.0.3.0, Culture=neutral, PublicKeyToken=e04bf464d7caae73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\OpenRasta\net-35\OpenRasta.dll</HintPath>
     </Reference>

@@ -14,8 +14,6 @@ namespace OpenRasta.Codecs.Spark.Configuration
 			_sparkCodecNamespacesConfiguration = sparkCodecNamespacesConfiguration;
 		}
 
-		#region ISparkConfiguration Members
-
 
 		public ISparkSettings CreateSettings()
 		{
@@ -27,10 +25,6 @@ namespace OpenRasta.Codecs.Spark.Configuration
 			_sparkCodecNamespacesConfiguration.AddNamespaces(result);
 			return result;
 		}
-
-		#endregion
-
-	
 
 		private static void AddViewFolder(SparkSettings result)
 		{

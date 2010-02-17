@@ -1,7 +1,40 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
+using OpenRasta.Tests.Integration;
 
 namespace OpenRasta.Codecs.Spark.IntegrationTests
 {
+	public class ServerContext : server_context
+	{
+		
+	}
+	public class OpenRastaContext : BaseContext
+	{
+		private server_context _server = null;
+
+		public server_context Server
+		{
+			get
+			{
+				return _server;
+			}
+		}
+		public override void CreateContext()
+		{
+			base.CreateContext();
+			_server = new ServerContext();
+			_server.setup_context();
+		}
+		protected override void TeardownContext()
+		{
+			base.TeardownContext();
+			if(_server!=null)
+			{
+				_server.tear();
+			}
+		}
+	}
+
 	public abstract class BaseContext
 	{
 		[SetUp]
@@ -10,6 +43,15 @@ namespace OpenRasta.Codecs.Spark.IntegrationTests
 			CreateContext();
 			AssignTarget();
 			When();
+		}
+		[TearDown]
+		public void TearDown()
+		{
+			TeardownContext();
+		}
+
+		protected virtual void TeardownContext()
+		{
 		}
 
 		public virtual void AssignTarget()
