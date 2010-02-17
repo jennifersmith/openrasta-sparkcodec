@@ -35,7 +35,9 @@ namespace OpenRasta.Codecs.Spark
 
 		public ISparkView Create(string name, object viewData)
 		{
-			return _sparkViewEngine.CreateInstance(new SparkViewDescriptor().AddTemplate(name));
+			SparkResourceView instance = (SparkResourceView) _sparkViewEngine.CreateInstance(new SparkViewDescriptor().AddTemplate(name));
+			instance.ViewData = new ViewData(viewData);
+			return instance;
 		}
 	}
 }

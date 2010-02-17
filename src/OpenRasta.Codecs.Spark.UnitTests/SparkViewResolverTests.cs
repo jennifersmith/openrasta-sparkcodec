@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using System.Linq;
 using NUnit.Framework;
 using Rhino.Mocks;
@@ -11,7 +13,7 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 		[Test]
 		public void UsesTheSparkEngineToCreateAView()
 		{
-			var expectedSparkView = MockRepository.GenerateStub<ISparkView>();
+			var expectedSparkView = new TestSparkResourceView();
 			var sparkViewEngine = MockRepository.GenerateStub<ISparkViewEngine>()
 				.StubCreateInstance(expectedSparkView);
 			sparkViewEngine.StubCreateInstance(expectedSparkView);
@@ -32,6 +34,34 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 
 			var sparkViewDescriptor = (SparkViewDescriptor)sparkViewEngine.GetArgumentsForSingleCall(x => x.CreateInstance(null));
 			Assert.That(sparkViewDescriptor.Templates.FirstOrDefault(), Is.EqualTo(viewName));
+		}
+		[Test]
+		public void EnhancesTheViewWithTheViewData()
+		{
+			var expectedSparkView = new TestSparkResourceView();
+			var sparkViewEngine = MockRepository.GenerateStub<ISparkViewEngine>()
+				.StubCreateInstance(expectedSparkView);
+			sparkViewEngine.StubCreateInstance(expectedSparkView);
+			var resolver = new SparkViewResolverBuilder().With(sparkViewEngine).Build();
+
+			object viewData = new object();
+			SparkResourceView resolvedView = (SparkResourceView) resolver.Create(null, viewData);
+
+			Assert.That(resolvedView.ViewData, Is.Not.Null);
+			Assert.That(resolvedView.ViewData.Eval("Resource"), Is.EqualTo(viewData));
+
+		}
+	}
+	public class TestSparkResourceView : SparkResourceView
+	{
+		public override void RenderView(TextWriter writer)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override Guid GeneratedViewId
+		{
+			get { throw new NotImplementedException(); }
 		}
 	}
 }
