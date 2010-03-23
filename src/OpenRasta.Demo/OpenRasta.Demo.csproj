@@ -48,10 +48,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\castle-2.0\Castle.DynamicProxy2.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.MicroKernel, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\castle-2.0\Castle.MicroKernel.dll</HintPath>
-    </Reference>
     <Reference Include="Castle.Windsor, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\castle-2.0\Castle.Windsor.dll</HintPath>
@@ -64,13 +60,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\OpenRasta\net-35\OpenRasta.DI.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="OpenRasta.Hosting.AspNet, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="OpenRasta.Hosting.AspNet, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\OpenRasta\net-35\OpenRasta.Hosting.AspNet.dll</HintPath>
     </Reference>
     <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\personal\StoryBook\lib\rhinomocks\Rhino.Mocks.dll</HintPath>
+      <HintPath>..\..\lib\rhinomocks\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

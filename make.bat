@@ -1,2 +1,1 @@
-lib\nant\nant -f:"build\OpenRasta.Codecs.Spark.build"
-pause
+lib\nant\nant -f:"build\OpenRasta.Codecs.Spark.build" dist -D:configuration=release

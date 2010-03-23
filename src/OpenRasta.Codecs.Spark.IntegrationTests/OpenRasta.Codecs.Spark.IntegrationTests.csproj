@@ -51,9 +51,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\OpenRasta\net-35\OpenRasta.DI.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="OpenRasta.Testing, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="OpenRasta.Testing, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\openrasta\bin\Release\net-35\OpenRasta.Testing.dll</HintPath>
+      <HintPath>..\..\lib\OpenRasta\net-35\OpenRasta.Testing.dll</HintPath>
     </Reference>
     <Reference Include="Spark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

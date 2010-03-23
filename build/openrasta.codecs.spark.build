@@ -11,9 +11,11 @@
     <property name="binaries-out-dir" value="${binaries-root-dir}bin/${configuration}/"/>
     <property name="unit-test-output-dir" value="../src/OpenRasta.Codecs.Spark.Tests/bin/${configuration}"/>
     <property name="unit-test-assembly" value="OpenRasta.Codecs.Spark.Tests.dll"/>
-    <target name="build">
+
+	<target name="build">
         <call target="run-unit-tests"/>
     </target>
+
 	<target name="update-and-build" depends="update-open-rasta">
         <call target="run-unit-tests"/>
     </target>
@@ -24,31 +26,27 @@
 		</msbuild>
     </target>
     
-    <target name="dist" depends="build">
-
-	<delete dir="${build-dir}" />	
-	<mkdir dir="${build-dir}" />
-	<copy todir="${build-dir}">
-    <fileset basedir="${binaries-out-dir}">
-        <include name="*.dll" />
-        <include name="*.pdb" />
-    </fileset>
-	</copy>
-	
-    </target>    
-    <target name="update-open-rasta">
-
-	<delete dir="${open-rasta-local-bin-dir}" />	
-	<mkdir dir="${open-rasta-local-bin-dir}" />
-	<copy todir="${open-rasta-local-bin-dir}">
-    <fileset basedir="${open-rasta-bin-dir}">
-        <include name="*.dll" />
-        <include name="*.pdb" />
-    </fileset>
-	</copy>
-	
+    <target name="dist" depends="build-solution">
+		<delete dir="${build-dir}" />	
+		<mkdir dir="${build-dir}" />
+		<copy todir="${build-dir}">
+			<fileset basedir="${binaries-out-dir}">
+				<include name="*.dll" />
+				<include name="*.pdb" />
+			</fileset>
+		</copy>	
     </target>
-    
+
+    <target name="update-open-rasta">
+		<delete dir="${open-rasta-local-bin-dir}" />	
+		<mkdir dir="${open-rasta-local-bin-dir}" />
+		<copy todir="${open-rasta-local-bin-dir}">
+		<fileset basedir="${open-rasta-bin-dir}">
+			<include name="*.dll" />
+			<include name="*.pdb" />
+		</fileset>
+		</copy>	
+    </target>
     
     <target name="run-unit-tests" depends="build-solution">
 		<nunit2 verbose="true">
@@ -56,5 +54,4 @@
 		  <test assemblyname="${unit-test-output-dir}\${unit-test-assembly}" />
 		</nunit2>
 	</target>
-
 </project>
