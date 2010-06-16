@@ -59,6 +59,11 @@ namespace OpenRasta.Codecs.Spark.UnitTests
 			throw new NotImplementedException();
 		}
 
+		public override void Render()
+		{
+			throw new NotImplementedException();
+		}
+
 		public override Guid GeneratedViewId
 		{
 			get { throw new NotImplementedException(); }
